@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="luasrc">
+      <UniqueIdentifier>{9c5e3946-bc94-466b-94bb-4a4876f7f3b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cjson">
+      <UniqueIdentifier>{25834b45-b12d-4047-81cf-45a0c58a1836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sqlite3">
+      <UniqueIdentifier>{d597aa64-6be5-491b-8512-c34c547fb2db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="luasrc\lapi.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lauxlib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lbaselib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lbitlib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lcode.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lcorolib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lctype.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ldblib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ldebug.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ldo.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ldump.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lfunc.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lgc.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\linit.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\liolib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\llex.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lmathlib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lmem.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\loadlib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lobject.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lopcodes.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\loslib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lparser.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lstate.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lstring.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lstrlib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ltable.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ltablib.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\ltm.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lua.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\luac.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lundump.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lvm.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="luasrc\lzio.c">
+      <Filter>luasrc</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaJson.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cjson\dtoa.c">
+      <Filter>cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="cjson\g_fmt.c">
+      <Filter>cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="cjson\lua_cjson.c">
+      <Filter>cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="cjson\strbuf.c">
+      <Filter>cjson</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite3\lsqlite3.c">
+      <Filter>sqlite3</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="luasrc\lapi.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lauxlib.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lcode.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lctype.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\ldebug.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\ldo.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lfunc.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lgc.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\llex.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\llimits.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lmem.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lobject.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lopcodes.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lparser.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lstate.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lstring.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\ltable.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\ltm.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lua.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lua.hpp">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\luaconf.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lualib.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lundump.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lvm.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="luasrc\lzio.h">
+      <Filter>luasrc</Filter>
+    </ClInclude>
+    <ClInclude Include="cjson\dtoa_config.h">
+      <Filter>cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="cjson\fpconv.h">
+      <Filter>cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="cjson\strbuf.h">
+      <Filter>cjson</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="luasrc\Makefile">
+      <Filter>luasrc</Filter>
+    </None>
+  </ItemGroup>
+</Project>
