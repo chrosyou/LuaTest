@@ -41,7 +41,7 @@ int _tmain(int argc, _TCHAR* argv[])
  	printf("The sum is %d\n", sum);
  	lua_close(L);
 
-
+	//test
 	return 0;
 }
 
