@@ -166,7 +166,7 @@ typedef enum {
 /*----------------------------------------------------------------------
 name		args	description
 ------------------------------------------------------------------------*/
-OP_MOVE,/*	A B	R(A) := R(B)					*/
+OP_MOVE,/*	A B	R(A) := R(B)将寄存器B中的值拷贝到A中					*/
 OP_LOADK,/*	A Bx	R(A) := Kst(Bx)					*/
 OP_LOADKX,/*	A 	R(A) := Kst(extra arg)				*/
 OP_LOADBOOL,/*	A B C	R(A) := (Bool)B; if (C) pc++			*/
