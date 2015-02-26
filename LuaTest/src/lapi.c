@@ -54,10 +54,10 @@ const char lua_ident[] =
 
 static TValue *index2addr (lua_State *L, int idx) {
   CallInfo *ci = L->ci;
-  if (idx > 0) {
+  if (idx > 0) { ///索引为正值时，通过base取得value 
     TValue *o = ci->func + idx;
     api_check(L, idx <= ci->top - (ci->func + 1), "unacceptable index");
-    if (o >= L->top) return NONVALIDVALUE;
+    if (o >= L->top) return NONVALIDVALUE; ///如果超过top，则返回nil，否则返回o。
     else return o;
   }
   else if (!ispseudo(idx)) {  /* negative index */
@@ -385,7 +385,7 @@ LUA_API int lua_toboolean (lua_State *L, int idx) {
   return !l_isfalse(o);
 }
 
-
+//
 LUA_API const char *lua_tolstring (lua_State *L, int idx, size_t *len) {
   StkId o = index2addr(L, idx);
   if (!ttisstring(o)) {

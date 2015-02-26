@@ -531,6 +531,9 @@ void luaV_finishOp (lua_State *L) {
 #define vmcase(l,b)	case l: {b}  break;
 #define vmcasenb(l,b)	case l: {b}		/* nb = no break */
 
+/*
+luaÖ¸ÁîÖ´ÐÐ
+*/
 void luaV_execute (lua_State *L) {
   CallInfo *ci = L->ci;
   LClosure *cl;

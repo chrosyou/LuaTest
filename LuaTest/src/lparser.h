@@ -99,7 +99,7 @@ typedef struct FuncState {
   struct FuncState *prev;  /* enclosing function */
   struct LexState *ls;  /* lexical state */
   struct BlockCnt *bl;  /* chain of current blocks */
-  int pc;  /* next position to code (equivalent to `ncode') */
+  int pc;  /* next position to code (equivalent to `ncode')下一个程序执行点 */
   int lasttarget;   /* 'label' of last 'jump label' */
   int jpc;  /* list of pending jumps to `pc' */
   int nk;  /* number of elements in `k' */

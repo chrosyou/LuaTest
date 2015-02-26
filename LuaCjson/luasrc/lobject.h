@@ -72,7 +72,7 @@ typedef union GCObject GCObject;
 
 /*
 ** Common Header for all collectable objects (in macro form, to be
-** included in other objects)
+** included in other objects)next是指向的下一对象，tt表示类型，marked表示这个对象使用情况
 */
 #define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked
 
@@ -462,12 +462,12 @@ typedef struct LocVar {
 
 
 /*
-** Function Prototypes
+** Function Prototypes 函数原型
 */
 typedef struct Proto {
   CommonHeader;
   TValue *k;  /* constants used by the function */
-  Instruction *code;
+  Instruction *code;  //函数的所有指令
   struct Proto **p;  /* functions defined inside the function */
   int *lineinfo;  /* map from opcodes to source lines (debug information) */
   LocVar *locvars;  /* information about local variables (debug information) */

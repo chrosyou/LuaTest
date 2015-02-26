@@ -353,7 +353,7 @@ LUALIB_API void luaL_checkany (lua_State *L, int narg) {
     luaL_argerror(L, narg, "value expected");
 }
 
-
+//检查函数的第 arg 个参数是否是一个 字符串，并返回该字符串,只是简单的对lua_tolstring进行了一层封装
 LUALIB_API const char *luaL_checklstring (lua_State *L, int narg, size_t *len) {
   const char *s = lua_tolstring(L, narg, len);
   if (!s) tag_error(L, narg, LUA_TSTRING);

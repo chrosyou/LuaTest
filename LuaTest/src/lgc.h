@@ -109,7 +109,7 @@
 
 #define otherwhite(g)	(g->currentwhite ^ WHITEBITS)
 #define isdeadm(ow,m)	(!(((m) ^ WHITEBITS) & (ow)))
-#define isdead(g,v)	isdeadm(otherwhite(g), (v)->gch.marked)
+#define isdead(g,v)	isdeadm(otherwhite(g), (v)->gch.marked)  //ÅÐ¶Ï×Ö·û´®ÊÇ·ñ´¦ÓÚ»ØÊÕ×´Ì¬
 
 #define changewhite(x)	((x)->gch.marked ^= WHITEBITS)
 #define gray2black(x)	l_setbit((x)->gch.marked, BLACKBIT)

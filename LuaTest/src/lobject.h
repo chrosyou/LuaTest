@@ -74,7 +74,7 @@ typedef union GCObject GCObject;
 ** Common Header for all collectable objects (in macro form, to be
 ** included in other objects)
 */
-#define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked
+#define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked  //next将gc数据串联成表，tt表示数据类型，marked表示颜色域
 
 
 /*
@@ -101,7 +101,7 @@ typedef union Value Value;
 ** an actual value plus a tag with its type.
 */
 
-#define TValuefields	Value value_; int tt_
+#define TValuefields	Value value_; int tt_  //tt_存放数据类型，value_存放数据
 
 typedef struct lua_TValue TValue;
 
@@ -386,8 +386,8 @@ typedef struct lua_TValue TValue;
 
 
 union Value {
-  GCObject *gc;    /* collectable objects */
-  void *p;         /* light userdata */
+  GCObject *gc;    /* collectable objects 可以gc的数据类型，下面是直接可用C表示的*/
+  void *p;         /* light userdata 轻量用户数据*/
   int b;           /* booleans */
   lua_CFunction f; /* light C functions */
   numfield         /* numbers */
@@ -408,17 +408,17 @@ typedef TValue *StkId;  /* index to stack elements */
 ** Header for string value; string bytes follow the end of this structure
 */
 typedef union TString {
-  L_Umaxalign dummy;  /* ensures maximum alignment for strings */
+  L_Umaxalign dummy;  /* ensures maximum alignment for strings 用于最大字节对齐，这里起占位作用*/
   struct {
-    CommonHeader;
-    lu_byte extra;  /* reserved words for short strings; "has hash" for longs */
-    unsigned int hash;
-    size_t len;  /* number of characters in string */
+    CommonHeader;  //用于gc处理的头
+    lu_byte extra;  /* reserved words for short strings; "has hash" for longs 字符串是不是保留字符串*/
+    unsigned int hash; //记录字符串对应的hash值
+    size_t len;  /* number of characters in string 字符串长度*/
   } tsv;
 } TString;
 
 
-/* get the actual string (array of bytes) from a TString */
+/* get the actual string (array of bytes) from a TString 从TString中获得字符串指针*/
 #define getstr(ts)	cast(const char *, (ts) + 1)
 
 /* get the actual string (array of bytes) from a Lua value */
@@ -429,7 +429,7 @@ typedef union TString {
 ** Header for userdata; memory area follows the end of this structure
 */
 typedef union Udata {
-  L_Umaxalign dummy;  /* ensures maximum alignment for `local' udata */
+  L_Umaxalign dummy;  /* ensures maximum alignment for `local' udata 对齐占位 */
   struct {
     CommonHeader;
     struct Table *metatable;
@@ -553,26 +553,26 @@ typedef union TKey {
 
 typedef struct Node {
   TValue i_val;
-  TKey i_key;
+  TKey i_key;  //保存有下一个指针
 } Node;
 
 
 typedef struct Table {
   CommonHeader;
   lu_byte flags;  /* 1<<p means tagmethod(p) is not present */
-  lu_byte lsizenode;  /* log2 of size of `node' array */
+  lu_byte lsizenode;  /* log2 of size of `node' array hash的大小(为2的整数次幂，这里表示的是幂次)*/
   struct Table *metatable;
-  TValue *array;  /* array part */
-  Node *node;
+  TValue *array;  /* array part 数组部分*/
+  Node *node;   //hash表
   Node *lastfree;  /* any free position is before this position */
   GCObject *gclist;
-  int sizearray;  /* size of `array' array */
+  int sizearray;  /* size of `array' array 数组的长度信息*/
 } Table;
 
 
 
 /*
-** `module' operation for hashing (size is always a power of 2)
+** `module' operation for hashing (size is always a power of 2)计算hash在表中的位置
 */
 #define lmod(s,size) \
 	(check_exp((size&(size-1))==0, (cast(int, (s) & ((size)-1)))))

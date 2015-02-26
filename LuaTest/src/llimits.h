@@ -45,7 +45,7 @@ typedef unsigned char lu_byte;
 
 
 
-/* type to ensure maximum alignment */
+/* type to ensure maximum alignment 最大字节对齐，依照不同的机器可能会有不同的值*/
 #if !defined(LUAI_USER_ALIGNMENT_T)
 #define LUAI_USER_ALIGNMENT_T	union { double u; void *s; long l; }
 #endif
@@ -90,7 +90,7 @@ typedef LUAI_UACNUMBER l_uacNumber;
 #endif
 
 
-#define cast(t, exp)	((t)(exp))
+#define cast(t, exp)	((t)(exp))  //类型转换的作用
 
 #define cast_byte(i)	cast(lu_byte, (i))
 #define cast_num(i)	cast(lua_Number, (i))
@@ -127,7 +127,7 @@ typedef LUAI_UACNUMBER l_uacNumber;
 
 
 /*
-** type for virtual-machine instructions
+** type for virtual-machine instructions 虚拟机指令(无符号32位数)
 ** must be an unsigned with (at least) 4 bytes (see details in lopcodes.h)
 */
 typedef lu_int32 Instruction;

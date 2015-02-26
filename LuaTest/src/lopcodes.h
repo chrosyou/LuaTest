@@ -159,7 +159,7 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 
 
 /*
-** grep "ORDER OP" if you change these enums
+** grep "ORDER OP" if you change these enums 总共40条指令
 */
 
 typedef enum {
@@ -259,14 +259,14 @@ OP_EXTRAARG/*	Ax	extra (larger) argument for previous opcode	*/
 ** bits 2-3: C arg mode
 ** bits 4-5: B arg mode
 ** bit 6: instruction set register A
-** bit 7: operator is a test (next instruction must be a jump)
+** bit 7: operator is a test (next instruction must be a jump)测试位
 */
 
 enum OpArgMask {
-  OpArgN,  /* argument is not used */
-  OpArgU,  /* argument is used */
-  OpArgR,  /* argument is a register or a jump offset */
-  OpArgK   /* argument is a constant or register/constant */
+  OpArgN,  /* argument is not used 参数未被使用*/
+  OpArgU,  /* argument is used 已使用参数*/
+  OpArgR,  /* argument is a register or a jump offset 该参数是寄存器或跳转偏移*/
+  OpArgK   /* argument is a constant or register/constant 该参数是个常量或寄存器常量， K乃const之意*/
 };
 
 LUAI_DDEC const lu_byte luaP_opmodes[NUM_OPCODES];

@@ -57,9 +57,9 @@ struct lua_longjmp;  /* defined in ldo.c */
 
 
 typedef struct stringtable {
-  GCObject **hash;
+  GCObject **hash;  //保存所有的字符串
   lu_int32 nuse;  /* number of elements */
-  int size;
+  int size;  //hash桶的大小
 } stringtable;
 
 
@@ -107,7 +107,7 @@ typedef struct CallInfo {
 
 
 /*
-** `global state', shared by all threads of this state
+** `global state', shared by all threads of this state全局state所有线程共享
 */
 typedef struct global_State {
   lua_Alloc frealloc;  /* function to reallocate memory */
@@ -116,7 +116,7 @@ typedef struct global_State {
   l_mem GCdebt;  /* bytes allocated not yet compensated by the collector */
   lu_mem GCmemtrav;  /* memory traversed by the GC */
   lu_mem GCestimate;  /* an estimate of the non-garbage memory in use */
-  stringtable strt;  /* hash table for strings */
+  stringtable strt;  /* hash table for strings  保存短字符串*/
   TValue l_registry;
   unsigned int seed;  /* randomized seed for hashes */
   lu_byte currentwhite;
@@ -149,17 +149,17 @@ typedef struct global_State {
 
 
 /*
-** `per thread' state
+** `per thread' state 每个线程的state
 */
 struct lua_State {
   CommonHeader;
   lu_byte status;
-  StkId top;  /* first free slot in the stack */
-  global_State *l_G;
-  CallInfo *ci;  /* call info for current function */
+  StkId top;  /* first free slot in the stack 指向栈顶元素*/
+  global_State *l_G;  //全局栈
+  CallInfo *ci;  /* call info for current function 当前函数信息*/
   const Instruction *oldpc;  /* last pc traced */
-  StkId stack_last;  /* last free slot in the stack */
-  StkId stack;  /* stack base */
+  StkId stack_last;  /* last free slot in the stack 栈底元素*/
+  StkId stack;  /* stack base 当前指向的元素(也可以说成当前函数的栈底)*/
   int stacksize;
   unsigned short nny;  /* number of non-yieldable calls in stack */
   unsigned short nCcalls;  /* number of nested C calls */
@@ -180,17 +180,17 @@ struct lua_State {
 
 
 /*
-** Union of all collectable objects
+** Union of all collectable objects 可以GC的数据结构
 */
 union GCObject {
   GCheader gch;  /* common header */
-  union TString ts;
-  union Udata u;
-  union Closure cl;
-  struct Table h;
-  struct Proto p;
+  union TString ts;  //string
+  union Udata u;	 //用户数据
+  union Closure cl;	 //闭包
+  struct Table h;	 //表
+  struct Proto p;	 //函数
   struct UpVal uv;
-  struct lua_State th;  /* thread */
+  struct lua_State th;  /* thread 线程(协同)*/
 };
 
 
@@ -198,7 +198,7 @@ union GCObject {
 
 /* macros to convert a GCObject into a specific value */
 #define rawgco2ts(o)  \
-	check_exp(novariant((o)->gch.tt) == LUA_TSTRING, &((o)->ts))
+	check_exp(novariant((o)->gch.tt) == LUA_TSTRING, &((o)->ts))  //计算得到GCObject中的tstring
 #define gco2ts(o)	(&rawgco2ts(o)->tsv)
 #define rawgco2u(o)	check_exp((o)->gch.tt == LUA_TUSERDATA, &((o)->u))
 #define gco2u(o)	(&rawgco2u(o)->uv)

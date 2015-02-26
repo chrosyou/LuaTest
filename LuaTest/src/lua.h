@@ -71,7 +71,7 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 
 
 /*
-** basic types
+** basic types  基本的数据类型
 */
 #define LUA_TNONE		(-1)
 
@@ -82,8 +82,8 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 #define LUA_TSTRING		4
 #define LUA_TTABLE		5
 #define LUA_TFUNCTION		6
-#define LUA_TUSERDATA		7
-#define LUA_TTHREAD		8
+#define LUA_TUSERDATA		7 //（自定义的用户数据结构，有Light和Heavy两种，后者由Lua来分配管理，用GC）
+#define LUA_TTHREAD		8	//（线程，CoRoutine）
 
 #define LUA_NUMTAGS		9
 
@@ -99,14 +99,14 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 #define LUA_RIDX_LAST		LUA_RIDX_GLOBALS
 
 
-/* type of numbers in Lua */
+/* type of numbers in Lua lua中使用的数字double*/
 typedef LUA_NUMBER lua_Number;
 
 
-/* type for integer functions */
+/* type for integer functions 64位就是__int64，32位是int*/
 typedef LUA_INTEGER lua_Integer;
 
-/* unsigned integer type */
+/* unsigned integer type 无符号32位数*/
 typedef LUA_UNSIGNED lua_Unsigned;
 
 
@@ -139,7 +139,7 @@ LUA_API const lua_Number *(lua_version) (lua_State *L);
 
 
 /*
-** basic stack manipulation
+** basic stack manipulation 主要的栈操作
 */
 LUA_API int   (lua_absindex) (lua_State *L, int idx);
 LUA_API int   (lua_gettop) (lua_State *L);

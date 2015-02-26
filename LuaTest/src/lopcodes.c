@@ -59,6 +59,12 @@ LUAI_DDEF const char *const luaP_opnames[NUM_OPCODES+1] = {
 };
 
 
+//位	位置	含义
+//t		7		是否是测试操作，测试意味着跳转，跳转和测试指令该位为1
+//a		6		是否是寄存器操作
+//b		4~5		B参数，OpArgMask类型
+//c		2~3		C参数，OpArgMask类型
+//m		0~1		opmode
 #define opmode(t,a,b,c,m) (((t)<<7) | ((a)<<6) | ((b)<<4) | ((c)<<2) | (m))
 
 LUAI_DDEF const lu_byte luaP_opmodes[NUM_OPCODES] = {
