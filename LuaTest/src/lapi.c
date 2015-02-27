@@ -903,7 +903,8 @@ LUA_API void lua_callk (lua_State *L, int nargs, int nresults, int ctx,
   if (k != NULL && L->nny == 0) {  /* need to prepare continuation? */
     L->ci->u.c.k = k;  /* save continuation */
     L->ci->u.c.ctx = ctx;  /* save context */
-    luaD_call(L, func, nresults, 1);  /* do the call */
+    luaD_call
+		(L, func, nresults, 1);  /* do the call */
   }
   else  /* no continuation or no yieldable */
     luaD_call(L, func, nresults, 0);  /* just do the call */

@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TVariant" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAACAAAAIABAAAAQAAEAAAECAgAAJAAAA=</HashCode>
+      <FileName>Variant.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestA" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABgAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Variant.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestB" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Variant.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CallS" Collapsed="true">
+    <Position X="26.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAA=</HashCode>
+      <FileName>src\lapi.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LoadF" Collapsed="true">
+    <Position X="26.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAA=</HashCode>
+      <FileName>src\lauxlib.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LoadS" Collapsed="true">
+    <Position X="28.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>src\lauxlib.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="lua_longjmp" Collapsed="true">
+    <Position X="21.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>src\ldo.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SParser" Collapsed="true">
+    <Position X="25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAACAAAAIAAAAAAAEAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>src\ldo.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_0019_1" Collapsed="true">
+    <Position X="15.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAQAAAA=</HashCode>
+      <FileName>src\ldump.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BlockCnt" Collapsed="true">
+    <Position X="23.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgCAAAAAAIAAABAAAABAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>src\lparser.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ConsControl" Collapsed="true">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAEAAAABQAAIAAAAA=</HashCode>
+      <FileName>src\lparser.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_002c_1" Collapsed="true">
+    <Position X="18" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>src\lparser.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LHS_assign" Collapsed="true">
+    <Position X="25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAAA=</HashCode>
+      <FileName>src\lparser.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LX" Collapsed="true">
+    <Position X="28.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>src\lstate.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LG" Collapsed="true">
+    <Position X="23.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAA=</HashCode>
+      <FileName>src\lstate.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MatchState" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAAgAAAAAAAAAAAAAAAAMAEAAAAAAAAAQAAAA=</HashCode>
+      <FileName>src\lstrlib.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_003c_1" Collapsed="true">
+    <Position X="11.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAQAAAAQAAAE=</HashCode>
+      <FileName>src\lundump.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="luaL_Reg" Collapsed="true">
+    <Position X="26.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lauxlib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="luaL_Buffer" Collapsed="true">
+    <Position X="25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEQAAAAQAAAA=</HashCode>
+      <FileName>src\lauxlib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="luaL_Stream" Collapsed="true">
+    <Position X="7.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAA=</HashCode>
+      <FileName>src\lauxlib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Token" Collapsed="true">
+    <Position X="28.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llex.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LexState" Collapsed="true">
+    <Position X="21.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABACAAAiAEAIAAAAIAAAAgAAAAAAAAIQAAQQACAA=</HashCode>
+      <FileName>src\llex.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GCheader" Collapsed="true">
+    <Position X="25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="lua_TValue" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Upvaldesc" Collapsed="true">
+    <Position X="19.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LocVar" Collapsed="true">
+    <Position X="18" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAgAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Proto" Collapsed="true">
+    <Position X="23.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAADAAAQAEAAEIABgAAABAAIAAAAAAggFAAAAAQgEA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="UpVal" Collapsed="true">
+    <Position X="18" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CClosure" Collapsed="true">
+    <Position X="28.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="LClosure" Collapsed="true">
+    <Position X="19.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node" Collapsed="true">
+    <Position X="21.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Table">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAAAAgAAACAgAAAAAAAAAAAAAAAAAACAQAAQ=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="expdesc" Collapsed="true">
+    <Position X="21.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQgAYAAAAAAAA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vardesc" Collapsed="true">
+    <Position X="21.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Labeldesc" Collapsed="true">
+    <Position X="28.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Labellist" Collapsed="true">
+    <Position X="18" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAgAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Dyndata" Collapsed="true">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAAAAAA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="FuncState" Collapsed="true">
+    <Position X="23.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAABAAAAAAAAAAEAAAAAAAAAAEAQAAQQAJQAQCQQAI=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="stringtable" Collapsed="true">
+    <Position X="26.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAIAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lstate.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CallInfo" Collapsed="true">
+    <Position X="25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAEAAAAAAIAAAgAAAAAAAEAAgIAAAIAAAA=</HashCode>
+      <FileName>src\lstate.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="global_State" Collapsed="true">
+    <Position X="26.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IISAAGCEAAAAQIABAAgQAqJEAAggCkAAiDAQABAAKAA=</HashCode>
+      <FileName>src\lstate.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="lua_State" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQUUAAEEAAEACAAAAACAAgAIAAAAIEBgACgAACQAAA=</HashCode>
+      <FileName>src\lstate.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="lua_Debug" Collapsed="true">
+    <Position X="19.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEBAAAAAOAAAYAAAAAAAAABAEEAAIAAAAAAAAAAEE=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Mbuffer" Collapsed="true">
+    <Position X="19.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAAAAAA=</HashCode>
+      <FileName>src\lzio.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Zio" Collapsed="true">
+    <Position X="7.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAQAAQQAAA=</HashCode>
+      <FileName>src\lzio.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BCinfo" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAIAAAAAAAAAAAAAAACABAEAEAAAAQAAAAAAQA=</HashCode>
+      <FileName>cjson\dtoa.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Bigint" Collapsed="true">
+    <Position X="21.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAgABAAAIAgAA=</HashCode>
+      <FileName>cjson\dtoa.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_0005_2" Collapsed="true">
+    <Position X="3.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGAAAIACEAAAAAAAAICAAAAAAAAAAoIAAAABAAAAAg=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_0005_3" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACACAAAAAAAAAAAAAAAAEIAAAAQAAAAAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_0005_4" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAABACAAAAAAAAABAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_0007_1" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAiAAEAAAAAAMCAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\strbuf.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="b_uint" Collapsed="true">
+    <Position X="11.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lbitlib.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="DumpState" Collapsed="true">
+    <Position X="15.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ldump.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LStream" Collapsed="true">
+    <Position X="7.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\liolib.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LoadState" Collapsed="true">
+    <Position X="11.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lundump.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Pfunc" Collapsed="true">
+    <Position X="25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ldo.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SemInfo" Collapsed="true">
+    <Position X="26.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llex.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lu_int32" Collapsed="true">
+    <Position X="3.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lu_mem" Collapsed="true">
+    <Position X="23.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="l_mem" Collapsed="true">
+    <Position X="18" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lu_byte" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="L_Umaxalign" Collapsed="true">
+    <Position X="21.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="l_uacNumber" Collapsed="true">
+    <Position X="19.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Instruction" Collapsed="true">
+    <Position X="3.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\llimits.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TValue" Collapsed="true">
+    <Position X="3.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="StkId" Collapsed="true">
+    <Position X="3.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="OpCode" Collapsed="true">
+    <Position X="15.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lopcodes.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="expkind" Collapsed="true">
+    <Position X="15.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TMS" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ltm.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_CFunction" Collapsed="true">
+    <Position X="26.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Reader" Collapsed="true">
+    <Position X="21.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Writer" Collapsed="true">
+    <Position X="23.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Alloc" Collapsed="true">
+    <Position X="25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Number" Collapsed="true">
+    <Position X="19.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Integer" Collapsed="true">
+    <Position X="18" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Unsigned" Collapsed="true">
+    <Position X="11.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="lua_Hook" Collapsed="true">
+    <Position X="28.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lua.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ZIO" Collapsed="true">
+    <Position X="7.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lzio.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ULong" Collapsed="true">
+    <Position X="28.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\dtoa.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="json_token_type_t" Collapsed="true">
+    <Position X="11.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="json_config_t" Collapsed="true">
+    <Position X="3.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="json_parse_t" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="json_token_t" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="strbuf_t" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cjson\strbuf.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="GCObject" Collapsed="true">
+    <Position X="3.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lobject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="BinOpr" Collapsed="true">
+    <Position X="19.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkAAAAAAAAAgQAAAACAACAKAgAEAAAAAAAAEABAAAg=</HashCode>
+      <FileName>src\lcode.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="UnOpr" Collapsed="true">
+    <Position X="26.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEIAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABA=</HashCode>
+      <FileName>src\lcode.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RESERVED" Collapsed="true">
+    <Position X="25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACVpEFAAEhEREIAAoAAASAAAAAIAAAIAQIAAiUCAA=</HashCode>
+      <FileName>src\llex.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OpMode" Collapsed="true">
+    <Position X="23.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAACA=</HashCode>
+      <FileName>src\lopcodes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_002a_1" Collapsed="true">
+    <Position X="15.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GIAEAAEQAAgBEAAEYAJkFgQCoAEAIgIA6AACAmCAAAA=</HashCode>
+      <FileName>src\lopcodes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OpArgMask" Collapsed="true">
+    <Position X="21.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\lopcodes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_002d_1" Collapsed="true">
+    <Position X="15.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAEAAAAAAAAAAACAQMAIgAAAAQACABIAgAAAAA=</HashCode>
+      <FileName>src\lparser.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0037_1" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAEAgAABAAAIABAAgABACCAAAAAAABiAQEIAAAAA=</HashCode>
+      <FileName>src\ltm.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0001_1" Collapsed="true">
+    <Position X="18" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAAAQAAACA=</HashCode>
+      <FileName>cjson\dtoa.c</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0005_1" Collapsed="true">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAABAQAAAAAQAABAEAEIAAAAAAAAAAAAAQBAIgAA=</HashCode>
+      <FileName>cjson\lua_cjson.c</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
