@@ -98,7 +98,7 @@ typedef union Value Value;
 
 /*
 ** Tagged Values. This is the basic representation of values in Lua,
-** an actual value plus a tag with its type.
+** an actual value plus a tag with its type. lua的基本数据类型
 */
 
 #define TValuefields	Value value_; int tt_  //tt_存放数据类型，value_存放数据

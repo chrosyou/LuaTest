@@ -142,7 +142,7 @@ LUA_API const lua_Number *(lua_version) (lua_State *L);
 ** basic stack manipulation 主要的栈操作
 */
 LUA_API int   (lua_absindex) (lua_State *L, int idx);
-LUA_API int   (lua_gettop) (lua_State *L);
+LUA_API int   (lua_gettop) (lua_State *L); /*返回栈顶元素的索引*/
 LUA_API void  (lua_settop) (lua_State *L, int idx);
 LUA_API void  (lua_pushvalue) (lua_State *L, int idx);
 LUA_API void  (lua_remove) (lua_State *L, int idx);

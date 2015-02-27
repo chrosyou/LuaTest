@@ -156,7 +156,7 @@ LUA_API int lua_absindex (lua_State *L, int idx) {
          : cast_int(L->top - L->ci->func + idx);
 }
 
-
+/*返回栈顶元素的索引，因为索引是从1开始编号的， 所以这个结果等于栈上的元素个数； 特别指出，0 表示栈为空*/
 LUA_API int lua_gettop (lua_State *L) {
   return cast_int(L->top - (L->ci->func + 1));
 }
@@ -538,7 +538,7 @@ LUA_API const char *lua_pushvfstring (lua_State *L, const char *fmt,
   return ret;
 }
 
-
+/*把一个格式化过的字符串压栈*/
 LUA_API const char *lua_pushfstring (lua_State *L, const char *fmt, ...) {
   const char *ret;
   va_list argp;

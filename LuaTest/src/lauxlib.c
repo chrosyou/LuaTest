@@ -626,7 +626,7 @@ static int skipcomment (LoadF *lf, int *cp) {
   else return 0;  /* no comment */
 }
 
-/*把一个文件加载为 Lua 代码块*/
+/*把一个文件加载为 Lua 代码块，只加载，不运行(代码块的名字为filename)*/
 LUALIB_API int luaL_loadfilex (lua_State *L, const char *filename,
                                              const char *mode) {
   LoadF lf;
@@ -638,13 +638,13 @@ LUALIB_API int luaL_loadfilex (lua_State *L, const char *filename,
     lf.f = stdin;
   }
   else {
-    lua_pushfstring(L, "@%s", filename);
+    lua_pushfstring(L, "@%s", filename);  /*文件名压栈*/
     lf.f = fopen(filename, "r");
     if (lf.f == NULL) return errfile(L, "open", fnameindex);
   }
   if (skipcomment(&lf, &c))  /* read initial portion */
     lf.buff[lf.n++] = '\n';  /* add line to correct line numbers */
-  if (c == LUA_SIGNATURE[0] && filename) {  /* binary file? */
+  if (c == LUA_SIGNATURE[0] && filename) {  /* binary file? 怎么判断是二进制文件*/
     lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode */
     if (lf.f == NULL) return errfile(L, "reopen", fnameindex);
     skipcomment(&lf, &c);  /* re-read initial portion */

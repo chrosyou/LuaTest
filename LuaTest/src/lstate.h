@@ -58,7 +58,7 @@ struct lua_longjmp;  /* defined in ldo.c */
 
 typedef struct stringtable {
   GCObject **hash;  //保存所有的字符串
-  lu_int32 nuse;  /* number of elements */
+  lu_int32 nuse;  /* number of elements 元素的个数*/
   int size;  //hash桶的大小
 } stringtable;
 
@@ -189,7 +189,7 @@ union GCObject {
   union Closure cl;	 //闭包
   struct Table h;	 //表
   struct Proto p;	 //函数
-  struct UpVal uv;
+  struct UpVal uv;	 //闭包数据
   struct lua_State th;  /* thread 线程(协同)*/
 };
 
