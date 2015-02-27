@@ -133,8 +133,8 @@ void luaE_freeCI (lua_State *L) {
 
 static void stack_init (lua_State *L1, lua_State *L) {
   int i; CallInfo *ci;
-  /* initialize stack array */
-  L1->stack = luaM_newvector(L, BASIC_STACK_SIZE, TValue);
+  /* initialize stack array 栈数组初始化*/
+  L1->stack = luaM_newvector(L, BASIC_STACK_SIZE, TValue);  //分配空间
   L1->stacksize = BASIC_STACK_SIZE;
   for (i = 0; i < BASIC_STACK_SIZE; i++)
     setnilvalue(L1->stack + i);  /* erase new stack */
@@ -184,11 +184,11 @@ static void init_registry (lua_State *L, global_State *g) {
 static void f_luaopen (lua_State *L, void *ud) {
   global_State *g = G(L);
   UNUSED(ud);
-  stack_init(L, L);  /* init stack */
+  stack_init(L, L);  /* init stack 栈和函数信息初始化*/
   init_registry(L, g);
-  luaS_resize(L, MINSTRTABSIZE);  /* initial size of string table */
-  luaT_init(L);
-  luaX_init(L);
+  luaS_resize(L, MINSTRTABSIZE);  /* initial size of string table 重新规划短字符串表大小*/
+  luaT_init(L);  //元方法名添加
+  luaX_init(L);  //关键字加到global_state.strt中
   /* pre-create memory-error message */
   g->memerrmsg = luaS_newliteral(L, MEMERRMSG);
   luaS_fix(g->memerrmsg);  /* it should never be collected */

@@ -413,7 +413,7 @@ static int luaB_tostring (lua_State *L) {
   return 1;
 }
 
-
+/*基础函数*/
 static const luaL_Reg base_funcs[] = {
   {"assert", luaB_assert},
   {"collectgarbage", luaB_collectgarbage},
@@ -447,10 +447,10 @@ static const luaL_Reg base_funcs[] = {
 LUAMOD_API int luaopen_base (lua_State *L) {
   /* set global _G */
   lua_pushglobaltable(L);
-  lua_pushglobaltable(L);
-  lua_setfield(L, -2, "_G");
+  lua_pushglobaltable(L);  /*？取两次*/
+  lua_setfield(L, -2, "_G");  /*给表中的元素赋值*/
   /* open lib into global table */
-  luaL_setfuncs(L, base_funcs, 0);
+  luaL_setfuncs(L, base_funcs, 0);  /*设置默认的函数*/
   lua_pushliteral(L, LUA_VERSION);
   lua_setfield(L, -2, "_VERSION");  /* set global _VERSION */
   return 1;

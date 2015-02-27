@@ -32,6 +32,7 @@
 
 #define luaM_malloc(L,s)	luaM_realloc_(L, NULL, 0, (s))
 #define luaM_new(L,t)		cast(t *, luaM_malloc(L, sizeof(t)))
+/*分配数组空间*/
 #define luaM_newvector(L,n,t) \
 		cast(t *, luaM_reallocv(L, NULL, 0, n, sizeof(t)))
 

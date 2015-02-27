@@ -32,7 +32,7 @@
 #define currIsNewline(ls)	(ls->current == '\n' || ls->current == '\r')
 
 
-/* ORDER RESERVED */
+/* ORDER RESERVED 保留的关键字*/
 static const char *const luaX_tokens [] = {
     "and", "break", "do", "else", "elseif",
     "end", "false", "for", "function", "goto", "if",
@@ -61,12 +61,12 @@ static void save (LexState *ls, int c) {
   b->buffer[luaZ_bufflen(b)++] = cast(char, c);
 }
 
-
+//保留关键字的处理
 void luaX_init (lua_State *L) {
   int i;
   for (i=0; i<NUM_RESERVED; i++) {
     TString *ts = luaS_new(L, luaX_tokens[i]);
-    luaS_fix(ts);  /* reserved words are never collected */
+    luaS_fix(ts);  /* reserved words are never collected 保留关键字不回收*/
     ts->tsv.extra = cast_byte(i+1);  /* reserved word */
   }
 }

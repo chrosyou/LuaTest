@@ -40,7 +40,7 @@ const char lua_ident[] =
 /* corresponding test */
 #define isvalid(o)	((o) != luaO_nilobject)
 
-/* test for pseudo index */
+/* test for pseudo index 是否是伪索引*/
 #define ispseudo(i)		((i) <= LUA_REGISTRYINDEX)
 
 /* test for valid but not pseudo index */
@@ -51,22 +51,22 @@ const char lua_ident[] =
 #define api_checkstackindex(L, i, o)  \
 	api_check(L, isstackindex(i, o), "index not in the stack")
 
-
+/*把索引转化为地址*/
 static TValue *index2addr (lua_State *L, int idx) {
-  CallInfo *ci = L->ci;
-  if (idx > 0) { ///索引为正值时，通过base取得value 
+  CallInfo *ci = L->ci;  /*当前的闭包栈保存*/
+  if (idx > 0) { ///索引为正值时，返回L->ci->func 为栈基址的表元素中第idx 个对象  
     TValue *o = ci->func + idx;
     api_check(L, idx <= ci->top - (ci->func + 1), "unacceptable index");
     if (o >= L->top) return NONVALIDVALUE; ///如果超过top，则返回nil，否则返回o。
     else return o;
   }
-  else if (!ispseudo(idx)) {  /* negative index */
+  else if (!ispseudo(idx)) {  /* negative index 为负值的情况从栈顶开始*/
     api_check(L, idx != 0 && -idx <= L->top - (ci->func + 1), "invalid index");
     return L->top + idx;
   }
-  else if (idx == LUA_REGISTRYINDEX)
+  else if (idx == LUA_REGISTRYINDEX)  /*注册表索引*/
     return &G(L)->l_registry;
-  else {  /* upvalues */
+  else {  /* upvalues 闭包中的数据*/
     idx = LUA_REGISTRYINDEX - idx;
     api_check(L, idx <= MAXUPVAL + 1, "upvalue index too large");
     if (ttislcf(ci->func))  /* light C function? */
@@ -645,14 +645,14 @@ LUA_API void lua_rawget (lua_State *L, int idx) {
   lua_unlock(L);
 }
 
-
+/*取得栈中index的值ele，然后value = ele[n]，Stack.push(value)*/
 LUA_API void lua_rawgeti (lua_State *L, int idx, int n) {
   StkId t;
   lua_lock(L);
   t = index2addr(L, idx);
   api_check(L, ttistable(t), "table expected");
-  setobj2s(L, L->top, luaH_getint(hvalue(t), n));
-  api_incr_top(L);
+  setobj2s(L, L->top, luaH_getint(hvalue(t), n));  //赋值到top
+  api_incr_top(L);    //top++
   lua_unlock(L);
 }
 
@@ -754,7 +754,11 @@ LUA_API void lua_settable (lua_State *L, int idx) {
   lua_unlock(L);
 }
 
-
+/*给表中的元素赋值，可能引发元操作 __index
+	t = Stack[index]
+	t[k] = Stack.top()
+	Stack.pop()
+*/
 LUA_API void lua_setfield (lua_State *L, int idx, const char *k) {
   StkId t;
   lua_lock(L);

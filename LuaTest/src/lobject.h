@@ -137,7 +137,7 @@ typedef struct lua_TValue TValue;
 #define ttisstring(o)		checktype((o), LUA_TSTRING)
 #define ttisshrstring(o)	checktag((o), ctb(LUA_TSHRSTR))
 #define ttislngstring(o)	checktag((o), ctb(LUA_TLNGSTR))
-#define ttistable(o)		checktag((o), ctb(LUA_TTABLE))
+#define ttistable(o)		checktag((o), ctb(LUA_TTABLE))  /*判断是不是表*/
 #define ttisfunction(o)		checktype(o, LUA_TFUNCTION)
 #define ttisclosure(o)		((rttype(o) & 0x1F) == LUA_TFUNCTION)
 #define ttisCclosure(o)		checktag((o), ctb(LUA_TCCL))
@@ -161,7 +161,7 @@ typedef struct lua_TValue TValue;
 #define clLvalue(o)	check_exp(ttisLclosure(o), &val_(o).gc->cl.l)
 #define clCvalue(o)	check_exp(ttisCclosure(o), &val_(o).gc->cl.c)
 #define fvalue(o)	check_exp(ttislcf(o), val_(o).f)
-#define hvalue(o)	check_exp(ttistable(o), &val_(o).gc->h)
+#define hvalue(o)	check_exp(ttistable(o), &val_(o).gc->h) /*获得TValue o中的表结构*/
 #define bvalue(o)	check_exp(ttisboolean(o), val_(o).b)
 #define thvalue(o)	check_exp(ttisthread(o), &val_(o).gc->th)
 /* a dead value may get the 'gc' field, but cannot access its contents */
@@ -186,9 +186,9 @@ typedef struct lua_TValue TValue;
 
 #define setnvalue(obj,x) \
   { TValue *io=(obj); num_(io)=(x); settt_(io, LUA_TNUMBER); }
-/*设置为0*/
+/*类型设置为nil*/
 #define setnilvalue(obj) settt_(obj, LUA_TNIL)
-
+/*设置函数值*/
 #define setfvalue(obj,x) \
   { TValue *io=(obj); val_(io).f=(x); settt_(io, LUA_TLCF); }
 
@@ -201,7 +201,7 @@ typedef struct lua_TValue TValue;
 #define setgcovalue(L,obj,x) \
   { TValue *io=(obj); GCObject *i_g=(x); \
     val_(io).gc=i_g; settt_(io, ctb(gch(i_g)->tt)); }
-
+/*设置TString值*/
 #define setsvalue(L,obj,x) \
   { TValue *io=(obj); \
     TString *x_ = (x); \
@@ -236,7 +236,7 @@ typedef struct lua_TValue TValue;
 #define setdeadvalue(obj)	settt_(obj, LUA_TDEADKEY)
 
 
-
+/*obj2复制给obj1*/
 #define setobj(L,obj1,obj2) \
 	{ const TValue *io2=(obj2); TValue *io1=(obj1); \
 	  io1->value_ = io2->value_; io1->tt_ = io2->tt_; \
@@ -249,9 +249,9 @@ typedef struct lua_TValue TValue;
 
 /* from stack to (same) stack */
 #define setobjs2s	setobj
-/* to stack (not from same stack) */
+/* to stack (not from same stack) obj赋值操作*/
 #define setobj2s	setobj
-#define setsvalue2s	setsvalue
+#define setsvalue2s	setsvalue  /*设置TString值*/
 #define sethvalue2s	sethvalue
 #define setptvalue2s	setptvalue
 /* from table to same table */

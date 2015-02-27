@@ -32,7 +32,7 @@ int luaAdd(int x, int y)
 int _tmain(int argc, _TCHAR* argv[])
 {
  	int sum = 0;
- 	L = luaL_newstate();
+ 	L = luaL_newstate();  //创建线程栈和全局栈
  	luaopen_base(L);
  	luaL_openlibs(L);
  	luaL_loadfile(L, "add.lua");

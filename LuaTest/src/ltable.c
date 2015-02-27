@@ -441,7 +441,7 @@ TValue *luaH_newkey (lua_State *L, Table *t, const TValue *key) {
 
 
 /*
-** search function for integers
+** search function for integers 从表中获取对应key值的TValue
 */
 const TValue *luaH_getint (Table *t, int key) {
   /* (1 <= key && key <= t->sizearray) */

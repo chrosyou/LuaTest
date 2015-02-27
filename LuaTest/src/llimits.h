@@ -63,7 +63,7 @@ typedef LUAI_UACNUMBER l_uacNumber;
 /* to avoid problems with conditions too long */
 #define lua_longassert(c)	{ if (!(c)) lua_assert(0); }
 #else
-#define lua_assert(c)		((void)0)
+#define lua_assert(c)		((void)0)  /*暂时无用*/
 #define check_exp(c,e)		(e)
 #define lua_longassert(c)	((void)0)
 #endif
@@ -77,12 +77,12 @@ typedef LUAI_UACNUMBER l_uacNumber;
 #include <assert.h>
 #define luai_apicheck(L,e)	assert(e)
 #else
-#define luai_apicheck(L,e)	lua_assert(e)
+#define luai_apicheck(L,e)	lua_assert(e)  /*暂时无用*/
 #endif
 
 #endif
-
-#define api_check(l,e,msg)	luai_apicheck(l,(e) && msg)
+/*暂时无用*/
+#define api_check(l,e,msg)	luai_apicheck(l,(e) && msg)  /*暂时无用*/
 
 
 #if !defined(UNUSED)

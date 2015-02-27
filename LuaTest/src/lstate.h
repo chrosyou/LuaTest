@@ -64,18 +64,18 @@ typedef struct stringtable {
 
 
 /*
-** information about a call
+** information about a call 调用闭包信息结构
 */
 typedef struct CallInfo {
-  StkId func;  /* function index in the stack */
-  StkId	top;  /* top for this function */
-  struct CallInfo *previous, *next;  /* dynamic call link */
-  short nresults;  /* expected number of results from this function */
-  lu_byte callstatus;
+  StkId func;  /* function index in the stack 调用闭包的位置*/
+  StkId	top;  /* top for this function 栈顶*/
+  struct CallInfo *previous, *next;  /* dynamic call link 调用栈*/
+  short nresults;  /* expected number of results from this function 返回值个数*/
+  lu_byte callstatus;  /*调用状态*/
   ptrdiff_t extra;
   union {
     struct {  /* only for Lua functions */
-      StkId base;  /* base for this function */
+      StkId base;  /* base for this function 调用闭包的基址*/
       const Instruction *savedpc;
     } l;
     struct {  /* only for C functions */
@@ -143,7 +143,7 @@ typedef struct global_State {
   struct lua_State *mainthread;  /*主线程*/
   const lua_Number *version;  /* pointer to version number */
   TString *memerrmsg;  /* memory-error message */
-  TString *tmname[TM_N];  /* array with tag-method names */
+  TString *tmname[TM_N];  /* array with tag-method names 标记方法名的数组*/
   struct Table *mt[LUA_NUMTAGS];  /* metatables for basic types 元表基本类型*/
 } global_State;
 
