@@ -71,7 +71,7 @@ LUALIB_API int (luaL_execresult) (lua_State *L, int stat);
 
 LUALIB_API int (luaL_ref) (lua_State *L, int t);
 LUALIB_API void (luaL_unref) (lua_State *L, int t, int ref);
-
+/*只加载，不运行，能发现语法错误*/
 LUALIB_API int (luaL_loadfilex) (lua_State *L, const char *filename,
                                                const char *mode);
 

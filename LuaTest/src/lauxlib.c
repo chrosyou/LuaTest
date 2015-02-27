@@ -560,8 +560,8 @@ LUALIB_API void luaL_unref (lua_State *L, int t, int ref) {
 */
 
 typedef struct LoadF {
-  int n;  /* number of pre-read characters */
-  FILE *f;  /* file being read */
+  int n;  /* number of pre-read characters 预读取的字符数*/
+  FILE *f;  /* file being read 文件指针*/
   char buff[LUAL_BUFFERSIZE];  /* area for reading file */
 } LoadF;
 
@@ -592,13 +592,13 @@ static int errfile (lua_State *L, const char *what, int fnameindex) {
   return LUA_ERRFILE;
 }
 
-
+/*跳过文件头*/
 static int skipBOM (LoadF *lf) {
   const char *p = "\xEF\xBB\xBF";  /* Utf8 BOM mark */
   int c;
   lf->n = 0;
   do {
-    c = getc(lf->f);
+    c = getc(lf->f); /*读取一个字符*/
     if (c == EOF || c != *(const unsigned char *)p++) return c;
     lf->buff[lf->n++] = c;  /* to be read by the parser */
   } while (*p != '\0');
