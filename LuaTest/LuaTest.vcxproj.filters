@@ -105,9 +105,6 @@
     <ClInclude Include="src\lzio.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Variant.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="cjson\dtoa_config.h">
       <Filter>cjson</Filter>
     </ClInclude>
@@ -238,5 +235,6 @@
     <None Include="src\Makefile">
       <Filter>src</Filter>
     </None>
+    <None Include="object.cd" />
   </ItemGroup>
 </Project>

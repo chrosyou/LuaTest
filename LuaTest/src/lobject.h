@@ -181,12 +181,12 @@ typedef struct lua_TValue TValue;
 			(righttt(obj) && !isdead(g,gcvalue(obj))))
 
 
-/* Macros to set values */
+/* Macros to set values 设置为nil*/
 #define settt_(o,t)	((o)->tt_=(t))
 
 #define setnvalue(obj,x) \
   { TValue *io=(obj); num_(io)=(x); settt_(io, LUA_TNUMBER); }
-
+/*设置为0*/
 #define setnilvalue(obj) settt_(obj, LUA_TNIL)
 
 #define setfvalue(obj,x) \

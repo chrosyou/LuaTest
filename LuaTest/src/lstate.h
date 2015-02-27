@@ -46,7 +46,7 @@ struct lua_longjmp;  /* defined in ldo.c */
 /* extra stack space to handle TM calls and some other extras */
 #define EXTRA_STACK   5
 
-
+/*基本栈的大小40*/
 #define BASIC_STACK_SIZE        (2*LUA_MINSTACK)
 
 
@@ -110,7 +110,7 @@ typedef struct CallInfo {
 ** `global state', shared by all threads of this state全局state所有线程共享
 */
 typedef struct global_State {
-  lua_Alloc frealloc;  /* function to reallocate memory */
+  lua_Alloc frealloc;  /* function to reallocate memory 内存分配函数*/
   void *ud;         /* auxiliary data to `frealloc' */
   lu_mem totalbytes;  /* number of bytes currently allocated - GCdebt */
   l_mem GCdebt;  /* bytes allocated not yet compensated by the collector */
@@ -118,9 +118,9 @@ typedef struct global_State {
   lu_mem GCestimate;  /* an estimate of the non-garbage memory in use */
   stringtable strt;  /* hash table for strings  保存短字符串*/
   TValue l_registry;
-  unsigned int seed;  /* randomized seed for hashes */
+  unsigned int seed;  /* randomized seed for hashes 计算hash的随机种子*/
   lu_byte currentwhite;
-  lu_byte gcstate;  /* state of garbage collector */
+  lu_byte gcstate;  /* state of garbage collector 垃圾回收的状态*/
   lu_byte gckind;  /* kind of GC running */
   lu_byte gcrunning;  /* true if GC is running */
   int sweepstrgc;  /* position of sweep in `strt' */
@@ -140,11 +140,11 @@ typedef struct global_State {
   int gcmajorinc;  /* pause between major collections (only in gen. mode) */
   int gcstepmul;  /* GC `granularity' */
   lua_CFunction panic;  /* to be called in unprotected errors */
-  struct lua_State *mainthread;
+  struct lua_State *mainthread;  /*主线程*/
   const lua_Number *version;  /* pointer to version number */
   TString *memerrmsg;  /* memory-error message */
   TString *tmname[TM_N];  /* array with tag-method names */
-  struct Table *mt[LUA_NUMTAGS];  /* metatables for basic types */
+  struct Table *mt[LUA_NUMTAGS];  /* metatables for basic types 元表基本类型*/
 } global_State;
 
 
@@ -153,26 +153,26 @@ typedef struct global_State {
 */
 struct lua_State {
   CommonHeader;
-  lu_byte status;
+  lu_byte status;  //线程脚本的状态，线程可选状态如下：
   StkId top;  /* first free slot in the stack 指向栈顶元素*/
   global_State *l_G;  //全局栈
   CallInfo *ci;  /* call info for current function 当前函数信息*/
   const Instruction *oldpc;  /* last pc traced */
   StkId stack_last;  /* last free slot in the stack 栈底元素*/
   StkId stack;  /* stack base 当前指向的元素(也可以说成当前函数的栈底)*/
-  int stacksize;
+  int stacksize;  /*栈的大小*/
   unsigned short nny;  /* number of non-yieldable calls in stack */
-  unsigned short nCcalls;  /* number of nested C calls */
-  lu_byte hookmask;
-  lu_byte allowhook;
-  int basehookcount;
-  int hookcount;
-  lua_Hook hook;
-  GCObject *openupval;  /* list of open upvalues in this stack */
-  GCObject *gclist;
-  struct lua_longjmp *errorJmp;  /* current error recover point */
+  unsigned short nCcalls;  /* number of nested C calls 调用深度*/
+  lu_byte hookmask;  /*支持的hook能力*/
+  lu_byte allowhook;  /*是否允许hook*/
+  int basehookcount;  /*用户设置的执行指令数(LUA_MASKCOUNT下有效)*/
+  int hookcount;   /*运行时，跑了多少条指令（LUA_MASKCOUNT下有效）*/
+  lua_Hook hook;  /*用户注册的hook函数*/
+  GCObject *openupval;  /* list of open upvalues in this stack 用于GC*/
+  GCObject *gclist; /*用于GC*/
+  struct lua_longjmp *errorJmp;  /* current error recover point 发生错误的长跳转位置，用于记录当函数发生错误时跳转出去的位置*/
   ptrdiff_t errfunc;  /* current error handling function (stack index) */
-  CallInfo base_ci;  /* CallInfo for first level (C calling Lua) */
+  CallInfo base_ci;  /* CallInfo for first level (C calling Lua)函数调用栈的栈底 */
 };
 
 

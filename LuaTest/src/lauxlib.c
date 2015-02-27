@@ -915,15 +915,15 @@ LUALIB_API const char *luaL_gsub (lua_State *L, const char *s, const char *p,
   return lua_tostring(L, -1);
 }
 
-
+//参数(1不用，2，3不用，4分配的大小)
 static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
   (void)ud; (void)osize;  /* not used */
-  if (nsize == 0) {
+  if (nsize == 0) { //分配为0的情况
     free(ptr);
     return NULL;
   }
   else
-    return realloc(ptr, nsize);
+    return realloc(ptr, nsize); //分配内存
 }
 
 
@@ -935,7 +935,7 @@ static int panic (lua_State *L) {
 
 
 LUALIB_API lua_State *luaL_newstate (void) {
-  lua_State *L = lua_newstate(l_alloc, NULL);
+  lua_State *L = lua_newstate(l_alloc, NULL);  //创建线程的栈
   if (L) lua_atpanic(L, &panic);
   return L;
 }

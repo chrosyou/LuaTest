@@ -73,7 +73,7 @@
 
 
 
-/* chain list of long jump buffers */
+/* chain list of long jump buffers 长跳转*/
 struct lua_longjmp {
   struct lua_longjmp *previous;
   luai_jmpbuf b;
@@ -126,8 +126,8 @@ int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
   unsigned short oldnCcalls = L->nCcalls;
   struct lua_longjmp lj;
   lj.status = LUA_OK;
-  lj.previous = L->errorJmp;  /* chain new error handler */
-  L->errorJmp = &lj;
+  lj.previous = L->errorJmp;  /* chain new error handler 保存当前跳转点*/
+  L->errorJmp = &lj; /*设置新的跳转点*/
   LUAI_TRY(L, &lj,
     (*f)(L, ud);
   );

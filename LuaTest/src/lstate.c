@@ -48,13 +48,13 @@
 */
 #if !defined(luai_makeseed)
 #include <time.h>
-#define luai_makeseed()		cast(unsigned int, time(NULL))
+#define luai_makeseed()		cast(unsigned int, time(NULL))  /*获得时间*/
 #endif
 
 
 
 /*
-** thread state + extra space
+** thread state + extra space 线程栈和额外空间
 */
 typedef struct LX {
 #if defined(LUAI_EXTRASPACE)
@@ -65,11 +65,11 @@ typedef struct LX {
 
 
 /*
-** Main thread combines a thread state and the global state
+** Main thread combines a thread state and the global state 主线程的线程栈和全局栈
 */
 typedef struct LG {
-  LX l;
-  global_State g;
+  LX l;  //线程栈
+  global_State g;   //全局栈
 } LG;
 
 
@@ -80,22 +80,23 @@ typedef struct LG {
 /*
 ** Compute an initial seed as random as possible. In ANSI, rely on
 ** Address Space Layout Randomization (if present) to increase
-** randomness..
+** randomness..首先获得栈的地址，
 */
 #define addbuff(b,p,e) \
   { size_t t = cast(size_t, e); \
     memcpy(buff + p, &t, sizeof(t)); p += sizeof(t); }
 
+//计算随机种子
 static unsigned int makeseed (lua_State *L) {
   char buff[4 * sizeof(size_t)];
-  unsigned int h = luai_makeseed();
+  unsigned int h = luai_makeseed();  //获得时间
   int p = 0;
-  addbuff(buff, p, L);  /* heap variable */
-  addbuff(buff, p, &h);  /* local variable */
+  addbuff(buff, p, L);  /* heap variable 栈的前两个字节*/
+  addbuff(buff, p, &h);  /* local variable 时间*/
   addbuff(buff, p, luaO_nilobject);  /* global variable */
-  addbuff(buff, p, &lua_newstate);  /* public function */
+  addbuff(buff, p, &lua_newstate);  /* public function 函数地址*/
   lua_assert(p == sizeof(buff));
-  return luaS_hash(buff, p, h);
+  return luaS_hash(buff, p, h);  /*计算hash*/
 }
 
 
@@ -160,7 +161,7 @@ static void freestack (lua_State *L) {
 
 
 /*
-** Create registry table and its predefined values
+** Create registry table and its predefined values 创建注册表
 */
 static void init_registry (lua_State *L, global_State *g) {
   TValue mt;
@@ -199,10 +200,10 @@ static void f_luaopen (lua_State *L, void *ud) {
 
 /*
 ** preinitialize a state with consistent values without allocating
-** any memory (to avoid errors)
+** any memory (to avoid errors) //初始化一些常量，
 */
 static void preinit_state (lua_State *L, global_State *g) {
-  G(L) = g;
+  G(L) = g;  //全局栈指针赋给线程栈变量
   L->stack = NULL;
   L->ci = NULL;
   L->stacksize = 0;
@@ -262,25 +263,25 @@ void luaE_freethread (lua_State *L, lua_State *L1) {
   luaM_free(L, l);
 }
 
-
+//参数(内存分配函数，默认参数)
 LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   int i;
-  lua_State *L;
-  global_State *g;
-  LG *l = cast(LG *, (*f)(ud, NULL, LUA_TTHREAD, sizeof(LG)));
+  lua_State *L;  //线程栈
+  global_State *g;   //全局栈
+  LG *l = cast(LG *, (*f)(ud, NULL, LUA_TTHREAD, sizeof(LG)));  //获得分配的内存
   if (l == NULL) return NULL;
-  L = &l->l.l;
-  g = &l->g;
-  L->next = NULL;
+  L = &l->l.l;  //线程栈赋值
+  g = &l->g;    //全局栈赋值
+  L->next = NULL;  
   L->tt = LUA_TTHREAD;
   g->currentwhite = bit2mask(WHITE0BIT, FIXEDBIT);
   L->marked = luaC_white(g);
   g->gckind = KGC_NORMAL;
-  preinit_state(L, g);
-  g->frealloc = f;
+  preinit_state(L, g);  //常量初始化
+  g->frealloc = f;  //内存分配函数
   g->ud = ud;
   g->mainthread = L;
-  g->seed = makeseed(L);
+  g->seed = makeseed(L);  //计算种子
   g->uvhead.u.l.prev = &g->uvhead;
   g->uvhead.u.l.next = &g->uvhead;
   g->gcrunning = 0;  /* no GC while building state */

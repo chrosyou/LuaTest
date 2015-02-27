@@ -41,14 +41,14 @@
 #define lua_upvalueindex(i)	(LUA_REGISTRYINDEX - (i))
 
 
-/* thread status */
-#define LUA_OK		0
-#define LUA_YIELD	1
-#define LUA_ERRRUN	2
-#define LUA_ERRSYNTAX	3
-#define LUA_ERRMEM	4
-#define LUA_ERRGCMM	5
-#define LUA_ERRERR	6
+/* thread status 线程状态*/
+#define LUA_OK		0		//正常状态
+#define LUA_YIELD	1		//线程处于挂起状态，整个线程上下文会被挂起，可以通过调用lua_yield来挂起线程
+#define LUA_ERRRUN	2		//所有运行错误发生之后，线程状态会变成LUA_ERRRUN
+#define LUA_ERRSYNTAX	3	//语法分析错误
+#define LUA_ERRMEM	4		//这种情况下不会调用错误处理函数
+#define LUA_ERRGCMM	5		//调用metamethod.__gc时报错，由gc引起，和函数本身没关系
+#define LUA_ERRERR	6		//调用错误处理函数时出错，当然，不会再进一步调用错误处理函数
 
 
 typedef struct lua_State lua_State;
@@ -65,7 +65,7 @@ typedef int (*lua_Writer) (lua_State *L, const void* p, size_t sz, void* ud);
 
 
 /*
-** prototype for memory-allocation functions
+** prototype for memory-allocation functions  内存分配函数原型
 */
 typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 
