@@ -462,19 +462,19 @@ typedef struct LocVar {
 
 
 /*
-** Function Prototypes 闭包原型
+** Function Prototypes 函数原型
 */
 typedef struct Proto {
   CommonHeader;
-  TValue *k;  /* constants used by the function */
-  Instruction *code;
-  struct Proto **p;  /* functions defined inside the function */
+  TValue *k;  /* constants used by the function 指向这个proto使用的常量*/
+  Instruction *code;  /*指令组*/
+  struct Proto **p;  /* functions defined inside the function 内部Proto列表*/
   int *lineinfo;  /* map from opcodes to source lines (debug information) */
-  LocVar *locvars;  /* information about local variables (debug information) */
-  Upvaldesc *upvalues;  /* upvalue information */
-  union Closure *cache;  /* last created closure with this prototype */
-  TString  *source;  /* used for debug information */
-  int sizeupvalues;  /* size of 'upvalues' */
+  LocVar *locvars;  /* information about local variables (debug information) 局部变量*/
+  Upvaldesc *upvalues;  /* upvalue information 闭包中的变量*/
+  union Closure *cache;  /* last created closure with this prototype 最后创建的闭包*/
+  TString  *source;  /* used for debug information Proto所属的文件名*/
+  int sizeupvalues;  /* size of 'upvalues' size部分表示各个数组的大小*/
   int sizek;  /* size of `k' */
   int sizecode;
   int sizelineinfo;
@@ -483,9 +483,9 @@ typedef struct Proto {
   int linedefined;
   int lastlinedefined;
   GCObject *gclist;
-  lu_byte numparams;  /* number of fixed parameters */
-  lu_byte is_vararg;
-  lu_byte maxstacksize;  /* maximum stack used by this function */
+  lu_byte numparams;  /* number of fixed parameters 固定的参数个数*/
+  lu_byte is_vararg;  /*表示是否是一个变参函数*/
+  lu_byte maxstacksize;  /* maximum stack used by this function 表示最大的栈大小*/
 } Proto;
 
 
@@ -507,7 +507,7 @@ typedef struct UpVal {
 
 
 /*
-** Closures
+** Closures 表示有多少个nup值
 */
 
 #define ClosureHeader \

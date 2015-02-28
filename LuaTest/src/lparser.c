@@ -40,12 +40,12 @@
 ** nodes for block list (list of active blocks)
 */
 typedef struct BlockCnt {
-  struct BlockCnt *previous;  /* chain */
+  struct BlockCnt *previous;  /* chain 形成的链*/
   short firstlabel;  /* index of first label in this block */
   short firstgoto;  /* index of first pending goto in this block */
-  lu_byte nactvar;  /* # active locals outside the block */
-  lu_byte upval;  /* true if some variable in the block is an upvalue */
-  lu_byte isloop;  /* true if `block' is a loop */
+  lu_byte nactvar;  /* # active locals outside the block 这个block之前的active var的个数*/
+  lu_byte upval;  /* true if some variable in the block is an upvalue 是否有upvalue被其他block访问*/
+  lu_byte isloop;  /* true if `block' is a loop 这个block是否是循环block*/
 } BlockCnt;
 
 
@@ -589,6 +589,7 @@ static void close_func (LexState *ls) {
 ** check whether current token is in the follow set of a block.
 ** 'until' closes syntactical blocks, but do not close scope,
 ** so it handled in separate.
+** statement分析语句采用的是LL(2)的递归下降语法分析法
 */
 static int block_follow (LexState *ls, int withuntil) {
   switch (ls->t.token) {
@@ -1599,12 +1600,12 @@ static void statement (LexState *ls) {
 
 /*
 ** compiles the main function, which is a regular vararg function with an
-** upvalue named LUA_ENV
+** upvalue named LUA_ENV 全局的设置成函数，闭包变量是LUA_ENV
 */
 static void mainfunc (LexState *ls, FuncState *fs) {
-  BlockCnt bl;
+  BlockCnt bl;  /*块的链表*/
   expdesc v;
-  open_func(ls, fs, &bl);
+  open_func(ls, fs, &bl);  /*初始化操作*/
   fs->f->is_vararg = 1;  /* main function is always vararg */
   init_exp(&v, VLOCAL, 0);  /* create and... */
   newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue */
@@ -1628,7 +1629,7 @@ Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
   lexstate.buff = buff;
   lexstate.dyd = dyd;
   dyd->actvar.n = dyd->gt.n = dyd->label.n = 0;
-  luaX_setinput(L, &lexstate, z, funcstate.f->source, firstchar);
+  luaX_setinput(L, &lexstate, z, funcstate.f->source, firstchar);  /*初始化lexstate*/
   mainfunc(&lexstate, &funcstate);
   lua_assert(!funcstate.prev && funcstate.nups == 1 && !lexstate.fs);
   /* all scopes should be correctly finished */

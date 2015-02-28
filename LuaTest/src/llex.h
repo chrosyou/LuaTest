@@ -41,13 +41,13 @@ typedef union {
 
 
 typedef struct Token {
-  int token;
-  SemInfo seminfo;
+  int token;  /*token类型*/
+  SemInfo seminfo;  /*表示语义信息，根据token的类型可以是数值或是字符串*/
 } Token;
 
 
 /* state of the lexer plus state of the parser when shared by all
-   functions */
+   functions 词法分析的上下文*/
 typedef struct LexState {
   int current;  /* current character (charint) */
   int linenumber;  /* input line counter */

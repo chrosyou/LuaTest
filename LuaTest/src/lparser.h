@@ -92,12 +92,12 @@ typedef struct Dyndata {
 struct BlockCnt;  /* defined in lparser.c */
 
 
-/* state needed to generate code for a given function */
+/* state needed to generate code for a given function 表示parse时函数状态信息*/
 typedef struct FuncState {
-  Proto *f;  /* current function header */
+  Proto *f;  /* current function header 保存函数指令，变量，upvalue等信息*/
   Table *h;  /* table to find (and reuse) elements in `k' */
   struct FuncState *prev;  /* enclosing function */
-  struct LexState *ls;  /* lexical state */
+  struct LexState *ls;  /* lexical state 指向词法分析结构*/
   struct BlockCnt *bl;  /* chain of current blocks */
   int pc;  /* next position to code (equivalent to `ncode')下一个程序执行点 */
   int lasttarget;   /* 'label' of last 'jump label' */
