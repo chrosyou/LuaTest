@@ -26,7 +26,7 @@ Closure *luaF_newCclosure (lua_State *L, int n) {
   return c;
 }
 
-
+/*创建一个新的lua闭包*/
 Closure *luaF_newLclosure (lua_State *L, int n) {
   Closure *c = &luaC_newobj(L, LUA_TLCL, sizeLclosure(n), NULL, 0)->cl;
   c->l.p = NULL;

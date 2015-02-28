@@ -13,14 +13,14 @@
 
 #define sizeCclosure(n)	(cast(int, sizeof(CClosure)) + \
                          cast(int, sizeof(TValue)*((n)-1)))
-
+/*获得闭包的位置*/
 #define sizeLclosure(n)	(cast(int, sizeof(LClosure)) + \
                          cast(int, sizeof(TValue *)*((n)-1)))
 
 
 LUAI_FUNC Proto *luaF_newproto (lua_State *L);
 LUAI_FUNC Closure *luaF_newCclosure (lua_State *L, int nelems);
-LUAI_FUNC Closure *luaF_newLclosure (lua_State *L, int nelems);
+LUAI_FUNC Closure *luaF_newLclosure (lua_State *L, int nelems);   /*创建新的lua闭包*/
 LUAI_FUNC UpVal *luaF_newupval (lua_State *L);
 LUAI_FUNC UpVal *luaF_findupval (lua_State *L, StkId level);
 LUAI_FUNC void luaF_close (lua_State *L, StkId level);

@@ -385,7 +385,7 @@ LUA_API int lua_toboolean (lua_State *L, int idx) {
   return !l_isfalse(o);
 }
 
-//
+//把给定索引处的 Lua 值转换为一个 C 字符串
 LUA_API const char *lua_tolstring (lua_State *L, int idx, size_t *len) {
   StkId o = index2addr(L, idx);
   if (!ttisstring(o)) {
@@ -400,7 +400,7 @@ LUA_API const char *lua_tolstring (lua_State *L, int idx, size_t *len) {
     lua_unlock(L);
   }
   if (len != NULL) *len = tsvalue(o)->len;
-  return svalue(o);
+  return svalue(o);  //返回对象中的字符串
 }
 
 
@@ -974,14 +974,16 @@ LUA_API int lua_pcallk (lua_State *L, int nargs, int nresults, int errfunc,
   return status;
 }
 
-
+/*加载一段 Lua 代码块，但不运行它
+如果没有错误， lua_load把一个编译好的代码块作为一个 Lua 函数压到栈顶。 否则，压入错误消息。
+*/
 LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,
                       const char *chunkname, const char *mode) {
   ZIO z;
   int status;
   lua_lock(L);
-  if (!chunkname) chunkname = "?";
-  luaZ_init(L, &z, reader, data);
+  if (!chunkname) chunkname = "?";  /*确定是否有chunkname*/
+  luaZ_init(L, &z, reader, data);   /*初始化Z*/
   status = luaD_protectedparser(L, &z, chunkname, mode);
   if (status == LUA_OK) {  /* no errors? */
     LClosure *f = clLvalue(L->top - 1);  /* get newly created function */

@@ -620,11 +620,11 @@ int luaD_pcall (lua_State *L, Pfunc func, void *u,
 ** Execute a protected parser.
 */
 struct SParser {  /* data to `f_parser' */
-  ZIO *z;
-  Mbuffer buff;  /* dynamic structure used by the scanner */
-  Dyndata dyd;  /* dynamic structures used by the parser */
-  const char *mode;
-  const char *name;
+  ZIO *z;		  /*读入流结构*/
+  Mbuffer buff;   /* dynamic structure used by the scanner 扫描数据结构*/
+  Dyndata dyd;    /* dynamic structures used by the parser 解析数据结构*/
+  const char *mode;  /*读取模式*/
+  const char *name;  /*chunkname*/
 };
 
 

@@ -46,7 +46,7 @@
 ** 2 - regular C function (closure)
 */
 
-/* Variant tags for functions */
+/* Variant tags for functions 闭包的几种标签*/
 #define LUA_TLCL	(LUA_TFUNCTION | (0 << 4))  /* Lua closure */
 #define LUA_TLCF	(LUA_TFUNCTION | (1 << 4))  /* light C function */
 #define LUA_TCCL	(LUA_TFUNCTION | (2 << 4))  /* C closure */
@@ -462,7 +462,7 @@ typedef struct LocVar {
 
 
 /*
-** Function Prototypes
+** Function Prototypes 闭包原型
 */
 typedef struct Proto {
   CommonHeader;
@@ -522,14 +522,14 @@ typedef struct CClosure {
 
 typedef struct LClosure {
   ClosureHeader;
-  struct Proto *p;
+  struct Proto *p;   /*？闭包字节码*/
   UpVal *upvals[1];  /* list of upvalues */
 } LClosure;
 
 
 typedef union Closure {
-  CClosure c;
-  LClosure l;
+  CClosure c;  /*c闭包*/
+  LClosure l;  /*lua闭包*/
 } Closure;
 
 

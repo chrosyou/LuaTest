@@ -16,7 +16,7 @@
 #define luaD_checkstack(L,n)	if (L->stack_last - L->top <= (n)) \
 				    luaD_growstack(L, n); else condmovestack(L);
 
-
+/*Õ»Ôö¼Ó*/
 #define incr_top(L) {L->top++; luaD_checkstack(L,0);}
 
 #define savestack(L,p)		((char *)(p) - (char *)L->stack)

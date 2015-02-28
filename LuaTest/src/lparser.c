@@ -1621,8 +1621,8 @@ Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
   FuncState funcstate;
   Closure *cl = luaF_newLclosure(L, 1);  /* create main closure */
   /* anchor closure (to avoid being collected) */
-  setclLvalue(L, L->top, cl);
-  incr_top(L);
+  setclLvalue(L, L->top, cl);   /*闭包放在栈顶*/
+  incr_top(L);  /*栈增加*/
   funcstate.f = cl->l.p = luaF_newproto(L);
   funcstate.f->source = luaS_new(L, name);  /* create and anchor TString */
   lexstate.buff = buff;

@@ -562,7 +562,7 @@ LUALIB_API void luaL_unref (lua_State *L, int t, int ref) {
 typedef struct LoadF {
   int n;  /* number of pre-read characters 预读取的字符数*/
   FILE *f;  /* file being read 文件指针*/
-  char buff[LUAL_BUFFERSIZE];  /* area for reading file */
+  char buff[LUAL_BUFFERSIZE];  /* area for reading file 读取文件的部分*/
 } LoadF;
 
 
@@ -632,17 +632,17 @@ LUALIB_API int luaL_loadfilex (lua_State *L, const char *filename,
   LoadF lf;
   int status, readstatus;
   int c;
-  int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack */
+  int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack 栈顶的序号*/
   if (filename == NULL) {
     lua_pushliteral(L, "=stdin");
     lf.f = stdin;
   }
   else {
-    lua_pushfstring(L, "@%s", filename);  /*文件名压栈*/
+    lua_pushfstring(L, "@%s", filename);  /*文件名加前缀压栈*/
     lf.f = fopen(filename, "r");
     if (lf.f == NULL) return errfile(L, "open", fnameindex);
   }
-  if (skipcomment(&lf, &c))  /* read initial portion */
+  if (skipcomment(&lf, &c))  /* read initial portion c为第一个有效字符*/
     lf.buff[lf.n++] = '\n';  /* add line to correct line numbers */
   if (c == LUA_SIGNATURE[0] && filename) {  /* binary file? 怎么判断是二进制文件*/
     lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode */

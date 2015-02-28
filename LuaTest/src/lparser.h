@@ -78,13 +78,13 @@ typedef struct Labellist {
 
 /* dynamic structures used by the parser */
 typedef struct Dyndata {
-  struct {  /* list of active local variables */
+  struct {  /* list of active local variables 局部变量*/
     Vardesc *arr;
     int n;
     int size;
   } actvar;
-  Labellist gt;  /* list of pending gotos */
-  Labellist label;   /* list of active labels */
+  Labellist gt;  /* list of pending gotos goto的列表*/
+  Labellist label;   /* list of active labels 标签列表*/
 } Dyndata;
 
 

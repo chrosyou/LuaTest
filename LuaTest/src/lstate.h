@@ -161,7 +161,7 @@ struct lua_State {
   StkId stack_last;  /* last free slot in the stack 栈底元素*/
   StkId stack;  /* stack base 当前指向的元素(也可以说成当前函数的栈底)*/
   int stacksize;  /*栈的大小*/
-  unsigned short nny;  /* number of non-yieldable calls in stack */
+  unsigned short nny;  /* number of non-yieldable calls in stack 栈中不能被yiled的个数*/
   unsigned short nCcalls;  /* number of nested C calls 调用深度*/
   lu_byte hookmask;  /*支持的hook能力*/
   lu_byte allowhook;  /*是否允许hook*/
