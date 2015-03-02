@@ -235,6 +235,6 @@
     <None Include="src\Makefile">
       <Filter>src</Filter>
     </None>
-    <None Include="object.cd" />
+    <None Include="luastruct.cd" />
   </ItemGroup>
 </Project>

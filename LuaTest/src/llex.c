@@ -167,8 +167,8 @@ void luaX_setinput (lua_State *L, LexState *ls, ZIO *z, TString *source,
   ls->linenumber = 1;
   ls->lastline = 1;
   ls->source = source;
-  ls->envn = luaS_new(L, LUA_ENV);  /* create env name */
-  luaS_fix(ls->envn);  /* never collect this name */
+  ls->envn = luaS_new(L, LUA_ENV);  /* create env name 创建环境变量*/
+  luaS_fix(ls->envn);  /* never collect this name 设置为不可回收状态*/
   luaZ_resizebuffer(ls->L, ls->buff, LUA_MINBUFFER);  /* initialize buffer */
 }
 

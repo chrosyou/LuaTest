@@ -1598,7 +1598,7 @@ static void statement (LexState *ls) {
 /* }====================================================================== */
 
 
-/*
+/* lua将整个视为一个main函数，_ENV为器upvalue
 ** compiles the main function, which is a regular vararg function with an
 ** upvalue named LUA_ENV 全局的设置成函数，闭包变量是LUA_ENV
 */
@@ -1606,7 +1606,7 @@ static void mainfunc (LexState *ls, FuncState *fs) {
   BlockCnt bl;  /*块的链表*/
   expdesc v;
   open_func(ls, fs, &bl);  /*初始化操作*/
-  fs->f->is_vararg = 1;  /* main function is always vararg */
+  fs->f->is_vararg = 1;  /* main function is always vararg 主函数总是变参函数*/
   init_exp(&v, VLOCAL, 0);  /* create and... */
   newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue */
   luaX_next(ls);  /* read first token */

@@ -523,7 +523,7 @@ typedef struct CClosure {
 typedef struct LClosure {
   ClosureHeader;
   struct Proto *p;   /*？闭包字节码*/
-  UpVal *upvals[1];  /* list of upvalues */
+  UpVal *upvals[1];  /* list of upvalues 内值*/
 } LClosure;
 
 

@@ -123,10 +123,10 @@ l_noret luaD_throw (lua_State *L, int errcode) {
 
 
 int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
-  unsigned short oldnCcalls = L->nCcalls;
+  unsigned short oldnCcalls = L->nCcalls;  /*保存调用深度*/
   struct lua_longjmp lj;
-  lj.status = LUA_OK;
-  lj.previous = L->errorJmp;  /* chain new error handler 保存当前跳转点*/
+  lj.status = LUA_OK;  
+  lj.previous = L->errorJmp;  /* chain new error handler 保存当前跳转点，这里可以看出跳转是一个链*/
   L->errorJmp = &lj; /*设置新的跳转点*/
   LUAI_TRY(L, &lj,
     (*f)(L, ud);
@@ -591,11 +591,11 @@ LUA_API int lua_yieldk (lua_State *L, int nresults, int ctx, lua_CFunction k) {
   return 0;  /* return to 'luaD_hook' */
 }
 
-
+/*第三个参数是 SParser 结构*/
 int luaD_pcall (lua_State *L, Pfunc func, void *u,
                 ptrdiff_t old_top, ptrdiff_t ef) {
   int status;
-  CallInfo *old_ci = L->ci;
+  CallInfo *old_ci = L->ci;  //保存当前函数信息
   lu_byte old_allowhooks = L->allowhook;
   unsigned short old_nny = L->nny;
   ptrdiff_t old_errfunc = L->errfunc;
@@ -636,7 +636,7 @@ static void checkmode (lua_State *L, const char *mode, const char *x) {
   }
 }
 
-
+/*第二个参数是解析结构 SParser */
 static void f_parser (lua_State *L, void *ud) {
   int i;
   Closure *cl;
@@ -647,7 +647,7 @@ static void f_parser (lua_State *L, void *ud) {
     cl = luaU_undump(L, p->z, &p->buff, p->name);
   }
   else {
-    checkmode(L, p->mode, "text");
+    checkmode(L, p->mode, "text");  /*这里检测模式是什么作用？*/
     cl = luaY_parser(L, p->z, &p->buff, &p->dyd, p->name, c);
   }
   lua_assert(cl->l.nupvalues == cl->l.p->sizeupvalues);
