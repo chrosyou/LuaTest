@@ -31,7 +31,7 @@ Closure *luaF_newLclosure (lua_State *L, int n) {
   Closure *c = &luaC_newobj(L, LUA_TLCL, sizeLclosure(n), NULL, 0)->cl;
   c->l.p = NULL;
   c->l.nupvalues = cast_byte(n);
-  while (n--) c->l.upvals[n] = NULL;
+  while (n--) c->l.upvals[n] = NULL;  
   return c;
 }
 

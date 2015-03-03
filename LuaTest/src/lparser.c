@@ -591,7 +591,7 @@ static void close_func (LexState *ls) {
 ** 'until' closes syntactical blocks, but do not close scope,
 ** so it handled in separate.
 ** statement分析语句采用的是LL(2)的递归下降语法分析法
-** 下一个代码块
+** 判断当前是不是某个代码块的下半部分
 */
 static int block_follow (LexState *ls, int withuntil) {
   switch (ls->t.token) {
@@ -1626,8 +1626,8 @@ Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
   /* anchor closure (to avoid being collected) */
   setclLvalue(L, L->top, cl);   /*闭包放在栈顶*/
   incr_top(L);  /*栈增加*/
-  funcstate.f = cl->l.p = luaF_newproto(L);
-  funcstate.f->source = luaS_new(L, name);  /* create and anchor TString */
+  funcstate.f = cl->l.p = luaF_newproto(L);  /*创建新的而函数对象*/
+  funcstate.f->source = luaS_new(L, name);  /* create and anchor TString 创建新的字符串*/
   lexstate.buff = buff;
   lexstate.dyd = dyd;
   dyd->actvar.n = dyd->gt.n = dyd->label.n = 0;

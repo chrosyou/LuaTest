@@ -144,6 +144,7 @@ TString *luaX_newstring (LexState *ls, const char *str, size_t l) {
 /*
 ** increment line number and skips newline sequence (any of
 ** \n, \r, \n\r, or \r\n)
+** 读取换行函数
 */
 static void inclinenumber (LexState *ls) {
   int old = ls->current;
@@ -253,6 +254,7 @@ static void read_numeral (LexState *ls, SemInfo *seminfo) {
 /*
 ** skip a sequence '[=*[' or ']=*]' and return its number of '='s or
 ** -1 if sequence is malformed
+** 跳过“[[”之间的等号
 */
 static int skip_sep (LexState *ls) {
   int count = 0;
@@ -266,14 +268,14 @@ static int skip_sep (LexState *ls) {
   return (ls->current == s) ? count : (-count) - 1;
 }
 
-
+/*读取长字符串*/
 static void read_long_string (LexState *ls, SemInfo *seminfo, int sep) {
   save_and_next(ls);  /* skip 2nd `[' */
   if (currIsNewline(ls))  /* string starts with a newline? */
     inclinenumber(ls);  /* skip it */
   for (;;) {
     switch (ls->current) {
-      case EOZ:
+      case EOZ:  /*读取到最后有没有"]"，出现错误*/
         lexerror(ls, (seminfo) ? "unfinished long string" :
                                  "unfinished long comment", TK_EOS);
         break;  /* to avoid warnings */
@@ -403,23 +405,23 @@ static int llex (LexState *ls, SemInfo *seminfo) {
   for (;;) {
     switch (ls->current) {
       case '\n': case '\r': {  /* line breaks 换行符*/
-        inclinenumber(ls);  /*跳过换行符*/
+        inclinenumber(ls);  /*跳过换行符，行号加1*/
         break;
       }
-      case ' ': case '\f': case '\t': case '\v': {  /* spaces */
+      case ' ': case '\f': case '\t': case '\v': {  /* spaces 空格，制表符直接跳过*/
         next(ls);
         break;
       }
-      case '-': {  /* '-' or '--' (comment) */
+      case '-': {  /* '-' or '--' (comment) 判断是不是注释*/
         next(ls);
-        if (ls->current != '-') return '-';
+        if (ls->current != '-') return '-';  /*不是注释直接返回*/
         /* else is a comment */
         next(ls);
-        if (ls->current == '[') {  /* long comment? */
+        if (ls->current == '[') {  /* long comment? 可以换行的注释*/
           int sep = skip_sep(ls);
           luaZ_resetbuffer(ls->buff);  /* `skip_sep' may dirty the buffer */
           if (sep >= 0) {
-            read_long_string(ls, NULL, sep);  /* skip long comment */
+            read_long_string(ls, NULL, sep);  /* skip long comment 跳过长注释*/
             luaZ_resetbuffer(ls->buff);  /* previous call may dirty the buff. */
             break;
           }
@@ -510,7 +512,7 @@ static int llex (LexState *ls, SemInfo *seminfo) {
   }
 }
 
-/*获得下一个token*/
+/*获得下一个有效token，会跳过注释*/
 void luaX_next (LexState *ls) {
   ls->lastline = ls->linenumber;
   if (ls->lookahead.token != TK_EOS) {  /* is there a look-ahead token? */
