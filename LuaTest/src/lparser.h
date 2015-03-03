@@ -96,7 +96,7 @@ struct BlockCnt;  /* defined in lparser.c */
 typedef struct FuncState {
   Proto *f;  /* current function header 保存函数指令，变量，upvalue等信息*/
   Table *h;  /* table to find (and reuse) elements in `k' */
-  struct FuncState *prev;  /* enclosing function */
+  struct FuncState *prev;  /* enclosing function 前一个函数块*/
   struct LexState *ls;  /* lexical state 指向词法分析结构*/
   struct BlockCnt *bl;  /* chain of current blocks */
   int pc;  /* next position to code (equivalent to `ncode')下一个程序执行点 */

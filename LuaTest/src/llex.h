@@ -10,14 +10,14 @@
 #include "lobject.h"
 #include "lzio.h"
 
-
+/*前面的是已经定义的ascii*/
 #define FIRST_RESERVED	257
 
 
 
 /*
 * WARNING: if you change the order of this enumeration,
-* grep "ORDER RESERVED"
+* grep "ORDER RESERVED" 保留关键字
 */
 enum RESERVED {
   /* terminal symbols denoted by reserved words */
@@ -49,15 +49,15 @@ typedef struct Token {
 /* state of the lexer plus state of the parser when shared by all
    functions 词法分析的上下文*/
 typedef struct LexState {
-  int current;  /* current character (charint) */
-  int linenumber;  /* input line counter */
-  int lastline;  /* line of last token `consumed' */
-  Token t;  /* current token */
+  int current;  /* current character (charint) 当前读到的字符*/
+  int linenumber;  /* input line counter 当前的行数*/
+  int lastline;  /* line of last token `consumed' 前一行的行数*/
+  Token t;  /* current token 当前token(标记)*/
   Token lookahead;  /* look ahead token */
   struct FuncState *fs;  /* current function (parser) */
   struct lua_State *L;
   ZIO *z;  /* input stream */
-  Mbuffer *buff;  /* buffer for tokens */
+  Mbuffer *buff;  /* buffer for tokens 存储当前读取token的buffer*/
   struct Dyndata *dyd;  /* dynamic structures used by the parser */
   TString *source;  /* current source name */
   TString *envn;  /* environment variable name */

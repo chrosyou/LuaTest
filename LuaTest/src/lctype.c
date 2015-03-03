@@ -12,7 +12,7 @@
 #if !LUA_USE_CTYPE	/* { */
 
 #include <limits.h>
-
+/*这里定义的通过最后一为来判断是不是字符*/
 LUAI_DDEF const lu_byte luai_ctype_[UCHAR_MAX + 2] = {
   0x00,  /* EOZ */
   0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,	/* 0. */

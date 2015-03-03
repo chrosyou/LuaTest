@@ -24,7 +24,7 @@
 #include "lzio.h"
 
 
-
+/*获得下一个字符*/
 #define next(ls) (ls->current = zgetc(ls->z))
 
 
@@ -149,9 +149,9 @@ static void inclinenumber (LexState *ls) {
   int old = ls->current;
   lua_assert(currIsNewline(ls));
   next(ls);  /* skip `\n' or `\r' */
-  if (currIsNewline(ls) && ls->current != old)
+  if (currIsNewline(ls) && ls->current != old)  /*判断换行符一个或者两个*/
     next(ls);  /* skip `\n\r' or `\r\n' */
-  if (++ls->linenumber >= MAX_INT)
+  if (++ls->linenumber >= MAX_INT)  /*换行号+1*/
     luaX_syntaxerror(ls, "chunk has too many lines");
 }
 
@@ -397,13 +397,13 @@ static void read_string (LexState *ls, int del, SemInfo *seminfo) {
                                    luaZ_bufflen(ls->buff) - 2);
 }
 
-
+/*获得下一个token*/
 static int llex (LexState *ls, SemInfo *seminfo) {
   luaZ_resetbuffer(ls->buff);
   for (;;) {
     switch (ls->current) {
-      case '\n': case '\r': {  /* line breaks */
-        inclinenumber(ls);
+      case '\n': case '\r': {  /* line breaks 换行符*/
+        inclinenumber(ls);  /*跳过换行符*/
         break;
       }
       case ' ': case '\f': case '\t': case '\v': {  /* spaces */
@@ -500,7 +500,7 @@ static int llex (LexState *ls, SemInfo *seminfo) {
             return TK_NAME;
           }
         }
-        else {  /* single-char tokens (+ - / ...) */
+        else {  /* single-char tokens (+ - / ...) 如果是其他符号，则直接视为token*/
           int c = ls->current;
           next(ls);
           return c;
@@ -510,7 +510,7 @@ static int llex (LexState *ls, SemInfo *seminfo) {
   }
 }
 
-
+/*获得下一个token*/
 void luaX_next (LexState *ls) {
   ls->lastline = ls->linenumber;
   if (ls->lookahead.token != TK_EOS) {  /* is there a look-ahead token? */

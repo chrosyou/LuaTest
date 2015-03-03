@@ -106,7 +106,7 @@ static int testnext (LexState *ls, int c) {
   else return 0;
 }
 
-
+/*判断是否相等*/
 static void check (LexState *ls, int c) {
   if (ls->t.token != c)
     error_expected(ls, c);
@@ -174,7 +174,7 @@ static int registerlocalvar (LexState *ls, TString *varname) {
   return fs->nlocvars++;
 }
 
-
+/*新建一个局部变量*/
 static void new_localvar (LexState *ls, TString *name) {
   FuncState *fs = ls->fs;
   Dyndata *dyd = ls->dyd;
@@ -267,19 +267,20 @@ static void markupval (FuncState *fs, int level) {
 /*
   Find variable with given name 'n'. If it is an upvalue, add this
   upvalue into all intermediate functions.
+**函数自己管理upvalue值，保证了每个函数的upvalue值的不同
 */
 static int singlevaraux (FuncState *fs, TString *n, expdesc *var, int base) {
   if (fs == NULL)  /* no more levels? */
     return VVOID;  /* default is global */
   else {
     int v = searchvar(fs, n);  /* look up locals at current level */
-    if (v >= 0) {  /* found? */
+    if (v >= 0) {  /* found? 在本层找到这个变量*/
       init_exp(var, VLOCAL, v);  /* variable is local */
       if (!base)
         markupval(fs, v);  /* local will be used as an upval */
       return VLOCAL;
     }
-    else {  /* not found as local at current level; try upvalues */
+    else {  /* not found as local at current level; try upvalues 没找到在upvalue中找 */
       int idx = searchupvalue(fs, n);  /* try existing upvalues */
       if (idx < 0) {  /* not found? */
         if (singlevaraux(fs->prev, n, var, 0) == VVOID) /* try upper levels */
@@ -295,7 +296,7 @@ static int singlevaraux (FuncState *fs, TString *n, expdesc *var, int base) {
 
 
 static void singlevar (LexState *ls, expdesc *var) {
-  TString *varname = str_checkname(ls);
+  TString *varname = str_checkname(ls);  /*获得函数名*/
   FuncState *fs = ls->fs;
   if (singlevaraux(fs, varname, var, 1) == VVOID) {  /* global name? */
     expdesc key;
@@ -329,7 +330,7 @@ static void adjust_assign (LexState *ls, int nvars, int nexps, expdesc *e) {
 
 static void enterlevel (LexState *ls) {
   lua_State *L = ls->L;
-  ++L->nCcalls;
+  ++L->nCcalls;  /*调用深度+1*/
   checklimit(ls->fs, L->nCcalls, LUAI_MAXCCALLS, "C levels");
 }
 
@@ -601,7 +602,7 @@ static int block_follow (LexState *ls, int withuntil) {
   }
 }
 
-
+/*解析关键字*/
 static void statlist (LexState *ls) {
   /* statlist -> { stat [`;'] } */
   while (!block_follow(ls, 1)) {
@@ -1526,10 +1527,10 @@ static void retstat (LexState *ls) {
   testnext(ls, ';');  /* skip optional semicolon */
 }
 
-
+/*case语句处理各个带关键字的语句*/
 static void statement (LexState *ls) {
-  int line = ls->linenumber;  /* may be needed for error messages */
-  enterlevel(ls);
+  int line = ls->linenumber;  /* may be needed for error messages 保存当前行*/
+  enterlevel(ls);   /*深度检测*/
   switch (ls->t.token) {
     case ';': {  /* stat -> ';' (empty statement) */
       luaX_next(ls);  /* skip ';' */
@@ -1557,7 +1558,7 @@ static void statement (LexState *ls) {
       repeatstat(ls, line);
       break;
     }
-    case TK_FUNCTION: {  /* stat -> funcstat */
+    case TK_FUNCTION: {  /* stat -> funcstat 函数检测*/
       funcstat(ls, line);
       break;
     }
@@ -1605,12 +1606,12 @@ static void statement (LexState *ls) {
 static void mainfunc (LexState *ls, FuncState *fs) {
   BlockCnt bl;  /*块的链表*/
   expdesc v;
-  open_func(ls, fs, &bl);  /*初始化操作*/
+  open_func(ls, fs, &bl);  /*初始化操作fs*/
   fs->f->is_vararg = 1;  /* main function is always vararg 主函数总是变参函数*/
   init_exp(&v, VLOCAL, 0);  /* create and... */
   newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue */
-  luaX_next(ls);  /* read first token */
-  statlist(ls);  /* parse main body */
+  luaX_next(ls);  /* read first token 获得第一个token*/
+  statlist(ls);  /* parse main body 解析主要的部分*/
   check(ls, TK_EOS);
   close_func(ls);
 }

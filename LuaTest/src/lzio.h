@@ -21,9 +21,9 @@ typedef struct Zio ZIO;
 
 
 typedef struct Mbuffer {
-  char *buffer;
-  size_t n;
-  size_t buffsize;
+  char *buffer;  /*内存地址*/
+  size_t n; /*实际的大小*/
+  size_t buffsize;  /*buffer大小*/
 } Mbuffer;
 
 #define luaZ_initbuffer(L, buff) ((buff)->buffer = NULL, (buff)->buffsize = 0)

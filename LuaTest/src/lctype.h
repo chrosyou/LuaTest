@@ -54,12 +54,12 @@
 /*
 ** 'lalpha' (Lua alphabetic) and 'lalnum' (Lua alphanumeric) both include '_'
 */
-#define lislalpha(c)	testprop(c, MASK(ALPHABIT))
-#define lislalnum(c)	testprop(c, (MASK(ALPHABIT) | MASK(DIGITBIT)))
-#define lisdigit(c)	testprop(c, MASK(DIGITBIT))
-#define lisspace(c)	testprop(c, MASK(SPACEBIT))
-#define lisprint(c)	testprop(c, MASK(PRINTBIT))
-#define lisxdigit(c)	testprop(c, MASK(XDIGITBIT))
+#define lislalpha(c)	testprop(c, MASK(ALPHABIT))   /*判断是否是字母*/
+#define lislalnum(c)	testprop(c, (MASK(ALPHABIT) | MASK(DIGITBIT)))  //**判断是否是字母或数字**/
+#define lisdigit(c)	testprop(c, MASK(DIGITBIT))  /*判断是否是数字*/
+#define lisspace(c)	testprop(c, MASK(SPACEBIT))  /*判断是否是空格*/
+#define lisprint(c)	testprop(c, MASK(PRINTBIT))  /*判断是否是可打印字符*/
+#define lisxdigit(c)	testprop(c, MASK(XDIGITBIT))   //**判断是否是数字或字母（大写A到G，小写a到g）(不知道为什么要这样？)**/
 
 /*
 ** this 'ltolower' only works for alphabetic characters
