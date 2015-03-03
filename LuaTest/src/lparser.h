@@ -106,7 +106,7 @@ typedef struct FuncState {
   int np;  /* number of elements in `p' */
   int firstlocal;  /* index of first local var (in Dyndata array) */
   short nlocvars;  /* number of elements in 'f->locvars' */
-  lu_byte nactvar;  /* number of active local variables */
+  lu_byte nactvar;  /* number of active local variables 局部变量的个数*/
   lu_byte nups;  /* number of upvalues */
   lu_byte freereg;  /* first free register */
 } FuncState;

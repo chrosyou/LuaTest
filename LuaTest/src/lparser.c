@@ -591,6 +591,7 @@ static void close_func (LexState *ls) {
 ** 'until' closes syntactical blocks, but do not close scope,
 ** so it handled in separate.
 ** statement分析语句采用的是LL(2)的递归下降语法分析法
+** 下一个代码块
 */
 static int block_follow (LexState *ls, int withuntil) {
   switch (ls->t.token) {
@@ -799,9 +800,9 @@ static void body (LexState *ls, expdesc *e, int ismethod, int line) {
     new_localvarliteral(ls, "self");  /* create 'self' parameter */
     adjustlocalvars(ls, 1);
   }
-  parlist(ls);
+  parlist(ls);  /*获得函数参数列表*/
   checknext(ls, ')');
-  statlist(ls);
+  statlist(ls); /*获得函数体部分*/
   new_fs.f->lastlinedefined = ls->linenumber;
   check_match(ls, TK_END, TK_FUNCTION, line);
   codeclosure(ls, e);
@@ -1466,7 +1467,7 @@ static int funcname (LexState *ls, expdesc *v) {
   return ismethod;
 }
 
-
+/*函数解析*/
 static void funcstat (LexState *ls, int line) {
   /* funcstat -> FUNCTION funcname body */
   int ismethod;
