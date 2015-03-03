@@ -18,7 +18,7 @@
 
 /*Õ»Ôö¼Ó*/
 #define incr_top(L) {L->top++; luaD_checkstack(L,0);}
-
+/*Æ«ÒÆÁ¿£¿*/
 #define savestack(L,p)		((char *)(p) - (char *)L->stack)
 #define restorestack(L,n)	((TValue *)((char *)L->stack + (n)))
 
