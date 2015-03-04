@@ -67,9 +67,9 @@ typedef struct stringtable {
 ** information about a call 调用闭包信息结构
 */
 typedef struct CallInfo {
-  StkId func;  /* function index in the stack 调用闭包的位置*/
+  StkId func;  /* function index in the stack 调用闭包的位置，正在执行函数的数据栈位置*/
   StkId	top;  /* top for this function 栈顶*/
-  struct CallInfo *previous, *next;  /* dynamic call link 调用栈*/
+  struct CallInfo *previous, *next;  /* dynamic call link 调用栈，双向链表*/
   short nresults;  /* expected number of results from this function 返回值个数*/
   lu_byte callstatus;  /*调用状态*/
   ptrdiff_t extra;

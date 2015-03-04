@@ -14,6 +14,7 @@
 
 /*
 ** Expression descriptor
+** 表达式描述
 */
 
 typedef enum {
@@ -24,7 +25,7 @@ typedef enum {
   VK,		/* info = index of constant in `k' */
   VKNUM,	/* nval = numerical value */
   VNONRELOC,	/* info = result register */
-  VLOCAL,	/* info = local register */
+  VLOCAL,	/* info = local register 局部寄存器变量*/
   VUPVAL,       /* info = index of upvalue in 'upvalues' */
   VINDEXED,	/* t = table register/upvalue; idx = index R/K */
   VJMP,		/* info = instruction pc */
@@ -36,16 +37,16 @@ typedef enum {
 
 #define vkisvar(k)	(VLOCAL <= (k) && (k) <= VINDEXED)
 #define vkisinreg(k)	((k) == VNONRELOC || (k) == VLOCAL)
-
+/* variable (global, local, upvalue, or indexed) 生成字节码需要*/
 typedef struct expdesc {
-  expkind k;
+  expkind k;  /*变量类型*/
   union {
     struct {  /* for indexed variables (VINDEXED) */
       short idx;  /* index (R/K) */
       lu_byte t;  /* table (register or upvalue) */
       lu_byte vt;  /* whether 't' is register (VLOCAL) or upvalue (VUPVAL) */
     } ind;
-    int info;  /* for generic use */
+    int info;  /* for generic use 变量在变量表中的位置*/
     lua_Number nval;  /* for VKNUM */
   } u;
   int t;  /* patch list of `exit when true' */
@@ -96,7 +97,7 @@ struct BlockCnt;  /* defined in lparser.c */
 typedef struct FuncState {
   Proto *f;  /* current function header 保存函数指令，变量，upvalue等信息*/
   Table *h;  /* table to find (and reuse) elements in `k' */
-  struct FuncState *prev;  /* enclosing function 前一个函数块*/
+  struct FuncState *prev;  /* enclosing function 上层函数块*/
   struct LexState *ls;  /* lexical state 指向词法分析结构*/
   struct BlockCnt *bl;  /* chain of current blocks */
   int pc;  /* next position to code (equivalent to `ncode')下一个程序执行点 */
@@ -108,7 +109,7 @@ typedef struct FuncState {
   short nlocvars;  /* number of elements in 'f->locvars' */
   lu_byte nactvar;  /* number of active local variables 局部变量的个数*/
   lu_byte nups;  /* number of upvalues */
-  lu_byte freereg;  /* first free register */
+  lu_byte freereg;  /* first free register 记录当前空闲寄存器的起始id*/
 } FuncState;
 
 
