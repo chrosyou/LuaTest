@@ -38,6 +38,7 @@
 
 /*
 ** nodes for block list (list of active blocks)
+** 代码块
 */
 typedef struct BlockCnt {
   struct BlockCnt *previous;  /* chain 形成的链*/
@@ -143,7 +144,7 @@ static TString *str_checkname (LexState *ls) {
   luaX_next(ls);
   return ts;
 }
-
+/*初始化表达式描述*/
 /*2.变量类型，3变量位置*/
 static void init_exp (expdesc *e, expkind k, int i) {
   e->f = e->t = NO_JUMP;
@@ -228,13 +229,14 @@ static int searchupvalue (FuncState *fs, TString *name) {
 }
 
 /*创建一个upvalue值，保存在Proto中*/
+/*创建之前会检测数组的大小*/
 static int newupvalue (FuncState *fs, TString *name, expdesc *v) {
   Proto *f = fs->f;
   int oldsize = f->sizeupvalues;
   checklimit(fs, fs->nups + 1, MAXUPVAL, "upvalues");
   luaM_growvector(fs->ls->L, f->upvalues, fs->nups, f->sizeupvalues,  /*这里作了扩充，但没有初始化*/
                   Upvaldesc, MAXUPVAL, "upvalues");
-  while (oldsize < f->sizeupvalues) f->upvalues[oldsize++].name = NULL;  /*后面的为什么需要赋值*/
+  while (oldsize < f->sizeupvalues) f->upvalues[oldsize++].name = NULL;  /*这里初始化*/
   f->upvalues[fs->nups].instack = (v->k == VLOCAL); /*局部变量表示在栈中*/
   f->upvalues[fs->nups].idx = cast_byte(v->u.info);
   f->upvalues[fs->nups].name = name;
@@ -436,7 +438,7 @@ static void movegotosout (FuncState *fs, BlockCnt *bl) {
   }
 }
 
-
+/*进入代码块*/
 static void enterblock (FuncState *fs, BlockCnt *bl, lu_byte isloop) {
   bl->isloop = isloop;
   bl->nactvar = fs->nactvar;
@@ -548,9 +550,9 @@ static void open_func (LexState *ls, FuncState *fs, BlockCnt *bl) {
   f->maxstacksize = 2;  /* registers 0/1 are always valid */
   fs->h = luaH_new(L);
   /* anchor table of constants (to avoid being collected) */
-  sethvalue2s(L, L->top, fs->h);
+  sethvalue2s(L, L->top, fs->h);  /*为什么放在栈上？*/
   incr_top(L);
-  enterblock(fs, bl, 0);
+  enterblock(fs, bl, 0);  
 }
 
 
@@ -1096,6 +1098,7 @@ static void block (LexState *ls) {
 /*
 ** structure to chain all variables in the left-hand side of an
 ** assignment
+** 串联左值得结构体
 */
 struct LHS_assign {
   struct LHS_assign *prev;
@@ -1623,11 +1626,11 @@ Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
                       Dyndata *dyd, const char *name, int firstchar) {
   LexState lexstate;
   FuncState funcstate;
-  Closure *cl = luaF_newLclosure(L, 1);  /* create main closure */
+  Closure *cl = luaF_newLclosure(L, 1);  /* create main closure 放在了gc链上*/
   /* anchor closure (to avoid being collected) */
   setclLvalue(L, L->top, cl);   /*闭包放在栈顶*/
   incr_top(L);  /*栈增加*/
-  funcstate.f = cl->l.p = luaF_newproto(L);  /*创建新的函数对象*/
+  funcstate.f = cl->l.p = luaF_newproto(L);  /*创建新的proto对象*/
   funcstate.f->source = luaS_new(L, name);  /* create and anchor TString 创建新的字符串*/
   lexstate.buff = buff;
   lexstate.dyd = dyd;

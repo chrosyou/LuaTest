@@ -188,7 +188,7 @@ union GCObject {
   union Udata u;	 //用户数据
   union Closure cl;	 //闭包
   struct Table h;	 //表
-  struct Proto p;	 //函数
+  struct Proto p;	 //函数字节码结构
   struct UpVal uv;	 //闭包数据
   struct lua_State th;  /* thread 线程(协同)*/
 };

@@ -207,7 +207,7 @@ void luaC_checkupvalcolor (global_State *g, UpVal *uv) {
 /*
 ** create a new collectable object (with given type and size) and link
 ** it to '*list'. 'offset' tells how many bytes to allocate before the
-** object itself (used only by states).创建一个新的可回收对象
+** object itself (used only by states).创建一个新的可回收对象，并放在了 gc 链上
 */
 GCObject *luaC_newobj (lua_State *L, int tt, size_t sz, GCObject **list,
                        int offset) {

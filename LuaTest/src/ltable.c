@@ -275,7 +275,7 @@ static void setarrayvector (lua_State *L, Table *t, int size) {
   t->sizearray = size;
 }
 
-
+/*创建表的node节点*/
 static void setnodevector (lua_State *L, Table *t, int size) {
   int lsize;
   if (size == 0) {  /* no elements to hash part? */
@@ -364,7 +364,7 @@ static void rehash (lua_State *L, Table *t, const TValue *ek) {
 ** }=============================================================
 */
 
-
+/*创建一个table表*/
 Table *luaH_new (lua_State *L) {
   Table *t = &luaC_newobj(L, LUA_TTABLE, sizeof(Table), NULL, 0)->h;
   t->metatable = NULL;

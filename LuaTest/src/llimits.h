@@ -121,7 +121,8 @@ typedef LUAI_UACNUMBER l_uacNumber;
 
 /*
 ** maximum number of upvalues in a closure (both C and Lua). (Value
-** must fit in an unsigned char.)Lua闭包或者C闭包中的最多含有Value值的个数
+** must fit in an unsigned char.)
+** Lua闭包或者C闭包中的最多含有Value值的个数(255个)
 */
 #define MAXUPVAL	UCHAR_MAX
 

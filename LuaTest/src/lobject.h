@@ -471,7 +471,7 @@ typedef struct Proto {
   struct Proto **p;  /* functions defined inside the function 内部Proto列表*/
   int *lineinfo;  /* map from opcodes to source lines (debug information) */
   LocVar *locvars;  /* information about local variables (debug information) 局部变量*/
-  Upvaldesc *upvalues;  /* upvalue information 闭包中的变量*/
+  Upvaldesc *upvalues;  /* upvalue information 闭包中的变量(使用中是一个数组，动态分配内存)*/
   union Closure *cache;  /* last created closure with this prototype 最后创建的闭包*/
   TString  *source;  /* used for debug information Proto所属的文件名*/
   int sizeupvalues;  /* size of 'upvalues' size部分表示各个数组的大小*/

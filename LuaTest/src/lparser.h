@@ -39,7 +39,7 @@ typedef enum {
 #define vkisinreg(k)	((k) == VNONRELOC || (k) == VLOCAL)
 /* variable (global, local, upvalue, or indexed) 生成字节码需要*/
 typedef struct expdesc {
-  expkind k;  /*变量类型*/
+  expkind k;  /*表达式类型*/
   union {
     struct {  /* for indexed variables (VINDEXED) */
       short idx;  /* index (R/K) */
@@ -98,7 +98,7 @@ typedef struct FuncState {
   Proto *f;  /* current function header 保存函数指令，变量，upvalue等信息*/
   Table *h;  /* table to find (and reuse) elements in `k' */
   struct FuncState *prev;  /* enclosing function 上层函数块*/
-  struct LexState *ls;  /* lexical state 指向词法分析结构*/
+  struct LexState *ls;  /* lexical state 指向词法分析结构，全局？*/
   struct BlockCnt *bl;  /* chain of current blocks */
   int pc;  /* next position to code (equivalent to `ncode')下一个程序执行点 */
   int lasttarget;   /* 'label' of last 'jump label' */
@@ -108,7 +108,7 @@ typedef struct FuncState {
   int firstlocal;  /* index of first local var (in Dyndata array) */
   short nlocvars;  /* number of elements in 'f->locvars' */
   lu_byte nactvar;  /* number of active local variables 局部变量的个数*/
-  lu_byte nups;  /* number of upvalues */
+  lu_byte nups;  /* number of upvalues upvalue的个数*/
   lu_byte freereg;  /* first free register 记录当前空闲寄存器的起始id*/
 } FuncState;
 
