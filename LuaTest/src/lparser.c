@@ -149,7 +149,7 @@ static TString *str_checkname (LexState *ls) {
 static void init_exp (expdesc *e, expkind k, int i) {
   e->f = e->t = NO_JUMP;
   e->k = k;
-  e->u.info = i;
+  e->u.info = i; /*在常量表中的位置*/
 }
 
 
@@ -228,11 +228,11 @@ static int searchupvalue (FuncState *fs, TString *name) {
   return -1;  /* not found */
 }
 
-/*创建一个upvalue值，保存在Proto中*/
+/*创建一个upvalue值，保存在本层ls的Proto中*/
 /*创建之前会检测数组的大小*/
 static int newupvalue (FuncState *fs, TString *name, expdesc *v) {
   Proto *f = fs->f;
-  int oldsize = f->sizeupvalues;
+  int oldsize = f->sizeupvalues;  /*记录初始大小，程序开始时是0*/
   checklimit(fs, fs->nups + 1, MAXUPVAL, "upvalues");
   luaM_growvector(fs->ls->L, f->upvalues, fs->nups, f->sizeupvalues,  /*这里作了扩充，但没有初始化*/
                   Upvaldesc, MAXUPVAL, "upvalues");
@@ -270,7 +270,8 @@ static void markupval (FuncState *fs, int level) {
   Find variable with given name 'n'. If it is an upvalue, add this
   upvalue into all intermediate functions.
 **函数自己管理upvalue值，保证了每个函数的upvalue值的不同
-**寻找这个变量值是否存在
+**寻找这个变量值是否存在，存在就初始化一个expdesc结构
+**(这个找的过程会为各层建立upvalue)
 */
 static int singlevaraux (FuncState *fs, TString *n, expdesc *var, int base) {
   if (fs == NULL)  /* no more levels? */
@@ -290,23 +291,23 @@ static int singlevaraux (FuncState *fs, TString *n, expdesc *var, int base) {
           return VVOID;  /* not found; is a global */
         /* else was LOCAL or UPVAL */
         idx  = newupvalue(fs, n, var);  /* will be a new upvalue 创建全局变量，放在当前的函数upvalue中*/
-      }
+      }									/*这里可以看出闭包的传递性，上层的upvalue会放在本层的proto->upvalue中*/
       init_exp(var, VUPVAL, idx);  /*找到就初始化*/
       return VUPVAL;
     }
   }
 }
 
-/*表达式解析*/
+/*表达式解析,解析得到单个变量*/
 static void singlevar (LexState *ls, expdesc *var) {
   TString *varname = str_checkname(ls);  /*获得token名*/
   FuncState *fs = ls->fs;
   if (singlevaraux(fs, varname, var, 1) == VVOID) {  /* global name? 所有的地方都没有找到，视为全局变量*/
     expdesc key;
-    singlevaraux(fs, ls->envn, var, 1);  /* get environment variable */
+    singlevaraux(fs, ls->envn, var, 1);  /* get environment variable ，找到全局量_ENV,并放在var中(这个找的过程会为各层建立upvalue)*/
     lua_assert(var->k == VLOCAL || var->k == VUPVAL);
-    codestring(ls, &key, varname);  /* key is variable name */
-    luaK_indexed(fs, var, &key);  /* env[varname] */
+    codestring(ls, &key, varname);  /* key is variable name 把名字放在常量表中，并放在结构key里*/
+    luaK_indexed(fs, var, &key);  /* env[varname] 设置变量全局的*/
   }
 }
 
@@ -445,8 +446,8 @@ static void enterblock (FuncState *fs, BlockCnt *bl, lu_byte isloop) {
   bl->firstlabel = fs->ls->dyd->label.n;
   bl->firstgoto = fs->ls->dyd->gt.n;
   bl->upval = 0;
-  bl->previous = fs->bl;
-  fs->bl = bl;
+  bl->previous = fs->bl;  /*之前的代码块是fs中的*/
+  fs->bl = bl; /*指向当前的代码块*/
   lua_assert(fs->freereg == fs->nactvar);
 }
 
@@ -1535,7 +1536,7 @@ static void retstat (LexState *ls) {
 /*case语句处理各个带关键字的语句*/
 static void statement (LexState *ls) {
   int line = ls->linenumber;  /* may be needed for error messages 保存当前行*/
-  enterlevel(ls);   /*深度检测*/
+  enterlevel(ls);   /*调用深度检测？*/
   switch (ls->t.token) {
     case ';': {  /* stat -> ';' (empty statement) */
       luaX_next(ls);  /* skip ';' */
@@ -1614,7 +1615,7 @@ static void mainfunc (LexState *ls, FuncState *fs) {
   open_func(ls, fs, &bl);  /*初始化操作fs*/
   fs->f->is_vararg = 1;  /* main function is always vararg 主函数总是变参函数*/
   init_exp(&v, VLOCAL, 0);  /* create and... */
-  newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue */
+  newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue 创建upvalue，放在当前函数的proto中*/
   luaX_next(ls);  /* read first token 获得第一个token*/
   statlist(ls);  /* parse main body 解析主要的部分*/
   check(ls, TK_EOS);

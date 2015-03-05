@@ -22,14 +22,14 @@ typedef enum {
   VNIL,
   VTRUE,
   VFALSE,
-  VK,		/* info = index of constant in `k' */
+  VK,		/* info = index of constant in `k' 常量在proto->中索引 */
   VKNUM,	/* nval = numerical value */
   VNONRELOC,	/* info = result register */
-  VLOCAL,	/* info = local register 局部寄存器变量*/
-  VUPVAL,       /* info = index of upvalue in 'upvalues' */
-  VINDEXED,	/* t = table register/upvalue; idx = index R/K */
+  VLOCAL,	/* info = local register 代表局部变量表达式，在info中保存局部变量对应的寄存器id */
+  VUPVAL,       /* info = index of upvalue in 'upvalues' 代表upvalue变量表达式，在info中保存upvalue的id */
+  VINDEXED,	/* t = table register/upvalue; idx = index R/K 代表对一个表进行索引的变量表达式，比如a.b或者a[1]，使用ind结构体保存数据 */
   VJMP,		/* info = instruction pc */
-  VRELOCABLE,	/* info = instruction pc */
+  VRELOCABLE,	/* info = instruction pc 需要重定位*/
   VCALL,	/* info = instruction pc */
   VVARARG	/* info = instruction pc */
 } expkind;
@@ -39,12 +39,12 @@ typedef enum {
 #define vkisinreg(k)	((k) == VNONRELOC || (k) == VLOCAL)
 /* variable (global, local, upvalue, or indexed) 生成字节码需要*/
 typedef struct expdesc {
-  expkind k;  /*表达式类型*/
+  expkind k;  /*表达式类型，类型不同就在不同的表中找*/
   union {
     struct {  /* for indexed variables (VINDEXED) */
-      short idx;  /* index (R/K) */
-      lu_byte t;  /* table (register or upvalue) */
-      lu_byte vt;  /* whether 't' is register (VLOCAL) or upvalue (VUPVAL) */
+      short idx;  /* index (R/K) 感觉像是寄存器索引*/
+      lu_byte t;  /* table (register or upvalue) 名称在常量表中的索引*/
+      lu_byte vt;  /* whether 't' is register (VLOCAL) or upvalue (VUPVAL) 变量类型*/
     } ind;
     int info;  /* for generic use 变量在变量表中的位置*/
     lua_Number nval;  /* for VKNUM */
@@ -78,6 +78,7 @@ typedef struct Labellist {
 
 
 /* dynamic structures used by the parser */
+/* 只存放当前代码块的局部变量？ */
 typedef struct Dyndata {
   struct {  /* list of active local variables 局部变量*/
     Vardesc *arr;
@@ -96,7 +97,7 @@ struct BlockCnt;  /* defined in lparser.c */
 /* state needed to generate code for a given function 表示parse时函数状态信息*/
 typedef struct FuncState {
   Proto *f;  /* current function header 保存函数指令，变量，upvalue等信息*/
-  Table *h;  /* table to find (and reuse) elements in `k' */
+  Table *h;  /* table to find (and reuse) elements in `k'  常量表？*/
   struct FuncState *prev;  /* enclosing function 上层函数块*/
   struct LexState *ls;  /* lexical state 指向词法分析结构，全局？*/
   struct BlockCnt *bl;  /* chain of current blocks */

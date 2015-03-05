@@ -401,6 +401,7 @@ static Node *getfreepos (Table *t) {
 ** position or not: if it is not, move colliding node to an empty place and
 ** put new key in its main position; otherwise (colliding node is in its main
 ** position), new key goes to an empty position.
+** 新建一个KEY，值为nil
 */
 TValue *luaH_newkey (lua_State *L, Table *t, const TValue *key) {
   Node *mp;
@@ -441,7 +442,8 @@ TValue *luaH_newkey (lua_State *L, Table *t, const TValue *key) {
 
 
 /*
-** search function for integers 从表中获取对应key值的TValue
+** search function for integers 
+** 从表中获取对应key值的TValue(索引为数字)
 */
 const TValue *luaH_getint (Table *t, int key) {
   /* (1 <= key && key <= t->sizearray) */
@@ -506,6 +508,8 @@ const TValue *luaH_get (Table *t, const TValue *key) {
 /*
 ** beware: when using this function you probably need to check a GC
 ** barrier and invalidate the TM cache.
+** 先查找，找到则直接返回value
+** 未找到则新建一个，然后值为nil
 */
 TValue *luaH_set (lua_State *L, Table *t, const TValue *key) {
   const TValue *p = luaH_get(t, key);

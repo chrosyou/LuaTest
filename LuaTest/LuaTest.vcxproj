@@ -234,7 +234,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="luastruct.cd" />
     <None Include="src\Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

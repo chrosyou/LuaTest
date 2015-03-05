@@ -131,6 +131,7 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 */
 
 /* this bit 1 means constant (0 means register) */
+/* 256 */
 #define BITRK		(1 << (SIZE_B - 1))
 
 /* test whether value is a constant */
@@ -138,7 +139,7 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 
 /* gets the index of the constant */
 #define INDEXK(r)	((int)(r) & ~BITRK)
-
+/*255*/
 #define MAXINDEXRK	(BITRK - 1)
 
 /* code a constant index as a RK value */

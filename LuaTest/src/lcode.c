@@ -287,10 +287,10 @@ static void freeexp (FuncState *fs, expdesc *e) {
     freereg(fs, e->u.info);
 }
 
-
+/*返回的是添加量的索引，添加到proto->k中*/
 static int addk (FuncState *fs, TValue *key, TValue *v) {
   lua_State *L = fs->ls->L;
-  TValue *idx = luaH_set(L, fs->h, key);
+  TValue *idx = luaH_set(L, fs->h, key);  /*首先找是否有这个值*/
   Proto *f = fs->f;
   int k, oldsize;
   if (ttisnumber(idx)) {
@@ -302,8 +302,8 @@ static int addk (FuncState *fs, TValue *key, TValue *v) {
        go through and create a new entry for this value */
   }
   /* constant not found; create a new entry */
-  oldsize = f->sizek;
-  k = fs->nk;
+  oldsize = f->sizek;  /*常量表的大小*/
+  k = fs->nk;    /*已经有元素的大小*/
   /* numerical value does not need GC barrier;
      table has no metatable, so it does not need to invalidate cache */
   setnvalue(idx, cast_num(k));
@@ -379,7 +379,7 @@ void luaK_setoneret (FuncState *fs, expdesc *e) {
   }
 }
 
-
+/* 函数为变量表达式生成估值计算的指令 */
 void luaK_dischargevars (FuncState *fs, expdesc *e) {
   switch (e->k) {
     case VLOCAL: {
@@ -496,7 +496,7 @@ void luaK_exp2nextreg (FuncState *fs, expdesc *e) {
   exp2reg(fs, e, fs->freereg - 1);
 }
 
-
+/*首先分配一个空闲的寄存器,并得到其索引，常量表索引被返回到语法分析器*/
 int luaK_exp2anyreg (FuncState *fs, expdesc *e) {
   luaK_dischargevars(fs, e);
   if (e->k == VNONRELOC) {
@@ -518,13 +518,13 @@ void luaK_exp2anyregup (FuncState *fs, expdesc *e) {
 
 
 void luaK_exp2val (FuncState *fs, expdesc *e) {
-  if (hasjumps(e))
+  if (hasjumps(e)) /*判断是否有跳转*/
     luaK_exp2anyreg(fs, e);
   else
     luaK_dischargevars(fs, e);
 }
 
-
+/*获得寄存器的索引*/
 int luaK_exp2RK (FuncState *fs, expdesc *e) {
   luaK_exp2val(fs, e);
   switch (e->k) {
@@ -702,8 +702,8 @@ static void codenot (FuncState *fs, expdesc *e) {
 
 void luaK_indexed (FuncState *fs, expdesc *t, expdesc *k) {
   lua_assert(!hasjumps(t));
-  t->u.ind.t = t->u.info;
-  t->u.ind.idx = luaK_exp2RK(fs, k);
+  t->u.ind.t = t->u.info;  /*常量表K中的位置*/
+  t->u.ind.idx = luaK_exp2RK(fs, k); /*寄存器的索引*/
   t->u.ind.vt = (t->k == VUPVAL) ? VUPVAL
                                  : check_exp(vkisinreg(t->k), VLOCAL);
   t->k = VINDEXED;

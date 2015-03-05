@@ -466,7 +466,7 @@ typedef struct LocVar {
 */
 typedef struct Proto {
   CommonHeader;
-  TValue *k;  /* constants used by the function 指向这个proto使用的常量*/
+  TValue *k;  /* constants used by the function 指向这个proto使用的常量，变量名*/
   Instruction *code;  /*指令组*/
   struct Proto **p;  /* functions defined inside the function 内部Proto列表*/
   int *lineinfo;  /* map from opcodes to source lines (debug information) */
