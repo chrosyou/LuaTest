@@ -306,8 +306,8 @@ static void singlevar (LexState *ls, expdesc *var) {
     expdesc key;
     singlevaraux(fs, ls->envn, var, 1);  /* get environment variable ，找到全局量_ENV,并放在var中(这个找的过程会为各层建立upvalue)*/
     lua_assert(var->k == VLOCAL || var->k == VUPVAL);
-    codestring(ls, &key, varname);  /* key is variable name 把名字放在常量表中，并放在结构key里*/
-    luaK_indexed(fs, var, &key);  /* env[varname] 设置变量全局的*/
+    codestring(ls, &key, varname);  /* key is variable name 把名字放在常量表中，变量位置，类型在结构key里*/
+    luaK_indexed(fs, var, &key);  /* env[varname] 设置变量全局，var为VINDEXED*/
   }
 }
 
@@ -331,7 +331,7 @@ static void adjust_assign (LexState *ls, int nvars, int nexps, expdesc *e) {
   }
 }
 
-/*进入深度？*/
+/*深度判断*/
 static void enterlevel (LexState *ls) {
   lua_State *L = ls->L;
   ++L->nCcalls;  /*调用深度+1*/
@@ -947,7 +947,7 @@ static void simpleexp (LexState *ls, expdesc *v) {
   switch (ls->t.token) {
     case TK_NUMBER: {
       init_exp(v, VKNUM, 0);
-      v->u.nval = ls->t.seminfo.r;
+      v->u.nval = ls->t.seminfo.r;  /*得到数字的值*/
       break;
     }
     case TK_STRING: {
@@ -1052,7 +1052,7 @@ static BinOpr subexpr (LexState *ls, expdesc *v, int limit) {
     subexpr(ls, v, UNARY_PRIORITY);
     luaK_prefix(ls->fs, uop, v, line);
   }
-  else simpleexp(ls, v);
+  else simpleexp(ls, v); /*获得表达式状态*/
   /* expand while operators have priorities higher than `limit' */
   op = getbinopr(ls->t.token);
   while (op != OPR_NOBINOPR && priority[op].left > limit) {

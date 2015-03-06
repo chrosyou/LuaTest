@@ -43,12 +43,12 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 
 #define SIZE_OP		6
 
-#define POS_OP		0
-#define POS_A		(POS_OP + SIZE_OP)
-#define POS_C		(POS_A + SIZE_A)
-#define POS_B		(POS_C + SIZE_C)
-#define POS_Bx		POS_C
-#define POS_Ax		POS_A
+#define POS_OP		0	/*op的位置*/
+#define POS_A		(POS_OP + SIZE_OP)  /*6，A的位置*/
+#define POS_C		(POS_A + SIZE_A)	/*14，C的位置*/
+#define POS_B		(POS_C + SIZE_C)	/*23，B的位置*/
+#define POS_Bx		POS_C				/*14，Bx的位置*/
+#define POS_Ax		POS_A				/*6，Ax的位置*/
 
 
 /*
@@ -112,7 +112,7 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 #define GETARG_sBx(i)	(GETARG_Bx(i)-MAXARG_sBx)
 #define SETARG_sBx(i,b)	SETARG_Bx((i),cast(unsigned int, (b)+MAXARG_sBx))
 
-
+/*生成abc指令*/
 #define CREATE_ABC(o,a,b,c)	((cast(Instruction, o)<<POS_OP) \
 			| (cast(Instruction, a)<<POS_A) \
 			| (cast(Instruction, b)<<POS_B) \
@@ -168,10 +168,10 @@ typedef enum {
 name		args	description
 ------------------------------------------------------------------------*/
 OP_MOVE,/*	A B	R(A) := R(B)将寄存器B中的值拷贝到A中					*/
-OP_LOADK,/*	A Bx	R(A) := Kst(Bx)					*/
+OP_LOADK,/*	A Bx	R(A) := Kst(Bx)		把Bx号常量放到(本地)寄存器A中	 */
 OP_LOADKX,/*	A 	R(A) := Kst(extra arg)				*/
-OP_LOADBOOL,/*	A B C	R(A) := (Bool)B; if (C) pc++			*/
-OP_LOADNIL,/*	A B	R(A), R(A+1), ..., R(A+B) := nil		*/
+OP_LOADBOOL,/*	A B C	R(A) := (Bool)B; if (C) pc++	把bool值存入A中，true编码为1，false总是0，如果c非0，则跳过下一条指令		*/
+OP_LOADNIL,/*	A B	R(A), R(A+1), ..., R(A+B) := nil	A和B之间的寄存器置为nil	*/
 OP_GETUPVAL,/*	A B	R(A) := UpValue[B]				*/
 
 OP_GETTABUP,/*	A B C	R(A) := UpValue[B][RK(C)]			*/

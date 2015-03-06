@@ -223,7 +223,7 @@ static int luaK_code (FuncState *fs, Instruction i) {
   return fs->pc++;
 }
 
-
+/*生成字节码*/
 int luaK_codeABC (FuncState *fs, OpCode o, int a, int b, int c) {
   lua_assert(getOpMode(o) == iABC);
   lua_assert(getBMode(o) != OpArgN || b == 0);
@@ -315,7 +315,7 @@ static int addk (FuncState *fs, TValue *key, TValue *v) {
   return k;
 }
 
-
+/*string放在常量表中，返回的是在长量表中的位置*/
 int luaK_stringK (FuncState *fs, TString *s) {
   TValue o;
   setsvalue(fs->ls->L, &o, s);
@@ -367,7 +367,7 @@ void luaK_setreturns (FuncState *fs, expdesc *e, int nresults) {
   }
 }
 
-
+/*将表达式设置成单返回值*/
 void luaK_setoneret (FuncState *fs, expdesc *e) {
   if (e->k == VCALL) {  /* expression is an open function call? */
     e->k = VNONRELOC;

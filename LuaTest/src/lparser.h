@@ -47,7 +47,7 @@ typedef struct expdesc {
       lu_byte vt;  /* whether 't' is register (VLOCAL) or upvalue (VUPVAL) 变量类型*/
     } ind;
     int info;  /* for generic use 变量在变量表中的位置*/
-    lua_Number nval;  /* for VKNUM */
+    lua_Number nval;  /* for VKNUM 存数字的值*/
   } u;
   int t;  /* patch list of `exit when true' */
   int f;  /* patch list of `exit when false' */
