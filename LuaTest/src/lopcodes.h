@@ -172,32 +172,32 @@ OP_LOADK,/*	A Bx	R(A) := Kst(Bx)		把Bx号常量放到(本地)寄存器A中	 */
 OP_LOADKX,/*	A 	R(A) := Kst(extra arg)				*/
 OP_LOADBOOL,/*	A B C	R(A) := (Bool)B; if (C) pc++	把bool值存入A中，true编码为1，false总是0，如果c非0，则跳过下一条指令		*/
 OP_LOADNIL,/*	A B	R(A), R(A+1), ..., R(A+B) := nil	A和B之间的寄存器置为nil	*/
-OP_GETUPVAL,/*	A B	R(A) := UpValue[B]				*/
+OP_GETUPVAL,/*	A B	R(A) := UpValue[B] upvalue */
 
-OP_GETTABUP,/*	A B C	R(A) := UpValue[B][RK(C)]			*/
-OP_GETTABLE,/*	A B C	R(A) := R(B)[RK(C)]				*/
+OP_GETTABUP,/*	A B C	R(A) := UpValue[B][RK(C)] upvalue中的B项中的C给A*/
+OP_GETTABLE,/*	A B C	R(A) := R(B)[RK(C)]	tableB中key为C的值赋给A	*/
 
 OP_SETTABUP,/*	A B C	UpValue[A][RK(B)] := RK(C)			*/
 OP_SETUPVAL,/*	A B	UpValue[B] := R(A)				*/
-OP_SETTABLE,/*	A B C	R(A)[RK(B)] := RK(C)				*/
+OP_SETTABLE,/*	A B C	R(A)[RK(B)] := RK(C) 初始化表的hash部分 */
 
-OP_NEWTABLE,/*	A B C	R(A) := {} (size = B,C)				*/
+OP_NEWTABLE,/*	A B C	R(A) := {} (size = B,C)	B为数组大小，C为hash大小 */
 
 OP_SELF,/*	A B C	R(A+1) := R(B); R(A) := R(B)[RK(C)]		*/
-
+/*二元操作符指令*/
 OP_ADD,/*	A B C	R(A) := RK(B) + RK(C)				*/
 OP_SUB,/*	A B C	R(A) := RK(B) - RK(C)				*/
 OP_MUL,/*	A B C	R(A) := RK(B) * RK(C)				*/
 OP_DIV,/*	A B C	R(A) := RK(B) / RK(C)				*/
 OP_MOD,/*	A B C	R(A) := RK(B) % RK(C)				*/
-OP_POW,/*	A B C	R(A) := RK(B) ^ RK(C)				*/
-OP_UNM,/*	A B	R(A) := -R(B)					*/
-OP_NOT,/*	A B	R(A) := not R(B)				*/
-OP_LEN,/*	A B	R(A) := length of R(B)				*/
+OP_POW,/*	A B C	R(A) := RK(B) ^ RK(C) 指数运算		*/
+OP_UNM,/*	A B	R(A) := -R(B)	求负运算				*/
+OP_NOT,/*	A B	R(A) := not R(B) 求反运算				*/
+OP_LEN,/*	A B	R(A) := length of R(B)	求长度			*/
 
-OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C)			*/
+OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C) 将B和C指定范围内的字符串按顺序传接到一起，将结果存入到A */
 
-OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1	*/
+OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1 跳转到一处，goto使用 */
 OP_EQ,/*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++		*/
 OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++		*/
 OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++		*/
@@ -216,7 +216,7 @@ OP_FORPREP,/*	A sBx	R(A)-=R(A+2); pc+=sBx				*/
 OP_TFORCALL,/*	A C	R(A+3), ... ,R(A+2+C) := R(A)(R(A+1), R(A+2));	*/
 OP_TFORLOOP,/*	A sBx	if R(A+1) ~= nil then { R(A)=R(A+1); pc += sBx }*/
 
-OP_SETLIST,/*	A B C	R(A)[(C-1)*FPF+i] := R(A+i), 1 <= i <= B	*/
+OP_SETLIST,/*	A B C	R(A)[(C-1)*FPF+i] := R(A+i), 1 <= i <= B 初始化表的数组部分*/
 
 OP_CLOSURE,/*	A Bx	R(A) := closure(KPROTO[Bx])			*/
 
