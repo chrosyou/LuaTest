@@ -1,2 +1,4 @@
-
-a = 1
+local a=0;
+local b=3; 
+if (a < b) then
+end
