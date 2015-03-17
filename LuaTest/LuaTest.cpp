@@ -35,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
  	L = luaL_newstate();  //创建线程栈和全局栈
  	luaopen_base(L);
  	luaL_openlibs(L);
- 	int iErrCode = luaL_loadfile(L, "add.lua");
+ 	int iErrCode = luaL_loadfile(L, "123.lua");
  	lua_pcall(L, 0, LUA_MULTRET, 0);
  	sum = luaAdd(11, 15);
  	printf("The sum is %d\n", sum);

@@ -76,17 +76,18 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 #define MAXARG_C        ((1<<SIZE_C)-1)
 
 
-/* creates a mask with `n' 1 bits at position `p' */
+/* creates a mask with `n' 1 bits at position `p' 产生一个标记数位置全为1，长度为n，位置为p(从右到左计算) */
 #define MASK1(n,p)	((~((~(Instruction)0)<<(n)))<<(p))
 
-/* creates a mask with `n' 0 bits at position `p' */
+/* creates a mask with `n' 0 bits at position `p' 对上一个取反(标记位全为0) */
 #define MASK0(n,p)	(~MASK1(n,p))
 
 /*
 ** the following macros help to manipulate instructions
+** 其中i为指令
 */
 
-#define GET_OPCODE(i)	(cast(OpCode, ((i)>>POS_OP) & MASK1(SIZE_OP,0)))
+#define GET_OPCODE(i)	(cast(OpCode, ((i)>>POS_OP) & MASK1(SIZE_OP,0)))   /* 获得opcode */
 #define SET_OPCODE(i,o)	((i) = (((i)&MASK0(SIZE_OP,POS_OP)) | \
 		((cast(Instruction, o)<<POS_OP)&MASK1(SIZE_OP,POS_OP))))
 
@@ -94,7 +95,7 @@ enum OpMode {iABC, iABx, iAsBx, iAx};  /* basic instruction format */
 #define setarg(i,v,pos,size)	((i) = (((i)&MASK0(size,pos)) | \
                 ((cast(Instruction, v)<<pos)&MASK1(size,pos))))
 
-#define GETARG_A(i)	getarg(i, POS_A, SIZE_A)
+#define GETARG_A(i)	getarg(i, POS_A, SIZE_A)    /* 获取指令中的A寄存器值 */
 #define SETARG_A(i,v)	setarg(i, v, POS_A, SIZE_A)
 
 #define GETARG_B(i)	getarg(i, POS_B, SIZE_B)
@@ -203,15 +204,15 @@ OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++ 这里的A是个立即数 */
 OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++ 这里的A是个立即数 */
 
 OP_TEST,/*	A C	if not (R(A) <=> C) then pc++			*/
-OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	*/
+OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	用于实现and和or C表示立即数 */
 
 OP_CALL,/*	A B C	R(A), ... ,R(A+C-2) := R(A)(R(A+1), ... ,R(A+B-1)) */
 OP_TAILCALL,/*	A B C	return R(A)(R(A+1), ... ,R(A+B-1))		*/
 OP_RETURN,/*	A B	return R(A), ... ,R(A+B-2)	(see note)	*/
 
 OP_FORLOOP,/*	A sBx	R(A)+=R(A+2);
-			if R(A) <?= R(A+1) then { pc+=sBx; R(A+3)=R(A) }*/
-OP_FORPREP,/*	A sBx	R(A)-=R(A+2); pc+=sBx				*/
+			if R(A) <?= R(A+1) then { pc+=sBx; R(A+3)=R(A) } 这里将循环计数的index赋给内部使用的index */
+OP_FORPREP,/*	A sBx	R(A)-=R(A+2); pc+=sBx for循环的初始化，跳转到forloop中，forloop进行实际循环操作 */
 
 OP_TFORCALL,/*	A C	R(A+3), ... ,R(A+2+C) := R(A)(R(A+1), R(A+2));	*/
 OP_TFORLOOP,/*	A sBx	if R(A+1) ~= nil then { R(A)=R(A+1); pc += sBx }*/

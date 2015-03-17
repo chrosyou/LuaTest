@@ -1,3 +1,1 @@
-
-#include <stdio.h>
---test
+local a = 1 < 2 
