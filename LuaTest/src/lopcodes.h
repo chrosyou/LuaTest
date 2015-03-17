@@ -198,9 +198,9 @@ OP_LEN,/*	A B	R(A) := length of R(B)	求长度			*/
 OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C) 将B和C指定范围内的字符串按顺序传接到一起，将结果存入到A */
 
 OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1 跳转到一处，goto使用 */
-OP_EQ,/*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++		*/
-OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++		*/
-OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++		*/
+OP_EQ,/*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++ 这里的A是个立即数 */
+OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++ 这里的A是个立即数 */
+OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++ 这里的A是个立即数 */
 
 OP_TEST,/*	A C	if not (R(A) <=> C) then pc++			*/
 OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	*/
