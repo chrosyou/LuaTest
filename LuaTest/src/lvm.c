@@ -106,7 +106,7 @@ static void callTM (lua_State *L, const TValue *f, const TValue *p1,
   }
 }
 
-
+/* 从table中获得一个值 */
 void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
   int loop;
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
@@ -585,17 +585,17 @@ void luaV_execute (lua_State *L) {
         setobj2s(L, ra, cl->upvals[b]->v);
       )
       vmcase(OP_GETTABUP,
-        int b = GETARG_B(i);
+        int b = GETARG_B(i);  /* 获得upvalue中的位置 */
         Protect(luaV_gettable(L, cl->upvals[b]->v, RKC(i), ra));
       )
-      vmcase(OP_GETTABLE,
+      vmcase(OP_GETTABLE,   /* 获得table中的值 */
         Protect(luaV_gettable(L, RB(i), RKC(i), ra));
       )
       vmcase(OP_SETTABUP,
         int a = GETARG_A(i);
         Protect(luaV_settable(L, cl->upvals[a]->v, RKB(i), RKC(i)));
       )
-      vmcase(OP_SETUPVAL,
+      vmcase(OP_SETUPVAL,  /* 设置upvalue的值 */
         UpVal *uv = cl->upvals[GETARG_B(i)];
         setobj(L, uv->v, ra);
         luaC_barrier(L, uv, ra);
@@ -603,7 +603,7 @@ void luaV_execute (lua_State *L) {
       vmcase(OP_SETTABLE,
         Protect(luaV_settable(L, ra, RKB(i), RKC(i)));
       )
-      vmcase(OP_NEWTABLE,
+      vmcase(OP_NEWTABLE,  /* 创建table */
         int b = GETARG_B(i);
         int c = GETARG_C(i);
         Table *t = luaH_new(L);
@@ -710,8 +710,8 @@ void luaV_execute (lua_State *L) {
         }
       )
       vmcase(OP_CALL,
-        int b = GETARG_B(i);
-        int nresults = GETARG_C(i) - 1;
+        int b = GETARG_B(i);  /* b-1 表示参数个数 */
+        int nresults = GETARG_C(i) - 1;   /* c-1 返回值个数 */
         if (b != 0) L->top = ra+b;  /* else previous instruction set top */
         if (luaD_precall(L, ra, nresults)) {  /* C function? */
           if (nresults >= 0) L->top = ci->top;  /* adjust results */
