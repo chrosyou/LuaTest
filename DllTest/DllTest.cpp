@@ -12,6 +12,7 @@ extern "C" {
 #include <windows.h>
 #include <tchar.h>
 
+#pragma comment(lib, "lua52.lib")
 
 static int MyLuaDLL_HelloWorld(lua_State* L)  
 {  
@@ -36,12 +37,21 @@ static int MyLuaDLL_average(lua_State *L)
 	lua_pushnumber(L, sum);  
 
 	return 2;  
-}  
+}
+
+static int MyLuaDLL_Add(lua_State *L)
+{
+	int x = lua_tonumber(L, 1);
+	int y = lua_tonumber(L, 2);
+	lua_pushnumber(L, x+y);
+	return 1;
+}
 
 static const luaL_Reg MyLuaDLLFunctions [] =  
 {  
 	{"HelloWorld",MyLuaDLL_HelloWorld},  
-	{"average",MyLuaDLL_average},  
+	{"average",MyLuaDLL_average},
+	{"add", MyLuaDLL_Add},
 	{NULL, NULL}  
 };  
 

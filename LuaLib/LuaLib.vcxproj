@@ -51,7 +51,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;LUA_CPLUSPLUS;LUA_COMPAT_MODULE;LUA_COMPAT_LOADSTRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;LUA_CPLUSPLUS;LUA_COMPAT_MODULE;LUA_COMPAT_LOADSTRING;LUA_BUILD_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <CompileAs>Default</CompileAs>
       <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS</AdditionalOptions>
