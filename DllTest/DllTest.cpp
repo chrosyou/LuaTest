@@ -12,7 +12,6 @@ extern "C" {
 #include <windows.h>
 #include <tchar.h>
 
-#pragma comment(lib, "LuaLibd.lib")
 
 static int MyLuaDLL_HelloWorld(lua_State* L)  
 {  
@@ -46,7 +45,7 @@ static const luaL_Reg MyLuaDLLFunctions [] =
 	{NULL, NULL}  
 };  
 
-extern "C" int __cdecl luaopen_MyLuaDLL(lua_State* L)  
+extern "C" __declspec(dllexport) int luaopen_MyLuaDLL(lua_State* L)  
 {  
 	luaL_openlib(L, "MyLuaDLL", MyLuaDLLFunctions, 0);  
 	return 1;  
