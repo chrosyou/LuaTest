@@ -1,1 +1,1 @@
-f();
+function test(a,b)end

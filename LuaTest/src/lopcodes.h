@@ -197,13 +197,13 @@ OP_LEN,/*	A B	R(A) := length of R(B)	求长度			*/
 
 OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C) 将B和C指定范围内的字符串按顺序传接到一起，将结果存入到A */
 
-OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1 跳转到一处，goto使用 */
+OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1 (这里A看做是一个立即数)跳转到一处，goto使用 */
 OP_EQ,/*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++		*/
-OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++		*/
+OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++ 这里的A不是寄存器，而是立即数0为false，1为true*/
 OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++		*/
 
 OP_TEST,/*	A C	if not (R(A) <=> C) then pc++			*/
-OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	*/
+OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	寄存器B转化成一个boolean值，然后与C进行比较 */
 
 OP_CALL,/*	A B C	R(A), ... ,R(A+C-2) := R(A)(R(A+1), ... ,R(A+B-1)) */
 OP_TAILCALL,/*	A B C	return R(A)(R(A+1), ... ,R(A+B-1))		*/
