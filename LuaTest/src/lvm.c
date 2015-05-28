@@ -106,7 +106,7 @@ static void callTM (lua_State *L, const TValue *f, const TValue *p1,
   }
 }
 
-
+/* 从table中获得一个值 */
 void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
   int loop;
   for (loop = 0; loop < MAXTAGLOOP; loop++) {
@@ -486,7 +486,7 @@ void luaV_finishOp (lua_State *L) {
 #endif
 
 
-#define RA(i)	(base+GETARG_A(i))
+#define RA(i)	(base+GETARG_A(i))  /*获得RA在栈中的位置*/
 /* to be used after possible stack reallocation */
 #define RB(i)	check_exp(getBMode(GET_OPCODE(i)) == OpArgR, base+GETARG_B(i))
 #define RC(i)	check_exp(getCMode(GET_OPCODE(i)) == OpArgR, base+GETARG_C(i))
@@ -541,12 +541,12 @@ void luaV_execute (lua_State *L) {
   StkId base;
  newframe:  /* reentry point when frame changes (call/return) */
   lua_assert(ci == L->ci);
-  cl = clLvalue(ci->func);
-  k = cl->p->k;
-  base = ci->u.l.base;
+  cl = clLvalue(ci->func);  /*数据表，栈？*/
+  k = cl->p->k;  /*常量表*/
+  base = ci->u.l.base;  /*字节码的基址*/
   /* main loop of interpreter */
   for (;;) {
-    Instruction i = *(ci->u.l.savedpc++);
+    Instruction i = *(ci->u.l.savedpc++);  /*获得第一条指令, 这里执行完后PC一直在相加*/
     StkId ra;
     if ((L->hookmask & (LUA_MASKLINE | LUA_MASKCOUNT)) &&
         (--L->hookcount == 0 || L->hookmask & LUA_MASKLINE)) {
@@ -561,7 +561,7 @@ void luaV_execute (lua_State *L) {
         setobjs2s(L, ra, RB(i));
       )
       vmcase(OP_LOADK,
-        TValue *rb = k + GETARG_Bx(i);
+        TValue *rb = k + GETARG_Bx(i);  /* k是常量表 */
         setobj2s(L, ra, rb);
       )
       vmcase(OP_LOADKX,
@@ -571,31 +571,31 @@ void luaV_execute (lua_State *L) {
         setobj2s(L, ra, rb);
       )
       vmcase(OP_LOADBOOL,
-        setbvalue(ra, GETARG_B(i));
+        setbvalue(ra, GETARG_B(i));  /* 设置bool值 */
         if (GETARG_C(i)) ci->u.l.savedpc++;  /* skip next instruction (if C) */
       )
-      vmcase(OP_LOADNIL,
+      vmcase(OP_LOADNIL,   /* 可以设置一个范围，b表示后面跟的个数 */
         int b = GETARG_B(i);
         do {
           setnilvalue(ra++);
         } while (b--);
       )
-      vmcase(OP_GETUPVAL,
+      vmcase(OP_GETUPVAL, /* 获得upvalue值 */
         int b = GETARG_B(i);
         setobj2s(L, ra, cl->upvals[b]->v);
       )
       vmcase(OP_GETTABUP,
-        int b = GETARG_B(i);
+        int b = GETARG_B(i);  /* 获得upvalue中的位置 */
         Protect(luaV_gettable(L, cl->upvals[b]->v, RKC(i), ra));
       )
-      vmcase(OP_GETTABLE,
+      vmcase(OP_GETTABLE,   /* 获得table中的值 */
         Protect(luaV_gettable(L, RB(i), RKC(i), ra));
       )
       vmcase(OP_SETTABUP,
         int a = GETARG_A(i);
         Protect(luaV_settable(L, cl->upvals[a]->v, RKB(i), RKC(i)));
       )
-      vmcase(OP_SETUPVAL,
+      vmcase(OP_SETUPVAL,  /* 设置upvalue的值 */
         UpVal *uv = cl->upvals[GETARG_B(i)];
         setobj(L, uv->v, ra);
         luaC_barrier(L, uv, ra);
@@ -603,7 +603,7 @@ void luaV_execute (lua_State *L) {
       vmcase(OP_SETTABLE,
         Protect(luaV_settable(L, ra, RKB(i), RKC(i)));
       )
-      vmcase(OP_NEWTABLE,
+      vmcase(OP_NEWTABLE,  /* 创建table */
         int b = GETARG_B(i);
         int c = GETARG_C(i);
         Table *t = luaH_new(L);
@@ -710,8 +710,8 @@ void luaV_execute (lua_State *L) {
         }
       )
       vmcase(OP_CALL,
-        int b = GETARG_B(i);
-        int nresults = GETARG_C(i) - 1;
+        int b = GETARG_B(i);  /* b-1 表示参数个数 */
+        int nresults = GETARG_C(i) - 1;   /* c-1 返回值个数 */
         if (b != 0) L->top = ra+b;  /* else previous instruction set top */
         if (luaD_precall(L, ra, nresults)) {  /* C function? */
           if (nresults >= 0) L->top = ci->top;  /* adjust results */

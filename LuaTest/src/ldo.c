@@ -292,6 +292,7 @@ static StkId tryfuncTM (lua_State *L, StkId func) {
 
 /*
 ** returns true if function has been executed (C function)
+** 第二个参数，RA的位置
 */
 int luaD_precall (lua_State *L, StkId func, int nresults) {
   lua_CFunction f;

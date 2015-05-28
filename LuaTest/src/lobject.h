@@ -247,7 +247,7 @@ typedef struct lua_TValue TValue;
 ** different types of assignments, according to destination
 */
 
-/* from stack to (same) stack */
+/* from stack to (same) stack 栈之间的数据拷贝(可以是不同的栈) */
 #define setobjs2s	setobj
 /* to stack (not from same stack) obj赋值操作*/
 #define setobj2s	setobj
@@ -523,7 +523,7 @@ typedef struct CClosure {
 typedef struct LClosure {
   ClosureHeader;
   struct Proto *p;   /*？闭包字节码*/
-  UpVal *upvals[1];  /* list of upvalues 内值*/
+  UpVal *upvals[1];  /* list of upvalues upvalue的表*/
 } LClosure;
 
 
