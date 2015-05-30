@@ -25,7 +25,7 @@ typedef struct Mbuffer {
   size_t n; /*实际的大小*/
   size_t buffsize;  /*buffer大小*/
 } Mbuffer;
-
+//初始化一个内存块
 #define luaZ_initbuffer(L, buff) ((buff)->buffer = NULL, (buff)->buffsize = 0)
 
 #define luaZ_buffer(buff)	((buff)->buffer)

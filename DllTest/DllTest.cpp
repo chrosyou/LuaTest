@@ -47,11 +47,20 @@ static int MyLuaDLL_Add(lua_State *L)
 	return 1;
 }
 
+static int MyLuaDLL_GetClientPath(lua_State *L)
+{
+	char cPath[MAX_PATH] = {0};
+	GetModuleFileNameA(NULL, cPath, MAX_PATH);
+	lua_pushlstring(L, cPath, strlen(cPath));
+	return 1;
+}
+
 static const luaL_Reg MyLuaDLLFunctions [] =  
 {  
 	{"HelloWorld",MyLuaDLL_HelloWorld},  
 	{"average",MyLuaDLL_average},
 	{"add", MyLuaDLL_Add},
+	{"GetClientPath", MyLuaDLL_GetClientPath},
 	{NULL, NULL}  
 };  
 

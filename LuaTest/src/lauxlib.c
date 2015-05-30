@@ -613,6 +613,7 @@ static int skipBOM (LoadF *lf) {
 ** true if it skipped the first line.  In any case, '*cp' has the
 ** first "valid" character of the file (after the optional BOM and
 ** a first-line comment).
+** 跳过之前的注释
 */
 static int skipcomment (LoadF *lf, int *cp) {
   int c = *cp = skipBOM(lf);
@@ -644,8 +645,8 @@ LUALIB_API int luaL_loadfilex (lua_State *L, const char *filename,
   }
   if (skipcomment(&lf, &c))  /* read initial portion c为第一个有效字符*/
     lf.buff[lf.n++] = '\n';  /* add line to correct line numbers */
-  if (c == LUA_SIGNATURE[0] && filename) {  /* binary file? 怎么判断是二进制文件*/
-    lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode */
+  if (c == LUA_SIGNATURE[0] && filename) {  /* binary file? 判断是否是二进制文件(二进制文件是编译过生成的文件)*/
+    lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode 重新以二进制打开 */
     if (lf.f == NULL) return errfile(L, "reopen", fnameindex);
     skipcomment(&lf, &c);  /* re-read initial portion */
   }

@@ -31,11 +31,13 @@
 #define LUA_SIGNATURE	"\033Lua"
 
 /* option for multiple returns in 'lua_pcall' and 'lua_call' */
+/* 所有的结果都将入栈 */
 #define LUA_MULTRET	(-1)
 
 
 /*
-** pseudo-indices
+** pseudo-indices  
+** lua注册表的伪索引
 */
 #define LUA_REGISTRYINDEX	LUAI_FIRSTPSEUDOIDX
 #define lua_upvalueindex(i)	(LUA_REGISTRYINDEX - (i))
@@ -250,6 +252,7 @@ LUA_API void  (lua_setuservalue) (lua_State *L, int idx);
 */
 LUA_API void  (lua_callk) (lua_State *L, int nargs, int nresults, int ctx,
                            lua_CFunction k);
+/*调用一个函数，n 函数参数的个数， r 函数返回值的个数*/
 #define lua_call(L,n,r)		lua_callk(L, (n), (r), 0, NULL)
 
 LUA_API int   (lua_getctx) (lua_State *L, int *ctx);

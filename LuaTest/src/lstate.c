@@ -204,7 +204,7 @@ static void f_luaopen (lua_State *L, void *ud) {
 */
 static void preinit_state (lua_State *L, global_State *g) {
   G(L) = g;  //全局栈指针赋给线程栈变量
-  L->stack = NULL;
+  L->stack = NULL;   //初始化栈的大小为0
   L->ci = NULL;
   L->stacksize = 0;
   L->errorJmp = NULL;

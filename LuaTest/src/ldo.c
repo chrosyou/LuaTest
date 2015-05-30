@@ -653,7 +653,7 @@ static void f_parser (lua_State *L, void *ud) {
   }
   lua_assert(cl->l.nupvalues == cl->l.p->sizeupvalues);
   for (i = 0; i < cl->l.nupvalues; i++) {  /* initialize upvalues */
-    UpVal *up = luaF_newupval(L);
+    UpVal *up = luaF_newupval(L);  //放在upvalue的表中
     cl->l.upvals[i] = up;
     luaC_objbarrier(L, cl, up);
   }
