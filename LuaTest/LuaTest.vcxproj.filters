@@ -19,6 +19,21 @@
     <Filter Include="cjson">
       <UniqueIdentifier>{046d9f34-2590-485b-8722-5f4012264bc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="interface">
+      <UniqueIdentifier>{242e9de3-1480-49f3-84b8-d557f0ab5fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enginehelp">
+      <UniqueIdentifier>{245819a2-c389-4acc-b363-2e7d0f5b852f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enginehelp\memory">
+      <UniqueIdentifier>{7fa88668-1b49-46fb-a9e3-7a599aeb6a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enginehelp\strings">
+      <UniqueIdentifier>{f4b07b1a-9fab-4e33-b2d9-0f63d7987a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{8df3a531-63e6-41dc-8a70-8eca35f1c3cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -113,6 +128,66 @@
     </ClInclude>
     <ClInclude Include="cjson\strbuf.h">
       <Filter>cjson</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILuaApi.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILuaScriptHost.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IScriptLibStorage.h">
+      <Filter>interface</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\iLuaScriptEngineImpl.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\LuaEngine.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\memery\ref_counted.h">
+      <Filter>enginehelp\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\LuaVarint.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\iLuaAcitveScriptImpl.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\memory\atomicops.h">
+      <Filter>enginehelp\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\LuaVariantTable.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\LuaDebug.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\LuaHelper.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\strings\iImportLibDefine.h">
+      <Filter>enginehelp\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\strings\stringprintf.h">
+      <Filter>enginehelp\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\strings\StringsHelper.h">
+      <Filter>enginehelp\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\rtlbase.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\rtlmem.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="enginehelp\ScriptLibStorage.h">
+      <Filter>enginehelp</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lclcalib.h">
+      <Filter>lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,10 +305,41 @@
     <ClCompile Include="cjson\strbuf.c">
       <Filter>cjson</Filter>
     </ClCompile>
+    <ClCompile Include="enginehelp\iLuaScriptEngineImpl.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\LuaEngine.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\iLuaAcitveScriptImpl.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\LuaDebug.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\LuaHelper.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\strings\stringprintf.cpp">
+      <Filter>enginehelp\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\strings\StringsHelper.cpp">
+      <Filter>enginehelp\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="enginehelp\ScriptLibStorage.cpp">
+      <Filter>enginehelp</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTest.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lclcalib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Makefile">
       <Filter>src</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

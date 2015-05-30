@@ -41,19 +41,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)luatest\src;d:\isafe\trunk\include\ouilib;$(SolutionDir)luatest\cjson;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)luatest\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\strings;$(SolutionDir)luatest\lib;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)LuaLib\src;$(SolutionDir)luatest\cjson;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)LuaLib\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)luatest\boost;$(SolutionDir)luatest\strings;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;LUA_COMPAT_MODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS</AdditionalOptions>
       <BrowseInformation>true</BrowseInformation>
@@ -73,7 +73,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;LUA_COMPAT_MODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS</AdditionalOptions>
     </ClCompile>
@@ -91,6 +91,26 @@
     <ClInclude Include="cjson\dtoa_config.h" />
     <ClInclude Include="cjson\fpconv.h" />
     <ClInclude Include="cjson\strbuf.h" />
+    <ClInclude Include="enginehelp\iLuaAcitveScriptImpl.h" />
+    <ClInclude Include="enginehelp\iLuaScriptEngineImpl.h" />
+    <ClInclude Include="enginehelp\LuaDebug.h" />
+    <ClInclude Include="enginehelp\LuaEngine.h" />
+    <ClInclude Include="enginehelp\LuaHelper.h" />
+    <ClInclude Include="enginehelp\LuaVariantTable.h" />
+    <ClInclude Include="enginehelp\LuaVarint.h" />
+    <ClInclude Include="enginehelp\memery\ref_counted.h" />
+    <ClInclude Include="enginehelp\memory\atomicops.h" />
+    <ClInclude Include="enginehelp\rtlbase.h" />
+    <ClInclude Include="enginehelp\rtlmem.h" />
+    <ClInclude Include="enginehelp\ScriptLibStorage.h" />
+    <ClInclude Include="enginehelp\strings\iImportLibDefine.h" />
+    <ClInclude Include="enginehelp\strings\stringprintf.h" />
+    <ClInclude Include="enginehelp\strings\StringsHelper.h" />
+    <ClInclude Include="FileTest.h" />
+    <ClInclude Include="interface\ILuaApi.h" />
+    <ClInclude Include="interface\ILuaScriptHost.h" />
+    <ClInclude Include="interface\IScriptLibStorage.h" />
+    <ClInclude Include="lib\lclcalib.h" />
     <ClInclude Include="src\lapi.h" />
     <ClInclude Include="src\lauxlib.h" />
     <ClInclude Include="src\lcode.h" />
@@ -132,6 +152,16 @@
     <ClCompile Include="cjson\strbuf.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="enginehelp\iLuaAcitveScriptImpl.cpp" />
+    <ClCompile Include="enginehelp\iLuaScriptEngineImpl.cpp" />
+    <ClCompile Include="enginehelp\LuaDebug.cpp" />
+    <ClCompile Include="enginehelp\LuaEngine.cpp" />
+    <ClCompile Include="enginehelp\LuaHelper.cpp" />
+    <ClCompile Include="enginehelp\ScriptLibStorage.cpp" />
+    <ClCompile Include="enginehelp\strings\stringprintf.cpp" />
+    <ClCompile Include="enginehelp\strings\StringsHelper.cpp" />
+    <ClCompile Include="FileTest.cpp" />
+    <ClCompile Include="lib\lclcalib.cpp" />
     <ClCompile Include="LuaTest.cpp" />
     <ClCompile Include="src\lapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -235,6 +265,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="src\Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

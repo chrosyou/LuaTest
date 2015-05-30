@@ -1,6 +1,5 @@
 
-function add(a,b)
-	a = a + 1
-	b = b + 2
-	return a,b
+function add(a, b)
+	local c = clca.add(a, b);
+	return c;
 end
