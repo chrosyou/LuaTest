@@ -21,12 +21,33 @@ static int math_add (lua_State *L) {
 	lua_pushnumber(L, l_mathop(x + y));
 	return 1;
 }
+static int string_len(lua_State* L)
+{
+	size_t l;
+	const char *s = luaL_checklstring(L, 1, &l);
+	if (NULL == s)
+		lua_pushnumber(L, l_mathop(l));
+	else
+		lua_pushnumber(L, l_mathop(strlen(s)));
+	return 1;
+}
+
+static int math_muladd(lua_State* L)
+{
+	lua_Number x = luaL_checknumber(L, 1);
+	lua_Number y = luaL_checknumber(L, 2);
+	x++;
+	y++;
+	lua_pushnumber(L, x);
+	lua_pushnumber(L, y);
+	return 2;
+}
 
 static const luaL_Reg mathlib[] = {
 	{"abs",  math_abs},
 	{"add",  math_add},
-//	{"mul",  math_asin},
-//	{"abs", math_atan2},
+	{"muladd",  math_muladd},
+	{"len",  string_len},
 
 	{NULL, NULL}
 };
