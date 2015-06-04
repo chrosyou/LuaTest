@@ -41,12 +41,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)luatest\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\strings;$(SolutionDir)luatest\lib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)luatest\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\strings;$(SolutionDir)luatest\lib;E:\isafe\trunk\include\ouilib;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)LuaLib\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)luatest\boost;$(SolutionDir)luatest\strings;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\lib;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)LuaLib\src;$(SolutionDir)luatest\cjson;$(SolutionDir)luatest\interface;$(SolutionDir)luatest\enginehelp;$(SolutionDir)luatest;$(SolutionDir)luatest\boost;$(SolutionDir)luatest\strings;$(SolutionDir)..\iSafe\trunk\include\ouilib;$(SolutionDir)luatest\lib;E:\isafe\trunk\include\ouilib\boost;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
