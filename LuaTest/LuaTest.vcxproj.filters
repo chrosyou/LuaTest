@@ -189,6 +189,9 @@
     <ClInclude Include="lib\lclcalib.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="lib\lEquation.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -333,6 +336,9 @@
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="lib\lclcalib.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lEquation.cpp">
       <Filter>lib</Filter>
     </ClCompile>
   </ItemGroup>

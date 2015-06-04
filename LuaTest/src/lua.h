@@ -38,6 +38,7 @@
 /*
 ** pseudo-indices  
 ** lua注册表的伪索引
+** 这里upvalue的索引也是通过注册表来换算的
 */
 #define LUA_REGISTRYINDEX	LUAI_FIRSTPSEUDOIDX
 #define lua_upvalueindex(i)	(LUA_REGISTRYINDEX - (i))
@@ -96,6 +97,7 @@ typedef void * (*lua_Alloc) (void *ud, void *ptr, size_t osize, size_t nsize);
 
 
 /* predefined values in the registry */
+/* 注册表中预定义的值 ？*/
 #define LUA_RIDX_MAINTHREAD	1
 #define LUA_RIDX_GLOBALS	2
 #define LUA_RIDX_LAST		LUA_RIDX_GLOBALS

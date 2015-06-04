@@ -43,11 +43,22 @@ static int math_muladd(lua_State* L)
 	return 2;
 }
 
+static int math_setNum(lua_State* L)
+{
+	lua_Number x = luaL_checknumber(L, 1);
+	//lua_Number y = luaL_checknumber(L, 2);
+	lua_pushnumber(L, x);
+	//lua_pushnumber(L, y);
+	lua_setfield(L, LUA_REGISTRYINDEX, "key1");
+	return 0;
+}
+
 static const luaL_Reg mathlib[] = {
 	{"abs",  math_abs},
 	{"add",  math_add},
 	{"muladd",  math_muladd},
 	{"len",  string_len},
+	{"setvalue",  math_setNum},
 
 	{NULL, NULL}
 };

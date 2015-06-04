@@ -461,7 +461,7 @@ LUA_API const void *lua_topointer (lua_State *L, int idx) {
 ** push functions (C -> stack)
 */
 
-
+/* 当前栈顶放入一个nil */
 LUA_API void lua_pushnil (lua_State *L) {
   lua_lock(L);
   setnilvalue(L->top);
@@ -469,7 +469,7 @@ LUA_API void lua_pushnil (lua_State *L) {
   lua_unlock(L);
 }
 
-
+/* 当前栈顶放入一个double类型的数 */
 LUA_API void lua_pushnumber (lua_State *L, lua_Number n) {
   lua_lock(L);
   setnvalue(L->top, n);
@@ -479,7 +479,7 @@ LUA_API void lua_pushnumber (lua_State *L, lua_Number n) {
   lua_unlock(L);
 }
 
-
+/* 当前栈顶放入一个int类型的数 */
 LUA_API void lua_pushinteger (lua_State *L, lua_Integer n) {
   lua_lock(L);
   setnvalue(L->top, cast_num(n));
@@ -487,7 +487,7 @@ LUA_API void lua_pushinteger (lua_State *L, lua_Integer n) {
   lua_unlock(L);
 }
 
-
+/* 当前栈顶放入一个无符号类型的数 */
 LUA_API void lua_pushunsigned (lua_State *L, lua_Unsigned u) {
   lua_Number n;
   lua_lock(L);
@@ -497,7 +497,7 @@ LUA_API void lua_pushunsigned (lua_State *L, lua_Unsigned u) {
   lua_unlock(L);
 }
 
-
+/* 当前栈顶放入一个string，用len参数指定长度，可以包含二进制0 */
 LUA_API const char *lua_pushlstring (lua_State *L, const char *s, size_t len) {
   TString *ts;
   lua_lock(L);
@@ -509,7 +509,7 @@ LUA_API const char *lua_pushlstring (lua_State *L, const char *s, size_t len) {
   return getstr(ts);
 }
 
-
+/* 当前栈顶放入一个string，长度就是字符串的长度(该字符串不能包含0) */
 LUA_API const char *lua_pushstring (lua_State *L, const char *s) {
   if (s == NULL) {
     lua_pushnil(L);
@@ -527,7 +527,7 @@ LUA_API const char *lua_pushstring (lua_State *L, const char *s) {
   }
 }
 
-
+/* 带格式化的放入 */
 LUA_API const char *lua_pushvfstring (lua_State *L, const char *fmt,
                                       va_list argp) {
   const char *ret;
@@ -573,7 +573,7 @@ LUA_API void lua_pushcclosure (lua_State *L, lua_CFunction fn, int n) {
   lua_unlock(L);
 }
 
-
+/* 放入一个bool值 */
 LUA_API void lua_pushboolean (lua_State *L, int b) {
   lua_lock(L);
   setbvalue(L->top, (b != 0));  /* ensure that true is 1 */
@@ -602,6 +602,7 @@ LUA_API int lua_pushthread (lua_State *L) {
 
 /*
 ** get functions (Lua -> stack)
+** 从栈顶取数据
 */
 
 
@@ -743,7 +744,7 @@ LUA_API void lua_setglobal (lua_State *L, const char *var) {
   lua_unlock(L);
 }
 
-
+/* -2位置是 key，-1位置是value */
 LUA_API void lua_settable (lua_State *L, int idx) {
   StkId t;
   lua_lock(L);
@@ -754,9 +755,11 @@ LUA_API void lua_settable (lua_State *L, int idx) {
   lua_unlock(L);
 }
 
-/*给表中的元素赋值，可能引发元操作 __index
+/* 给table中的元素赋值，可能引发元操作 __index
+   会将 key值和value值出栈
 	t = Stack[index]
 	t[k] = Stack.top()
+	Stack.pop()
 	Stack.pop()
 */
 LUA_API void lua_setfield (lua_State *L, int idx, const char *k) {

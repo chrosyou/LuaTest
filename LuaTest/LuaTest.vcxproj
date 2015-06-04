@@ -111,6 +111,7 @@
     <ClInclude Include="interface\ILuaScriptHost.h" />
     <ClInclude Include="interface\IScriptLibStorage.h" />
     <ClInclude Include="lib\lclcalib.h" />
+    <ClInclude Include="lib\lEquation.h" />
     <ClInclude Include="src\lapi.h" />
     <ClInclude Include="src\lauxlib.h" />
     <ClInclude Include="src\lcode.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="enginehelp\strings\StringsHelper.cpp" />
     <ClCompile Include="FileTest.cpp" />
     <ClCompile Include="lib\lclcalib.cpp" />
+    <ClCompile Include="lib\lEquation.cpp" />
     <ClCompile Include="LuaTest.cpp" />
     <ClCompile Include="src\lapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
