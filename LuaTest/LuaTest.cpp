@@ -9,6 +9,7 @@
 #include "ScriptLibStorage.h"
 #include "FileTest.h"
 #include "lclcalib.h"
+#include "lEquation.h"
 
 using namespace std;
 using namespace elex::lua;
@@ -22,8 +23,12 @@ int luaAdd()
 	L = luaL_newstate();  //创建线程栈和全局栈
 	luaopen_base(L);
 	luaL_openlibs(L);     //添加标准库
+
 	luaL_requiref(L, "clca", luaopen_clca, 1);
 	lua_pop(L, 1);  /* remove lib */
+	luaL_requiref(L, "equation", luaopen_Equation, 1);
+	lua_pop(L, 1);  /* remove lib */
+	
 	int iErrCode = luaL_loadfile(L, "123.lua");
 	lua_pcall(L, 0, LUA_MULTRET, 0);
 

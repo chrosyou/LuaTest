@@ -456,6 +456,7 @@
 @@ LUA_INTEGER is the integral type used by lua_pushinteger/lua_tointeger.
 ** CHANGE that if ptrdiff_t is not adequate on your machine. (On most
 ** machines, ptrdiff_t gives a good choice between int or long.)
+** lua int 类型（32位机器上是int， 64位机器上是 __int64）
 */
 #define LUA_INTEGER	ptrdiff_t
 
