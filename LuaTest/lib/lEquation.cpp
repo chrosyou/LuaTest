@@ -8,9 +8,15 @@ int static cEquation_getValue(lua_State* L)
 	return 1;
 }
 
+int static cEquation_getreg(lua_State* L)
+{
+	return 0;
+}
+
 static const luaL_Reg cReg_Equation[] =
 {
 	{"getvalue", cEquation_getValue},
+	{"getreg", cEquation_getreg},
 
 	{NULL, NULL},
 };

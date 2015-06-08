@@ -117,7 +117,7 @@ typedef struct global_State {
   lu_mem GCmemtrav;  /* memory traversed by the GC */
   lu_mem GCestimate;  /* an estimate of the non-garbage memory in use */
   stringtable strt;  /* hash table for strings  保存短字符串*/
-  TValue l_registry;
+  TValue l_registry;  /* lua 注册表项 */
   unsigned int seed;  /* randomized seed for hashes 计算hash的随机种子*/
   lu_byte currentwhite;
   lu_byte gcstate;  /* state of garbage collector 垃圾回收的状态*/
