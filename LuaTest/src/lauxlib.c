@@ -845,13 +845,14 @@ LUALIB_API void luaL_openlib (lua_State *L, const char *libname,
 ** set functions from list 'l' into table at top - 'nup'; each
 ** function gets the 'nup' elements at the top as upvalues.
 ** Returns with only the table at the stack.
+** 把l中所有的函数注册到栈顶的表中，nup表示这些函数所共享的 upvalue
 */
 LUALIB_API void luaL_setfuncs (lua_State *L, const luaL_Reg *l, int nup) {
   luaL_checkversion(L);
   luaL_checkstack(L, nup, "too many upvalues");
   for (; l->name != NULL; l++) {  /* fill the table with given functions */
     int i;
-    for (i = 0; i < nup; i++)  /* copy upvalues to the top */
+    for (i = 0; i < nup; i++)  /* copy upvalues to the top 将现有的upvalue入栈 */
       lua_pushvalue(L, -nup);
     lua_pushcclosure(L, l->func, nup);  /* closure with those upvalues */
     lua_setfield(L, -(nup + 2), l->name);
@@ -895,7 +896,7 @@ LUALIB_API void luaL_requiref (lua_State *L, const char *modname,
   lua_pop(L, 1);  /* remove _LOADED table */
   if (glb) {
     lua_pushvalue(L, -1);  /* copy of 'mod' */
-    lua_setglobal(L, modname);  /* _G[modname] = module */
+    lua_setglobal(L, modname);  /* _G[modname] = module 这里有添加已经加载的项 */
   }
 }
 

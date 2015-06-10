@@ -443,12 +443,12 @@ static const luaL_Reg base_funcs[] = {
   {NULL, NULL}
 };
 
-
+/* 添加基本库 */
 LUAMOD_API int luaopen_base (lua_State *L) {
   /* set global _G */
   lua_pushglobaltable(L);
-  lua_pushglobaltable(L);  /*？取两次*/
-  lua_setfield(L, -2, "_G");  /*给表中的元素赋值*/
+  lua_pushglobaltable(L);  /*取两次*/
+  lua_setfield(L, -2, "_G");  /* 将 _G 指向自身*/
   /* open lib into global table */
   luaL_setfuncs(L, base_funcs, 0);  /*设置默认的函数*/
   lua_pushliteral(L, LUA_VERSION);

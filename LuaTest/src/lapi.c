@@ -670,7 +670,7 @@ LUA_API void lua_rawgetp (lua_State *L, int idx, const void *p) {
   lua_unlock(L);
 }
 
-
+/* 创建一个表，narray是数组部分大小，nrec是hash部分大小 */
 LUA_API void lua_createtable (lua_State *L, int narray, int nrec) {
   Table *t;
   lua_lock(L);

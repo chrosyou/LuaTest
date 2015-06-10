@@ -344,7 +344,7 @@ LUA_API void      (lua_setallocf) (lua_State *L, lua_Alloc f, void *ud);
 
 #define lua_pushliteral(L, s)	\
 	lua_pushlstring(L, "" s, (sizeof(s)/sizeof(char))-1)
-/*全局表压栈*/
+/* 全局表在注册表中，将全局表放在栈上 */
 #define lua_pushglobaltable(L)  \
 	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS)
 

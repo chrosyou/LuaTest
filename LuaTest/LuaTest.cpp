@@ -21,7 +21,7 @@ int luaAdd()
 {
 	int sum = 0;
 	L = luaL_newstate();  //创建线程栈和全局栈
-	luaopen_base(L);
+	//luaopen_base(L);
 	luaL_openlibs(L);     //添加标准库
 
 	luaL_requiref(L, "clca", luaopen_clca, 1);
