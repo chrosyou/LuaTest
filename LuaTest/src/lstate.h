@@ -113,7 +113,7 @@ typedef struct global_State {
   lua_Alloc frealloc;  /* function to reallocate memory 内存分配函数*/
   void *ud;         /* auxiliary data to `frealloc' */
   lu_mem totalbytes;  /* number of bytes currently allocated - GCdebt */
-  l_mem GCdebt;  /* bytes allocated not yet compensated by the collector */
+  l_mem GCdebt;  /* bytes allocated not yet compensated by the collector 被分配还未回收的内存*/
   lu_mem GCmemtrav;  /* memory traversed by the GC */
   lu_mem GCestimate;  /* an estimate of the non-garbage memory in use */
   stringtable strt;  /* hash table for strings  保存短字符串*/
@@ -124,7 +124,7 @@ typedef struct global_State {
   lu_byte gckind;  /* kind of GC running */
   lu_byte gcrunning;  /* true if GC is running */
   int sweepstrgc;  /* position of sweep in `strt' */
-  GCObject *allgc;  /* list of all collectable objects */
+  GCObject *allgc;  /* list of all collectable objects 被回收对象的链表*/
   GCObject *finobj;  /* list of collectable objects with finalizers */
   GCObject **sweepgc;  /* current position of sweep in list 'allgc' */
   GCObject **sweepfin;  /* current position of sweep in list 'finobj' */
@@ -183,8 +183,8 @@ struct lua_State {
 ** Union of all collectable objects 可以GC的数据结构
 */
 union GCObject {
-  GCheader gch;  /* common header */
-  union TString ts;  //string
+  GCheader gch;      /* common header */
+  union TString ts;  //string类型
   union Udata u;	 //用户数据
   union Closure cl;	 //闭包
   struct Table h;	 //表

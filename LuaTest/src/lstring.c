@@ -133,7 +133,7 @@ static TString *newshrstr (lua_State *L, const char *str, size_t l,
 static TString *internshrstr (lua_State *L, const char *str, size_t l) {
   GCObject *o;
   global_State *g = G(L);
-  unsigned int h = luaS_hash(str, l, g->seed); //计算得到的hash值
+  unsigned int h = luaS_hash(str, l, g->seed);   //计算得到的hash值
   for (o = g->strt.hash[lmod(h, g->strt.size)];  //通过计算得到的hash值找到在hash表中的位置，再遍历链表的每个节点
        o != NULL;
        o = gch(o)->next) {
@@ -166,6 +166,7 @@ TString *luaS_newlstr (lua_State *L, const char *str, size_t l) {
 
 /*
 ** new zero-terminated string
+** 创建以'\0'结尾的字符串
 */
 TString *luaS_new (lua_State *L, const char *str) {
   return luaS_newlstr(L, str, strlen(str));

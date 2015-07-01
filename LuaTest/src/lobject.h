@@ -19,7 +19,7 @@
 /*
 ** Extra tags for non-values
 */
-#define LUA_TPROTO	LUA_NUMTAGS
+#define LUA_TPROTO	LUA_NUMTAGS     //proto类型
 #define LUA_TUPVAL	(LUA_NUMTAGS+1)
 #define LUA_TDEADKEY	(LUA_NUMTAGS+2)
 
@@ -73,8 +73,9 @@ typedef union GCObject GCObject;
 /*
 ** Common Header for all collectable objects (in macro form, to be
 ** included in other objects)
+** next将gc数据串联成表，tt表示数据类型，marked表示颜色域
 */
-#define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked  //next将gc数据串联成表，tt表示数据类型，marked表示颜色域
+#define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked 
 
 
 /*
@@ -508,6 +509,7 @@ typedef struct UpVal {
 
 /*
 ** Closures 表示有多少个nup值
+** nupvalues表示有多少个upvalue
 */
 
 #define ClosureHeader \

@@ -85,8 +85,8 @@ typedef struct Dyndata {
     int n;
     int size;
   } actvar;
-  Labellist gt;  /* list of pending gotos goto的列表*/
-  Labellist label;   /* list of active labels 标签列表*/
+  Labellist gt;    /* list of pending gotos goto的列表*/
+  Labellist label; /* list of active labels 标签列表*/
 } Dyndata;
 
 
