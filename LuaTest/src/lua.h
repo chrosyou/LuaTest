@@ -32,6 +32,7 @@
 
 /* option for multiple returns in 'lua_pcall' and 'lua_call' */
 /* 所有的结果都将入栈 */
+/* 不为该值，则返回值依照lua_pcall的第三个参数确定 */
 #define LUA_MULTRET	(-1)
 
 
@@ -261,6 +262,10 @@ LUA_API int   (lua_getctx) (lua_State *L, int *ctx);
 
 LUA_API int   (lua_pcallk) (lua_State *L, int nargs, int nresults, int errfunc,
                             int ctx, lua_CFunction k);
+//保护模式调用一个lua函数
+//当调用的函数没有出错时，行为和lua_call一样，出错了就将f放在栈上(f为0时，)
+//这两个函数都会将函数和参数出栈
+//调用脚本中的函数，n为参数个数，r为返回值个数，f错误消息
 #define lua_pcall(L,n,r,f)	lua_pcallk(L, (n), (r), (f), 0, NULL)
 
 LUA_API int   (lua_load) (lua_State *L, lua_Reader reader, void *dt,

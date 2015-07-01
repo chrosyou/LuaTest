@@ -979,6 +979,7 @@ LUA_API int lua_pcallk (lua_State *L, int nargs, int nresults, int errfunc,
 
 /*加载一段 Lua 代码块，但不运行它
 如果没有错误， lua_load把一个编译好的代码块作为一个 Lua 函数压到栈顶。 否则，压入错误消息。
+可以以 “bt” 的方式读取
 */
 LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,
                       const char *chunkname, const char *mode) {

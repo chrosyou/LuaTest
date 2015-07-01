@@ -30,12 +30,13 @@ int luaAdd()
 	lua_pop(L, 1);  /* remove lib */
 	
 	int iErrCode = luaL_loadfile(L, "123.lua");
-	lua_pcall(L, 0, LUA_MULTRET, 0);
+	//lua_pcall(L, 0, LUA_MULTRET, 0);
+	lua_pop(L, 1);
 
 	lua_getglobal(L, "add");
 	lua_pushnumber(L, 3);
 	lua_pushnumber(L, 4);
-	lua_call(L, 2, 1);
+	int iRet = lua_pcall(L, 2, 1, 0);
 	//string wsRet = (string)lua_tostring(L, -1);
 	sum = (int)lua_tonumber(L, -1);
 	lua_pop(L, 1);
@@ -71,6 +72,7 @@ void Test()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	bool a = true;
 //	Test();
 	luaAdd();
 //	LuaEngineTest();
