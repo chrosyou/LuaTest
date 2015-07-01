@@ -560,12 +560,12 @@ LUALIB_API void luaL_unref (lua_State *L, int t, int ref) {
 */
 
 typedef struct LoadF {
-  int n;  /* number of pre-read characters 预读取的字符数*/
-  FILE *f;  /* file being read 文件指针*/
-  char buff[LUAL_BUFFERSIZE];  /* area for reading file 读取文件的部分*/
+  int n;  /* number of pre-read characters 预读取的字符数，在排除首行注释和有效字符时有用 */
+  FILE *f;  /* file being read 文件指针 */
+  char buff[LUAL_BUFFERSIZE];  /* area for reading file 读取文件的部分 */
 } LoadF;
 
-
+//每次从文件中读取512个字符，放在结构LoadF中
 static const char *getF (lua_State *L, void *ud, size_t *size) {
   LoadF *lf = (LoadF *)ud;
   (void)L;  /* not used */
@@ -592,7 +592,7 @@ static int errfile (lua_State *L, const char *what, int fnameindex) {
   return LUA_ERRFILE;
 }
 
-/*跳过文件头*/
+/*跳过BOM文件头，返回第一个有效字符*/
 static int skipBOM (LoadF *lf) {
   const char *p = "\xEF\xBB\xBF";  /* Utf8 BOM mark */
   int c;

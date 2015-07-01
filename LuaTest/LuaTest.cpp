@@ -30,8 +30,8 @@ int luaAdd()
 	lua_pop(L, 1);  /* remove lib */
 	
 	int iErrCode = luaL_loadfile(L, "123.lua");
-	//lua_pcall(L, 0, LUA_MULTRET, 0);
-	lua_pop(L, 1);
+	lua_pcall(L, 0, LUA_MULTRET, 0);
+
 
 	lua_getglobal(L, "add");
 	lua_pushnumber(L, 3);

@@ -642,13 +642,13 @@ static void f_parser (lua_State *L, void *ud) {
   int i;
   Closure *cl;
   struct SParser *p = cast(struct SParser *, ud);
-  int c = zgetc(p->z);  /* read first character */
+  int c = zgetc(p->z);  /* read first character 从缓冲池中读取一个字符，如果缓冲池为空，则从文件读到缓冲区 */
   if (c == LUA_SIGNATURE[0]) {
-    checkmode(L, p->mode, "binary");
+    checkmode(L, p->mode, "binary"); //如果不匹配，则错误
     cl = luaU_undump(L, p->z, &p->buff, p->name);
   }
   else {
-    checkmode(L, p->mode, "text");  /*这里检测模式是什么作用？*/
+    checkmode(L, p->mode, "text");  /* 检测是文本模式 */
     cl = luaY_parser(L, p->z, &p->buff, &p->dyd, p->name, c);
   }
   lua_assert(cl->l.nupvalues == cl->l.p->sizeupvalues);
