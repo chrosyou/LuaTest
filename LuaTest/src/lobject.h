@@ -454,6 +454,7 @@ typedef struct Upvaldesc {
 /*
 ** Description of a local variable for function prototypes
 ** (used for debug information)
+** 存放局部变量的名字，主要用于调试
 */
 typedef struct LocVar {
   TString *varname;  /* 局部变量名 */
@@ -473,7 +474,7 @@ typedef struct Proto {
   Instruction *code;  /*指令组*/
   struct Proto **p;   /* functions defined inside the function 内部Proto列表*/
   int *lineinfo;   /* map from opcodes to source lines (debug information) */
-  LocVar *locvars; /* information about local variables (debug information) 局部变量*/
+  LocVar *locvars; /* information about local variables (debug information) 局部变量名称，用于调试 */
   Upvaldesc *upvalues;   /* upvalue information 闭包中的变量(使用中是一个数组，动态分配内存)*/
   union Closure *cache;  /* last created closure with this prototype 最后创建的闭包*/
   TString  *source;  /* used for debug information Proto所属的文件名*/

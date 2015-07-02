@@ -56,7 +56,7 @@ typedef struct expdesc {
 
 /* description of active local variable */
 typedef struct Vardesc {
-  short idx;  /* variable index in stack */
+  short idx;  /* variable index in stack 名字的index？ */
 } Vardesc;
 
 
@@ -81,9 +81,9 @@ typedef struct Labellist {
 /* 只存放当前代码块的局部变量？ */
 typedef struct Dyndata {
   struct {  /* list of active local variables 局部变量*/
-    Vardesc *arr;
-    int n;
-    int size;
+    Vardesc *arr;  /* 当前局部变量数组 */
+    int n;		   /* 局部变量个数 */
+    int size;      /* 数组申请的大小 */
   } actvar;
   Labellist gt;    /* list of pending gotos goto的列表*/
   Labellist label; /* list of active labels 标签列表*/
