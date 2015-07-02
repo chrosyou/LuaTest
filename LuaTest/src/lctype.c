@@ -12,7 +12,9 @@
 #if !LUA_USE_CTYPE	/* { */
 
 #include <limits.h>
-/*这里定义的通过最后一为来判断是不是字符*/
+/*每个数字的每一位表示该数字是哪种类型*/
+/*11111111
+*  从右到左第五位表示16进制数 */
 LUAI_DDEF const lu_byte luai_ctype_[UCHAR_MAX + 2] = {
   0x00,  /* EOZ */
   0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,	/* 0. */

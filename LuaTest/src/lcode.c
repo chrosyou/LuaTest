@@ -322,7 +322,7 @@ int luaK_stringK (FuncState *fs, TString *s) {
   return addk(fs, &o, &o);
 }
 
-
+/* 生成一个常量数值，大小为r */
 int luaK_numberK (FuncState *fs, lua_Number r) {
   int n;
   lua_State *L = fs->ls->L;
@@ -417,7 +417,7 @@ static int code_label (FuncState *fs, int A, int b, int jump) {
   return luaK_codeABC(fs, OP_LOADBOOL, A, b, jump);
 }
 
-
+/* 将自己的值给指定的寄存器 */
 static void discharge2reg (FuncState *fs, expdesc *e, int reg) {
   luaK_dischargevars(fs, e);
   switch (e->k) {
@@ -464,7 +464,7 @@ static void discharge2anyreg (FuncState *fs, expdesc *e) {
   }
 }
 
-
+/* 将表达式的值给寄存器 */
 static void exp2reg (FuncState *fs, expdesc *e, int reg) {
   discharge2reg(fs, e, reg);
   if (e->k == VJMP)
@@ -488,7 +488,7 @@ static void exp2reg (FuncState *fs, expdesc *e, int reg) {
   e->k = VNONRELOC;
 }
 
-
+/* 为一个expdesc分配新的寄存器并生成相应代码 */
 void luaK_exp2nextreg (FuncState *fs, expdesc *e) {
   luaK_dischargevars(fs, e);
   freeexp(fs, e);

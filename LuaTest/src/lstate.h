@@ -58,13 +58,13 @@ struct lua_longjmp;  /* defined in ldo.c */
 
 typedef struct stringtable {
   GCObject **hash;  //保存所有的字符串
-  lu_int32 nuse;  /* number of elements 元素的个数*/
-  int size;  //hash桶的大小
+  lu_int32 nuse;  /* number of elements 已装元素的个数*/
+  int size;  //当前hash桶的大小
 } stringtable;
 
 
 /*
-** information about a call 调用闭包信息结构
+** information about a call 调用栈帧
 */
 typedef struct CallInfo {
   StkId func;  /* function index in the stack 调用闭包的位置，正在执行函数的数据栈位置*/

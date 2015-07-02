@@ -59,8 +59,8 @@ typedef struct LexState {
   ZIO *z;  /* input stream */
   Mbuffer *buff;  /* buffer for tokens 存储当前读取token的buffer*/
   struct Dyndata *dyd;  /* dynamic structures used by the parser 里面有局部变量表*/
-  TString *source;  /* current source name 当前的文件名，环境名？*/
-  TString *envn;  /* environment variable name 当前环境变量*/
+  TString *source;/* current source name 当前的文件名*/
+  TString *envn;  /* environment variable name 当前环境变量(_ENV)*/
   char decpoint;  /* locale decimal point 当前的小数点*/
 } LexState;
 

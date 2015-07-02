@@ -112,6 +112,7 @@ static TString *createstrobj (lua_State *L, const char *str, size_t l,
 
 /*
 ** creates a new short string, inserting it into string table
+** 创建一个短字符串，放在全局表中
 */
 static TString *newshrstr (lua_State *L, const char *str, size_t l,
                                        unsigned int h) {
@@ -133,7 +134,8 @@ static TString *newshrstr (lua_State *L, const char *str, size_t l,
 static TString *internshrstr (lua_State *L, const char *str, size_t l) {
   GCObject *o;
   global_State *g = G(L);
-  unsigned int h = luaS_hash(str, l, g->seed);   //计算得到的hash值
+  unsigned int h = luaS_hash(str, l, g->seed);   //计算str的hash值
+  unsigned int test = lmod(h, g->strt.size);
   for (o = g->strt.hash[lmod(h, g->strt.size)];  //通过计算得到的hash值找到在hash表中的位置，再遍历链表的每个节点
        o != NULL;
        o = gch(o)->next) {

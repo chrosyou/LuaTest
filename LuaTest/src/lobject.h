@@ -456,7 +456,7 @@ typedef struct Upvaldesc {
 ** (used for debug information)
 */
 typedef struct LocVar {
-  TString *varname;
+  TString *varname;  /* 局部变量名 */
   int startpc;  /* first point where variable is active */
   int endpc;    /* first point where variable is dead */
 } LocVar;
@@ -464,23 +464,25 @@ typedef struct LocVar {
 
 /*
 ** Function Prototypes 函数原型
+** lua解释器生成的对象，包括系列lua指令，常量表
+** 是一个可执行对象的原型
 */
 typedef struct Proto {
   CommonHeader;
-  TValue *k;  /* constants used by the function 指向这个proto使用的常量，变量名*/
+  TValue *k;  /* constants used by the function 指向这个proto使用的常量，常量值 */
   Instruction *code;  /*指令组*/
-  struct Proto **p;  /* functions defined inside the function 内部Proto列表*/
-  int *lineinfo;  /* map from opcodes to source lines (debug information) */
-  LocVar *locvars;  /* information about local variables (debug information) 局部变量*/
-  Upvaldesc *upvalues;  /* upvalue information 闭包中的变量(使用中是一个数组，动态分配内存)*/
+  struct Proto **p;   /* functions defined inside the function 内部Proto列表*/
+  int *lineinfo;   /* map from opcodes to source lines (debug information) */
+  LocVar *locvars; /* information about local variables (debug information) 局部变量*/
+  Upvaldesc *upvalues;   /* upvalue information 闭包中的变量(使用中是一个数组，动态分配内存)*/
   union Closure *cache;  /* last created closure with this prototype 最后创建的闭包*/
   TString  *source;  /* used for debug information Proto所属的文件名*/
-  int sizeupvalues;  /* size of 'upvalues' size部分表示各个数组的大小*/
+  int sizeupvalues;  /* size of 'upvalues' (upvalue数组的大小)*/
   int sizek;  /* size of `k' */
   int sizecode;
   int sizelineinfo;
   int sizep;  /* size of `p' */
-  int sizelocvars;
+  int sizelocvars;  /* locvars中分配的大小 */
   int linedefined;
   int lastlinedefined;
   GCObject *gclist;
@@ -515,16 +517,17 @@ typedef struct UpVal {
 #define ClosureHeader \
 	CommonHeader; lu_byte nupvalues; GCObject *gclist
 
+/* 包含了一个c api及其upvalue的对象，是一个可执行对象 */
 typedef struct CClosure {
   ClosureHeader;
   lua_CFunction f;
   TValue upvalue[1];  /* list of upvalues */
 } CClosure;
 
-
+/* lua闭包，包含了一个Proto及其upvalue的对象，是一个可执行对象*/
 typedef struct LClosure {
   ClosureHeader;
-  struct Proto *p;   /*？闭包字节码*/
+  struct Proto *p;   /**/
   UpVal *upvals[1];  /* list of upvalues upvalue的表*/
 } LClosure;
 

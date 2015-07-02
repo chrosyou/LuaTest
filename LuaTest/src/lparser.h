@@ -24,9 +24,9 @@ typedef enum {
   VFALSE,
   VK,		/* info = index of constant in `k' 常量在proto->中索引 */
   VKNUM,	/* nval = numerical value */
-  VNONRELOC,	/* info = result register */
+  VNONRELOC,/* info = result register */
   VLOCAL,	/* info = local register 代表局部变量表达式，在info中保存局部变量对应的寄存器id */
-  VUPVAL,       /* info = index of upvalue in 'upvalues' 代表upvalue变量表达式，在info中保存upvalue的id */
+  VUPVAL,   /* info = index of upvalue in 'upvalues' 代表upvalue变量表达式，在info中保存upvalue的id */
   VINDEXED,	/* t = table register/upvalue; idx = index R/K 代表对一个表进行索引的变量表达式，比如a.b或者a[1]，使用ind结构体保存数据 */
   VJMP,		/* info = instruction pc */
   VRELOCABLE,	/* info = instruction pc 需要重定位*/
@@ -107,8 +107,8 @@ typedef struct FuncState {
   int nk;  /* number of elements in `k' */
   int np;  /* number of elements in `p' */
   int firstlocal;  /* index of first local var (in Dyndata array) */
-  short nlocvars;  /* number of elements in 'f->locvars' */
-  lu_byte nactvar;  /* number of active local variables 局部变量的个数*/
+  short nlocvars;  /* number of elements in 'f->locvars' 局部变量个数*/
+  lu_byte nactvar;  /* number of active local variables 有效局部变量的个数*/
   lu_byte nups;  /* number of upvalues upvalue的个数*/
   lu_byte freereg;  /* first free register 记录当前空闲寄存器的起始id*/
 } FuncState;

@@ -235,7 +235,7 @@ static void read_numeral (LexState *ls, SemInfo *seminfo) {
   int first = ls->current;
   lua_assert(lisdigit(ls->current));
   save_and_next(ls);
-  if (first == '0' && check_next(ls, "Xx"))  /* hexadecimal? */
+  if (first == '0' && check_next(ls, "Xx"))  /* hexadecimal? 16½øÖÆÊý */
     expo = "Pp";
   for (;;) {
     if (check_next(ls, expo))  /* exponent part? */

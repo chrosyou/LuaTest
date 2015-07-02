@@ -39,7 +39,7 @@
 */
 
 
-
+/* 最小分配大小 */
 #define MINSIZEARRAY	4
 
 

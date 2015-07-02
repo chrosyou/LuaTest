@@ -145,7 +145,7 @@ static TString *str_checkname (LexState *ls) {
   return ts;
 }
 /*初始化表达式描述*/
-/*2.变量类型，3变量位置*/
+/*参数2.变量类型，参数3.变量位置*/
 static void init_exp (expdesc *e, expkind k, int i) {
   e->f = e->t = NO_JUMP;
   e->k = k;
@@ -162,7 +162,7 @@ static void checkname (LexState *ls, expdesc *e) {
   codestring(ls, e, str_checkname(ls));
 }
 
-
+/* 将局部变量放在proto中，返回当前局部变量个数 */
 static int registerlocalvar (LexState *ls, TString *varname) {
   FuncState *fs = ls->fs;
   Proto *f = fs->f;
@@ -228,8 +228,8 @@ static int searchupvalue (FuncState *fs, TString *name) {
   return -1;  /* not found */
 }
 
-/*创建一个upvalue值，保存在本层ls的Proto中*/
-/*创建之前会检测数组的大小*/
+/* 创建一个upvalue值，保存在本层ls的Proto中 */
+/* 创建之前会检测数组的大小 */
 static int newupvalue (FuncState *fs, TString *name, expdesc *v) {
   Proto *f = fs->f;
   int oldsize = f->sizeupvalues;  /*记录初始大小，程序开始时是0*/
@@ -244,7 +244,7 @@ static int newupvalue (FuncState *fs, TString *name, expdesc *v) {
   return fs->nups++;
 }
 
-
+/* 根据变量名返回寄存器id */
 static int searchvar (FuncState *fs, TString *n) {
   int i;
   for (i = cast_int(fs->nactvar) - 1; i >= 0; i--) {
@@ -311,7 +311,7 @@ static void singlevar (LexState *ls, expdesc *var) {
   }
 }
 
-/*nvars右边变量个数，nexps左边表达式个数*/
+/*nvars左边变量个数，nexps右边表达式个数*/
 static void adjust_assign (LexState *ls, int nvars, int nexps, expdesc *e) {
   FuncState *fs = ls->fs;
   int extra = nvars - nexps;
@@ -331,7 +331,7 @@ static void adjust_assign (LexState *ls, int nvars, int nexps, expdesc *e) {
   }
 }
 
-/*深度判断*/
+/*调用深度判断*/
 static void enterlevel (LexState *ls) {
   lua_State *L = ls->L;
   ++L->nCcalls;  /*调用深度+1*/
@@ -439,7 +439,7 @@ static void movegotosout (FuncState *fs, BlockCnt *bl) {
   }
 }
 
-/*进入代码块*/
+/*进入代码块,bl初始化*/
 static void enterblock (FuncState *fs, BlockCnt *bl, lu_byte isloop) {
   bl->isloop = isloop;
   bl->nactvar = fs->nactvar;
@@ -813,7 +813,7 @@ static void body (LexState *ls, expdesc *e, int ismethod, int line) {
   close_func(ls);
 }
 
-/*获得参数个数*/
+/* 返回表达式的个数 */
 static int explist (LexState *ls, expdesc *v) {
   /* explist -> expr { `,' expr } */
   int n = 1;  /* at least one expression */
@@ -1441,8 +1441,8 @@ static void localfunc (LexState *ls) {
 
 static void localstat (LexState *ls) {
   /* stat -> LOCAL NAME {`,' NAME} [`=' explist] */
-  int nvars = 0;
-  int nexps;
+  int nvars = 0;  /* 左边表达式个数 */
+  int nexps;  /* 右边表达式个数 */
   expdesc e;
   do {
     new_localvar(ls, str_checkname(ls));
@@ -1605,7 +1605,7 @@ static void statement (LexState *ls) {
 /* }====================================================================== */
 
 
-/* lua将整个视为一个main函数，_ENV为其upvalue
+/* lua将整个视为一个main函数，_ENV为其upvalue(且不能删除)
 ** compiles the main function, which is a regular vararg function with an
 ** upvalue named LUA_ENV 全局的设置成函数，闭包变量是LUA_ENV
 */
@@ -1613,7 +1613,7 @@ static void mainfunc (LexState *ls, FuncState *fs) {
   BlockCnt bl;  /*块的链表*/
   expdesc v;
   open_func(ls, fs, &bl);  /*初始化操作fs，bl*/
-  fs->f->is_vararg = 1;  /* main function is always vararg 主函数总是变参函数*/
+  fs->f->is_vararg = 1;    /* main function is always vararg 主函数总是变参函数*/
   init_exp(&v, VLOCAL, 0);  /* create and... */
   newupvalue(fs, ls->envn, &v);  /* ...set environment upvalue 创建upvalue，放在当前函数的proto中*/
   luaX_next(ls);  /* read first token 获得第一个token*/
