@@ -56,7 +56,7 @@ typedef struct expdesc {
 
 /* description of active local variable */
 typedef struct Vardesc {
-  short idx;  /* variable index in stack 名字的index？ */
+  short idx;  /* variable index in stack 名字的index，名字在proto->locvars中， */
 } Vardesc;
 
 

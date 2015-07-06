@@ -136,7 +136,7 @@ static void check_match (LexState *ls, int what, int who, int where) {
   }
 }
 
-/*获得当前token名，并读取下一个token*/
+/*返回当前token名，并读取下一个token*/
 static TString *str_checkname (LexState *ls) {
   TString *ts;
   check(ls, TK_NAME);
@@ -175,7 +175,7 @@ static int registerlocalvar (LexState *ls, TString *varname) {
   return fs->nlocvars++;
 }
 
-/*新建一个局部变量*/
+/*新建一个局部变量，名字保存在proto->locvars中*/
 static void new_localvar (LexState *ls, TString *name) {
   FuncState *fs = ls->fs;
   Dyndata *dyd = ls->dyd;

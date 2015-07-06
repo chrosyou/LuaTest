@@ -322,7 +322,7 @@ int luaK_stringK (FuncState *fs, TString *s) {
   return addk(fs, &o, &o);
 }
 
-/* 生成一个常量数值，大小为r */
+/* 生成一个常量数值，大小为r，返回在proto->k中的索引 */
 int luaK_numberK (FuncState *fs, lua_Number r) {
   int n;
   lua_State *L = fs->ls->L;
@@ -417,7 +417,7 @@ static int code_label (FuncState *fs, int A, int b, int jump) {
   return luaK_codeABC(fs, OP_LOADBOOL, A, b, jump);
 }
 
-/* 将自己的值给指定的寄存器 */
+/* 将e的值给指定的寄存器 */
 static void discharge2reg (FuncState *fs, expdesc *e, int reg) {
   luaK_dischargevars(fs, e);
   switch (e->k) {
