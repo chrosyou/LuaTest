@@ -561,7 +561,7 @@ static void close_func (LexState *ls) {
   lua_State *L = ls->L;
   FuncState *fs = ls->fs;
   Proto *f = fs->f;
-  luaK_ret(fs, 0, 0);  /* final return */
+  luaK_ret(fs, 0, 0);  /* final return 为主函数添加return语句 */
   leaveblock(fs);
   luaM_reallocvector(L, f->code, f->sizecode, fs->pc, Instruction);
   f->sizecode = fs->pc;

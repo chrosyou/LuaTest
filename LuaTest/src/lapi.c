@@ -951,7 +951,7 @@ LUA_API int lua_pcallk (lua_State *L, int nargs, int nresults, int errfunc,
     api_checkstackindex(L, errfunc, o);
     func = savestack(L, o);
   }
-  c.func = L->top - (nargs+1);  /* function to be called */
+  c.func = L->top - (nargs+1);  /* function to be called 函数在当前栈上 */
   if (k == NULL || L->nny > 0) {  /* no continuation or no yieldable? */
     c.nresults = nresults;  /* do a 'conventional' protected call */
     status = luaD_pcall(L, f_call, &c, savestack(L, c.func), func);

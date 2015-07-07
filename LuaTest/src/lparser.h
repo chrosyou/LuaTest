@@ -78,7 +78,7 @@ typedef struct Labellist {
 
 
 /* dynamic structures used by the parser */
-/* 只存放当前代码块的局部变量？ */
+/* 只存放当前代码块的局部变量,goto表，goto标签 */
 typedef struct Dyndata {
   struct {  /* list of active local variables 局部变量*/
     Vardesc *arr;  /* 当前局部变量数组 */

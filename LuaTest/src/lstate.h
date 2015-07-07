@@ -75,7 +75,7 @@ typedef struct CallInfo {
   ptrdiff_t extra;
   union {
     struct {  /* only for Lua functions */
-      StkId base;  /* base for this function 调用闭包的基址*/
+      StkId base;  /* base for this function 字节码的基址 */
       const Instruction *savedpc;  /*字节码的指针，一直在++*/
     } l;
     struct {  /* only for C functions */

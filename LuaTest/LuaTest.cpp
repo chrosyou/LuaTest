@@ -24,10 +24,10 @@ int luaAdd()
 	//luaopen_base(L);
 	luaL_openlibs(L);     //Ìí¼Ó±ê×¼¿â
 
-	luaL_requiref(L, "clca", luaopen_clca, 1);
-	lua_pop(L, 1);  /* remove lib */
-	luaL_requiref(L, "equation", luaopen_Equation, 1);
-	lua_pop(L, 1);  /* remove lib */
+// 	luaL_requiref(L, "clca", luaopen_clca, 1);
+// 	lua_pop(L, 1);  /* remove lib */
+// 	luaL_requiref(L, "equation", luaopen_Equation, 1);
+// 	lua_pop(L, 1);  /* remove lib */
 	
 	int iErrCode = luaL_loadfile(L, "123.lua");
 	lua_pcall(L, 0, LUA_MULTRET, 0);
@@ -72,7 +72,7 @@ void Test()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	bool a = true;
+
 //	Test();
 	luaAdd();
 //	LuaEngineTest();

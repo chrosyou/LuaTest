@@ -325,8 +325,8 @@ int luaD_precall (lua_State *L, StkId func, int nresults) {
     }
     case LUA_TLCL: {  /* Lua function: prepare its call */
       StkId base;
-      Proto *p = clLvalue(func)->p;
-      n = cast_int(L->top - func) - 1;  /* number of real arguments */
+      Proto *p = clLvalue(func)->p; /* 获得lua闭包的proto结构 */
+      n = cast_int(L->top - func) - 1;  /* number of real arguments 获得参数个数 */
       luaD_checkstack(L, p->maxstacksize);
       for (; n < p->numparams; n++)
         setnilvalue(L->top++);  /* complete missing arguments */
@@ -390,6 +390,7 @@ int luaD_poscall (lua_State *L, StkId firstResult) {
 ** The arguments are on the stack, right after the function.
 ** When returns, all the results are on the stack, starting at the original
 ** function position.
+** 有参数的话，参数会自动出栈，填充的是返回值
 */
 void luaD_call (lua_State *L, StkId func, int nResults, int allowyield) {
   if (++L->nCcalls >= LUAI_MAXCCALLS) {
@@ -623,7 +624,7 @@ int luaD_pcall (lua_State *L, Pfunc func, void *u,
 struct SParser {  /* data to `f_parser' */
   ZIO *z;		  /*读入流结构*/
   Mbuffer buff;   /* dynamic structure used by the scanner 扫描数据结构*/
-  Dyndata dyd;    /* dynamic structures used by the parser 解析数据结构*/
+  Dyndata dyd;    /* dynamic structures used by the parser local变量，goto表，goto标签 */
   const char *mode;  /*读取模式*/
   const char *name;  /*chunkname*/
 };
