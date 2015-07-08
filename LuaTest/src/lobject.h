@@ -73,7 +73,7 @@ typedef union GCObject GCObject;
 /*
 ** Common Header for all collectable objects (in macro form, to be
 ** included in other objects)
-** next将gc数据串联成表，tt表示数据类型，marked表示颜色域
+** next将gc数据串联成表(用于回收)，tt表示数据类型，marked表示颜色域(是否被回收的标记)
 */
 #define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked 
 

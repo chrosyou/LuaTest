@@ -17,7 +17,7 @@
 #include "lstate.h"
 #include "lzio.h"
 
-
+/* È¥¶ÁÒ»¶Îµ½buff */
 int luaZ_fill (ZIO *z) {
   size_t size;
   lua_State *L = z->L;

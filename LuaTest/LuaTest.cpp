@@ -70,9 +70,9 @@ void Test()
 	TestRead(_T("123"));
 }
 
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-
 //	Test();
 	luaAdd();
 //	LuaEngineTest();

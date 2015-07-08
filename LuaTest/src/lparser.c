@@ -1627,7 +1627,7 @@ Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
                       Dyndata *dyd, const char *name, int firstchar) {
   LexState lexstate;
   FuncState funcstate;
-  Closure *cl = luaF_newLclosure(L, 1);  /* create main closure 创建主闭包(匿名函数)*/
+  Closure *cl = luaF_newLclosure(L, 1);  /* create main closure 创建主闭包(匿名函数)，1个upvalue(_ENV)*/
   /* anchor closure (to avoid being collected) */
   setclLvalue(L, L->top, cl);   /*闭包放在栈顶*/
   incr_top(L);  /*栈增加*/

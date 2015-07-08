@@ -208,13 +208,13 @@ void luaC_checkupvalcolor (global_State *g, UpVal *uv) {
 ** create a new collectable object (with given type and size) and link
 ** it to '*list'. 'offset' tells how many bytes to allocate before the
 ** object itself (used only by states).
-** 通过指定的类型和大小，创建一个新的可回收对象，并放在了gc链上
+** 通过指定的类型(tt)和大小(size)，创建一个新的可回收对象，并放在了gc链上
 */
 GCObject *luaC_newobj (lua_State *L, int tt, size_t sz, GCObject **list,
                        int offset) {
   global_State *g = G(L);
   char *raw = cast(char *, luaM_newobject(L, novariant(tt), sz));
-  GCObject *o = obj2gco(raw + offset);
+  GCObject *o = obj2gco(raw + offset); /*强转获得头*/
   if (list == NULL)
     list = &g->allgc;  /* standard list for collectable objects */
   gch(o)->marked = luaC_white(g);  /*？*/
