@@ -184,7 +184,7 @@ typedef struct lua_TValue TValue;
 
 /* Macros to set values 设置为nil*/
 #define settt_(o,t)	((o)->tt_=(t))
-
+/* 设置obj为number类型 */
 #define setnvalue(obj,x) \
   { TValue *io=(obj); num_(io)=(x); settt_(io, LUA_TNUMBER); }
 /*类型设置为nil*/
@@ -567,7 +567,7 @@ typedef struct Table {
   CommonHeader;
   lu_byte flags;  /* 1<<p means tagmethod(p) is not present */
   lu_byte lsizenode;  /* log2 of size of `node' array hash的大小(为2的整数次幂，这里表示的是幂次)*/
-  struct Table *metatable;
+  struct Table *metatable;  /* 元表 */
   TValue *array;  /* array part 数组部分*/
   Node *node;   //hash表
   Node *lastfree;  /* any free position is before this position */
