@@ -208,7 +208,7 @@ void luaK_concat (FuncState *fs, int *l1, int l2) {
   }
 }
 
-
+/* 将指令i放到Proto->code中 */
 static int luaK_code (FuncState *fs, Instruction i) {
   Proto *f = fs->f;
   dischargejpc(fs);  /* `pc' will change */

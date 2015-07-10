@@ -1605,7 +1605,7 @@ static void statement (LexState *ls) {
 /* }====================================================================== */
 
 
-/* lua将整个视为一个main函数，_ENV为其upvalue(且不能删除)
+/* lua将整个文件视为一个main函数，_ENV为其upvalue(且不能删除)
 ** compiles the main function, which is a regular vararg function with an
 ** upvalue named LUA_ENV 全局的设置成函数，闭包变量是LUA_ENV
 */
