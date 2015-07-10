@@ -24,7 +24,7 @@ typedef enum {
   VFALSE,
   VK,		/* info = index of constant in `k' 常量在proto->中索引 */
   VKNUM,	/* nval = numerical value */
-  VNONRELOC,/* info = result register */
+  VNONRELOC,/* info = result register 不需要重定向 */
   VLOCAL,	/* info = local register 代表局部变量表达式，在info中保存局部变量对应的寄存器id */
   VUPVAL,   /* info = index of upvalue in 'upvalues' 代表upvalue变量表达式，在info中保存upvalue的id */
   VINDEXED,	/* t = table register/upvalue; idx = index R/K 代表对一个表进行索引的变量表达式，比如a.b或者a[1]，使用ind结构体保存数据 */

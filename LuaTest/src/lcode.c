@@ -290,7 +290,7 @@ static void freeexp (FuncState *fs, expdesc *e) {
 /*返回的是添加量的索引，添加到proto->k中*/
 static int addk (FuncState *fs, TValue *key, TValue *v) {
   lua_State *L = fs->ls->L;
-  TValue *idx = luaH_set(L, fs->h, key);  /*首先找是否有这个值*/
+  TValue *idx = luaH_set(L, fs->h, key);  /* 常量key放在fs->h中 */
   Proto *f = fs->f;
   int k, oldsize;
   if (ttisnumber(idx)) {
@@ -302,7 +302,7 @@ static int addk (FuncState *fs, TValue *key, TValue *v) {
        go through and create a new entry for this value */
   }
   /* constant not found; create a new entry */
-  oldsize = f->sizek;  /*常量表的大小*/
+  oldsize = f->sizek;  /* 常量表的大小 */
   k = fs->nk;    /*已经有元素的大小*/
   /* numerical value does not need GC barrier;
      table has no metatable, so it does not need to invalidate cache */
@@ -434,7 +434,7 @@ static void discharge2reg (FuncState *fs, expdesc *e, int reg) {
       break;
     }
     case VKNUM: {
-      luaK_codek(fs, reg, luaK_numberK(fs, e->u.nval));
+      luaK_codek(fs, reg, luaK_numberK(fs, e->u.nval));  /* proto->k中的索引 */
       break;
     }
     case VRELOCABLE: {
