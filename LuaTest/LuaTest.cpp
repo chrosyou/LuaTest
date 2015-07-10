@@ -70,9 +70,16 @@ void Test()
 	TestRead(_T("123"));
 }
 
+#define  A  1
+#define  B  A + 1
+
+#undef   A
+#define  A  10
+//#define  B  A + 2
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-
+	int a = B;
 //	Test();
 	luaAdd();
 //	LuaEngineTest();

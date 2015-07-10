@@ -644,7 +644,7 @@ static void f_parser (lua_State *L, void *ud) {
   Closure *cl;
   struct SParser *p = cast(struct SParser *, ud);
   int c = zgetc(p->z);  /* read first character 从缓冲池中读取一个字符，如果缓冲池为空，则从文件读到缓冲区 */
-  if (c == LUA_SIGNATURE[0]) {
+  if (c == LUA_SIGNATURE[0]) { /* 主要判断是不是二进制文件 */
     checkmode(L, p->mode, "binary"); //如果不匹配，则错误
     cl = luaU_undump(L, p->z, &p->buff, p->name);
   }

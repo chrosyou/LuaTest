@@ -479,6 +479,7 @@ const TValue *luaH_getstr (Table *t, TString *key) {
 
 /*
 ** main search function
+** t中查找是否含有key值
 */
 const TValue *luaH_get (Table *t, const TValue *key) {
   switch (ttype(key)) {

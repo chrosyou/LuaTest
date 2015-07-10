@@ -464,7 +464,7 @@ static void discharge2anyreg (FuncState *fs, expdesc *e) {
   }
 }
 
-/* 将表达式的值给寄存器 */
+/* 将表达式的值给寄存器(这里是虚拟机通用寄存器) */
 static void exp2reg (FuncState *fs, expdesc *e, int reg) {
   discharge2reg(fs, e, reg);
   if (e->k == VJMP)
