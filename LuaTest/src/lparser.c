@@ -175,7 +175,7 @@ static int registerlocalvar (LexState *ls, TString *varname) {
   return fs->nlocvars++;
 }
 
-/*新建一个局部变量，名字保存在proto->locvars中*/
+/* 新建一个局部变量，名字保存在proto->locvars中*/
 static void new_localvar (LexState *ls, TString *name) {
   FuncState *fs = ls->fs;
   Dyndata *dyd = ls->dyd;
@@ -202,12 +202,12 @@ static LocVar *getlocvar (FuncState *fs, int i) {
   return &fs->f->locvars[idx];
 }
 
-
+/* 调整有效范围 */
 static void adjustlocalvars (LexState *ls, int nvars) {
   FuncState *fs = ls->fs;
   fs->nactvar = cast_byte(fs->nactvar + nvars);
   for (; nvars; nvars--) {
-    getlocvar(fs, fs->nactvar - nvars)->startpc = fs->pc;
+    getlocvar(fs, fs->nactvar - nvars)->startpc = fs->pc;  /* 设置局部变量的有效范围 */
   }
 }
 
@@ -762,7 +762,7 @@ static void constructor (LexState *ls, expdesc *t) {
 /* }====================================================================== */
 
 
-
+/* 获得参数列表 */
 static void parlist (LexState *ls) {
   /* parlist -> [ param { `,' param } ] */
   FuncState *fs = ls->fs;
@@ -1070,7 +1070,7 @@ static BinOpr subexpr (LexState *ls, expdesc *v, int limit) {
   return op;  /* return first untreated operator */
 }
 
-
+/* 认为是个表达式 */
 static void expr (LexState *ls, expdesc *v) {
   subexpr(ls, v, 0);
 }
@@ -1438,7 +1438,7 @@ static void localfunc (LexState *ls) {
   getlocvar(fs, b.u.info)->startpc = fs->pc;
 }
 
-
+/* 表达式字节码生成 */
 static void localstat (LexState *ls) {
   /* stat -> LOCAL NAME {`,' NAME} [`=' explist] */
   int nvars = 0;  /* 左边表达式个数 */
