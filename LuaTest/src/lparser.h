@@ -21,7 +21,7 @@ typedef enum {
   VVOID,	/* no value */
   VNIL,
   VTRUE,
-  VFALSE,
+  VFALSE,   /* 值类型 */
   VK,		/* info = index of constant in `k' 常量在proto->中索引 */
   VKNUM,	/* nval = numerical value */
   VNONRELOC,/* info = result register 不需要重定向 */
@@ -49,8 +49,8 @@ typedef struct expdesc {
     int info;  /* for generic use 变量在变量表中的位置*/
     lua_Number nval;  /* for VKNUM 存数字的值*/
   } u;
-  int t;  /* patch list of `exit when true' */
-  int f;  /* patch list of `exit when false' */
+  int t;  /* patch list of `exit when true' 当为true时，待回填的坐标 */
+  int f;  /* patch list of `exit when false' 当为false时，待回填的坐标 */
 } expdesc;
 
 

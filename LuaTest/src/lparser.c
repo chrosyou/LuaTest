@@ -773,7 +773,7 @@ static void parlist (LexState *ls) {
     do {
       switch (ls->t.token) {
         case TK_NAME: {  /* param -> NAME */
-          new_localvar(ls, str_checkname(ls));
+          new_localvar(ls, str_checkname(ls));   /* 形参放在临时变量中 */
           nparams++;
           break;
         }
@@ -1245,7 +1245,7 @@ static void whilestat (LexState *ls, int line) {
   int condexit;
   BlockCnt bl;
   luaX_next(ls);  /* skip WHILE */
-  whileinit = luaK_getlabel(fs);
+  whileinit = luaK_getlabel(fs);   /* 返回当前执行点 */
   condexit = cond(ls);
   enterblock(fs, &bl, 1);
   checknext(ls, TK_DO);

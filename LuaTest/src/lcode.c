@@ -90,6 +90,7 @@ static void fixjump (FuncState *fs, int pc, int dest) {
 /*
 ** returns current `pc' and marks it as a jump target (to avoid wrong
 ** optimizations with consecutive instructions not in the same basic block).
+** 返回当前程序执行点
 */
 int luaK_getlabel (FuncState *fs) {
   fs->lasttarget = fs->pc;
