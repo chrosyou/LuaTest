@@ -76,6 +76,7 @@ static const Node dummynode_ = {
 
 /*
 ** hash for lua_Numbers
+** 获得数字的hash值，返回在hash表中的索引指针
 */
 static Node *hashnum (const Table *t, lua_Number n) {
   int i;
@@ -93,6 +94,7 @@ static Node *hashnum (const Table *t, lua_Number n) {
 /*
 ** returns the `main' position of an element in a table (that is, the index
 ** of its hash value)
+** 这里是建在了hash表中
 */
 static Node *mainposition (const Table *t, const TValue *key) {
   switch (ttype(key)) {
@@ -444,6 +446,8 @@ TValue *luaH_newkey (lua_State *L, Table *t, const TValue *key) {
 /*
 ** search function for integers 
 ** 从表中获取对应key值的TValue(索引为数字)
+** 首先在数组部分找，没找到的话在hash部分找
+** 都没找到就返回NULL
 */
 const TValue *luaH_getint (Table *t, int key) {
   /* (1 <= key && key <= t->sizearray) */
@@ -490,7 +494,7 @@ const TValue *luaH_get (Table *t, const TValue *key) {
       lua_Number n = nvalue(key);
       lua_number2int(k, n);
       if (luai_numeq(cast_num(k), n)) /* index is int? */
-        return luaH_getint(t, k);  /* use specialized version */
+        return luaH_getint(t, k);  /* use specialized version key为数组情况 */
       /* else go through */
     }
     default: {

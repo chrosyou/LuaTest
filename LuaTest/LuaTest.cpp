@@ -79,7 +79,8 @@ void Test()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int a = B;
+	int a = 0, b = 2;
+
 //	Test();
 	luaAdd();
 //	LuaEngineTest();
