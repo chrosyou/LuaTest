@@ -125,6 +125,7 @@ static Node *mainposition (const Table *t, const TValue *key) {
 /*
 ** returns the index for `key' if `key' is an appropriate key to live in
 ** the array part of the table, -1 otherwise.
+** 如果是整数，返回其值，否则返回-1
 */
 static int arrayindex (const TValue *key) {
   if (ttisnumber(key)) {
@@ -158,7 +159,7 @@ static int findindex (lua_State *L, Table *t, StkId key) {
              deadvalue(gkey(n)) == gcvalue(key))) {
         i = cast_int(n - gnode(t, 0));  /* key index in hash table */
         /* hash elements are numbered after array ones */
-        return i + t->sizearray;
+        return i + t->sizearray;  /* 区别于数组部分的大小，记录在桶中的位置 */
       }
       else n = gnext(n);
       if (n == NULL)
@@ -177,7 +178,7 @@ int luaH_next (lua_State *L, Table *t, StkId key) {
       return 1;
     }
   }
-  for (i -= t->sizearray; i < sizenode(t); i++) {  /* then hash part */
+  for (i -= t->sizearray; i < sizenode(t); i++) {  /* then hash part i表示在桶中的位置 */
     if (!ttisnil(gval(gnode(t, i)))) {  /* a non-nil value? */
       setobj2s(L, key, gkey(gnode(t, i)));
       setobj2s(L, key+1, gval(gnode(t, i)));
@@ -194,7 +195,7 @@ int luaH_next (lua_State *L, Table *t, StkId key) {
 ** ==============================================================
 */
 
-
+/* 会保存超过50%的最远位置，返回新数组从需要装的元素个数 */
 static int computesizes (int nums[], int *narray) {
   int i;
   int twotoi;  /* 2^i */
@@ -211,7 +212,7 @@ static int computesizes (int nums[], int *narray) {
     }
     if (a == *narray) break;  /* all elements already counted */
   }
-  *narray = n;
+  *narray = n;  /* narray表示组要从新分配的数组大小 */
   lua_assert(*narray/2 <= na && na <= *narray);
   return na;
 }
@@ -227,7 +228,7 @@ static int countint (const TValue *key, int *nums) {
     return 0;
 }
 
-
+/* 计算数组部分大小，并把每一部分的个数记录在数组nums中，返回总个数 */
 static int numusearray (const Table *t, int *nums) {
   int lg;
   int ttlg;  /* 2^lg */
@@ -252,10 +253,10 @@ static int numusearray (const Table *t, int *nums) {
   return ause;
 }
 
-
+/* 返回hash总共KEY个数， pnasize记录以整数为key的个数 */
 static int numusehash (const Table *t, int *nums, int *pnasize) {
   int totaluse = 0;  /* total number of elements */
-  int ause = 0;  /* summation of `nums' */
+  int ause = 0;  /* summation of `nums' hash部分以整数位索引的key个数 */
   int i = sizenode(t);
   while (i--) {
     Node *n = &t->node[i];
@@ -352,7 +353,7 @@ static void rehash (lua_State *L, Table *t, const TValue *ek) {
   totaluse = nasize;  /* all those keys are integer keys */
   totaluse += numusehash(t, nums, &nasize);  /* count keys in hash part */
   /* count extra key */
-  nasize += countint(ek, nums);
+  nasize += countint(ek, nums);  /* 新元素知否占据数组部分位置 */
   totaluse++;
   /* compute new size for array part */
   na = computesizes(nums, &nasize);
