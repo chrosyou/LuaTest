@@ -81,7 +81,6 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	int a = 0, b = 2;
 
-	value_type(a);
 //	Test();
 	luaAdd();
 //	LuaEngineTest();
