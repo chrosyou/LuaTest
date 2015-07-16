@@ -80,9 +80,12 @@ void Test()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int a = 0, b = 2;
+    
+	//	TEST();
 
-//	Test();
+	int test; 
 	luaAdd();
+
 //	LuaEngineTest();
 //	system("pause");
 	return 0;
