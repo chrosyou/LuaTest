@@ -17,6 +17,18 @@ using namespace elex::lua;
 
 lua_State *L;
 
+static const char * load_config = "\
+	local config_name = ...\
+	local f = assert(io.open(config_name))\
+	local code = assert(f:read \'*a\')\
+	local function getenv(name) return assert(os.getenv(name), \'os.getenv() failed: \' .. name) end\
+	code = string.gsub(code, \'%$([%w_%d]+)\', getenv)\
+    f:close()\
+    local result = {}\
+    assert(load(code,\'=(load)\',\'t\',result))()\
+    return result\
+    ";
+
 int luaAdd()
 {
 	int sum = 0;
@@ -28,6 +40,8 @@ int luaAdd()
 // 	lua_pop(L, 1);  /* remove lib */
 // 	luaL_requiref(L, "equation", luaopen_Equation, 1);
 // 	lua_pop(L, 1);  /* remove lib */
+
+	int iRet = luaL_loadstring(L, load_config);
 	
 	int iErrCode = luaL_loadfile(L, "123.lua");
 	lua_pcall(L, 0, LUA_MULTRET, 0);
